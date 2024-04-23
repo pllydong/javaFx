@@ -99,8 +99,8 @@ public class HttpUtils {
             } else {
                 // 处理HTTP请求失败的情况
                 System.err.println("HTTP请求失败: " + response.getStatusLine());
+                throw new RuntimeException(EntityUtils.toString(response.getEntity()));
             }
-            return response.getStatusLine().getReasonPhrase();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

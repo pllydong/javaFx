@@ -333,7 +333,6 @@ public class MainController implements Initializable {
                             "当前售价:" + productV2.getSettlementPrice(),
                             biddingSort, desc)));
 
-                    // 降价一分钱
                     doUpdateProductPrice(activityId, null, findFirstNumberStr(desc), costBaseLine);
                 }
             }
@@ -394,12 +393,14 @@ public class MainController implements Initializable {
             doSelectProducts();
         }
         if (isRunFirstScanTask) {
-            execScanTask(needScheduleProductV2Map.values().stream().filter(ProductV2::isFirstPro)
-                    .collect(Collectors.toList()), "--执行完成 \\上次扫描是第一名的产品\\ 的扫描任务--");
+            List<ProductV2> collect = needScheduleProductV2Map.values().stream().filter(p -> p.getOperationType() == 2)
+                    .collect(Collectors.toList());
+            execScanTask(collect, String.format("--执行完成 \\上次扫描是第一名的产品 共[%s]个\\ 的扫描任务--", collect.size()));
         }
         if (isRunOtherScanTask) {
-            execScanTask(needScheduleProductV2Map.values().stream().filter(p -> !p.isFirstPro())
-                    .collect(Collectors.toList()), "--执行完成 /上次扫描为其他名次的产品/ 的扫描任务--");
+            List<ProductV2> collect = needScheduleProductV2Map.values().stream().filter(p -> p.getOperationType() == 1)
+                    .collect(Collectors.toList());
+            execScanTask(collect, String.format("--执行完成 /上次扫描为其他名次的产品  共[%s]个/ 的扫描任务--", collect.size()));
         }
     }
 
@@ -703,13 +704,29 @@ public class MainController implements Initializable {
         if (null == productV2 || detail == null) {
             throw new RuntimeException("产品异常！activityId:" + activityId);
         }
+        Product product = productPriceMap.get(productV2.getScheduleSkuDTO().getSkuId());
 
         String settlementPrice = detail.getStr("settlementPrice");
         productV2.setSettlementPrice(settlementPrice);
 
         BigDecimal price = newPrice;
         if (null == price) {
-            price = new BigDecimal(settlementPrice).subtract(NumberConstant.BIG_DECIMAL_0_01).setScale(2, RoundingMode.DOWN);
+            BigDecimal oldPrice = new BigDecimal(settlementPrice).setScale(2, RoundingMode.DOWN);
+            BigDecimal price001 = new BigDecimal(settlementPrice).subtract(NumberConstant.BIG_DECIMAL_0_01).setScale(2, RoundingMode.DOWN);
+            BigDecimal bottomPrice = product.getLowestPrice().setScale(2, RoundingMode.DOWN);
+            BigDecimal recommendPrice = null == recommendReportPrice ? null : new BigDecimal(recommendReportPrice).setScale(2, RoundingMode.DOWN);
+            if (null == recommendPrice) {
+                price = price001;
+            } else if (oldPrice.compareTo(bottomPrice) == 0) {
+                // 已经是底价了
+                productV2.setOnlineType(3);
+                return;
+            } else if (recommendPrice.compareTo(bottomPrice) <= 0) {
+                // 推荐价格低于底价，设置底价
+                price = bottomPrice;
+            } else {
+                price = recommendPrice;
+            }
         }
         BigDecimal seckillPrice = price.subtract(NumberConstant.BIG_DECIMAL_0_01).setScale(2, RoundingMode.DOWN);
 

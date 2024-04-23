@@ -55,6 +55,11 @@ public class ProductV2 {
     private Object withdrawDesc;
 
 
-
-    private boolean firstPro = false;
+    /**
+     * 操作类型
+     * 1 非第一名产品
+     * 2 第一名产品
+     * 3 底价产品
+     */
+    private int operationType = 1;
 }
