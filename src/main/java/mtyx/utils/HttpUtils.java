@@ -13,6 +13,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
 import java.util.*;
 
 public class HttpUtils {
@@ -80,30 +81,41 @@ public class HttpUtils {
 //        request.addHeader(new BasicHeader("Cookie", "BSID=" + "2o4EE2PutlpUla3Nqsga_mY_IkneBQCL3UWctsxbCRHsOoZYne0hctClueqLrjFjKuZ_wn3Kk5oyAOcVs0nyUQ" + ";"));
 //        request.setHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 Core/1.94.197.400 QQBrowser/11.6.5265.400");
 
+        // 执行HTTP请求
+        HttpResponse response = null;
         try {
-            // 执行HTTP请求
-            HttpResponse response = httpClient.execute(request);
-
-            // 检查响应状态码
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == 200) {
-                // 从响应实体中获取JSON字符串
-                String jsonResponse = EntityUtils.toString(response.getEntity());
-
-                // 输出JSON字符串
-                System.out.println("返回的JSON数据：");
-                System.out.println(jsonResponse);
-                return jsonResponse;
-
-                // 这里可以对JSON字符串进行解析处理
-            } else {
-                // 处理HTTP请求失败的情况
-                System.err.println("HTTP请求失败: " + response.getStatusLine());
-                throw new RuntimeException(EntityUtils.toString(response.getEntity()));
-            }
-        } catch (Exception e) {
+            response = httpClient.execute(request);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        // 检查响应状态码
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (statusCode == 200) {
+            // 从响应实体中获取JSON字符串
+            String jsonResponse = null;
+            try {
+                jsonResponse = EntityUtils.toString(response.getEntity());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            // 输出JSON字符串
+            System.out.println("返回的JSON数据：");
+            System.out.println(jsonResponse);
+
+            // 是否登录
+            if (jsonResponse.startsWith("{\"code\":5,")) {
+                throw new RuntimeException(jsonResponse);
+            }
+
+            return jsonResponse;
+
+        } else {
+            // 处理HTTP请求失败的情况
+            System.err.println("HTTP请求失败: " + response.getStatusLine());
+        }
+        throw new RuntimeException(response.getStatusLine().getReasonPhrase());
     }
 
     private static BasicHeader getCookie() {
