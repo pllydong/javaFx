@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +53,26 @@ public class KeyValueFileUtils {
         if (!FileUtil.isFile(filePath)) {
             if (createFile(FileUtil.file(filePath))) {
                 inputStream = KeyValueFileUtils.class.getClassLoader().getResourceAsStream(originFilePath);
+                FileWriter writer = null;
+                try {
+                    writer = new FileWriter(FileUtil.file(filePath));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        writer.write(line + StrUtil.LF);
+                        String[] parts = line.split(SEPARATOR);
+                        if (parts.length == 2) {
+                            keyValueMap.putIfAbsent(parts[0].trim(), parts[1].trim());
+                        }
+                    }
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return keyValueMap;
             } else {
                 throw new RuntimeException("文件创建失败");
             }
@@ -59,8 +80,7 @@ public class KeyValueFileUtils {
             inputStream = FileUtil.getInputStream(filePath);
         }
 
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(SEPARATOR);
