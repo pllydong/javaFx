@@ -18,13 +18,16 @@ import java.util.*;
 
 public class HttpUtils {
 
-    private static final HttpClient httpClient = HttpClients.createDefault();
     private static String BSID = StrUtil.EMPTY;
     private static String USER_AGENT = StrUtil.EMPTY;
+    private static String account = null;
+    private static String password = null;
 
     private static final Random RADOM = new Random();
 
+
     public static String sendGet(String url, Map<String, Object> params, Map<String, String> headers) throws RuntimeException {
+        HttpClient httpClient = HttpClients.createDefault();
         if (params != null && !params.isEmpty()) {
             url += "?" + StrUtil.join("&", params.entrySet().stream()
                     .map(entry -> entry.getKey() + "=" + entry.getValue())
@@ -50,6 +53,7 @@ public class HttpUtils {
     }
 
     public static String sendPost(String url, Map<String, Object> params, String body, Map<String, String> headers) throws RuntimeException {
+        HttpClient httpClient = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
         if (params != null && !params.isEmpty()) {
@@ -115,11 +119,17 @@ public class HttpUtils {
             // 处理HTTP请求失败的情况
             System.err.println("HTTP请求失败: " + response.getStatusLine());
         }
-        throw new RuntimeException(response.getStatusLine().getReasonPhrase());
+        throw new RuntimeException("请求错误:" + response.getStatusLine().getReasonPhrase());
     }
 
     private static BasicHeader getCookie() {
-        return new BasicHeader("Cookie", "BSID=" + BSID + ";");
+//        String[] cookies = BSID.split("; ");
+//        for (String cookie : cookies) {
+//            String[] parts = cookie.split("=", 2);
+//            BasicClientCookie basicCookie = new BasicClientCookie(parts[0], parts[1]);
+//            cookieStore.addCookie(basicCookie);
+//        }
+        return new BasicHeader("Cookie", BSID);
     }
 
     public static String sendGet(String url) throws Exception {
@@ -137,11 +147,21 @@ public class HttpUtils {
         return url;
     }
 
+    public static boolean login(String account, String password) {
+//        String loginUrl = getUrl();
+        return false;
+    }
+
     public static void initBSID(String bsid) {
         BSID = bsid;
     }
 
     public static void initUserAgent(String userAgent) {
         USER_AGENT = userAgent;
+    }
+
+    public static void initUserInfo(String a, String p) {
+        account = a;
+        password = p;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Map;
  * @date 2024/4/23 1:29
  */
 public class UseThisUtils {
-    private static final Date DEFAULT_DATE = DateUtil.parseDate("2024-04-25");
+    private static final Date DEFAULT_DATE = DateUtil.parseDate("2025-04-30");
 
     public static Date getCanUseDate() {
         Integer addDays = getTxtMap().values().stream().map(Integer::parseInt).filter(n -> n > 0).reduce(Integer::sum).orElse(0);

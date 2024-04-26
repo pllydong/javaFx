@@ -29,10 +29,16 @@
       <Label layoutX="13.0" layoutY="226.0" text="第一名间隔(秒)" />
       <TextField fx:id="firstNoRunPeriodField" layoutX="146.0" layoutY="221.0" prefHeight="30.0" prefWidth="168.0" text="60" />
       <TextField fx:id="txtField" layoutX="14.0" layoutY="275.0" prefHeight="30.0" prefWidth="243.0" />
-      <Button fx:id="txtButton" layoutX="263.0" layoutY="275.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" />
-      <Label layoutX="14.0" layoutY="452.0" text="BSID" />
-      <TextArea fx:id="bsidTextArea" layoutX="14.0" layoutY="474.0" prefHeight="163.0" prefWidth="299.0" text="3uLBPcIlAVQF496pzUpkFKP_q83rHhF-UDzSyALN-waOSZAP0wS5acKNzNgJF4cMAGtUbrZWjGmMF4Laa6XWKg" wrapText="true" />
-      <TextArea fx:id="userAgentTextArea" layoutX="14.0" layoutY="668.0" prefHeight="163.0" prefWidth="299.0" text="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 Core/1.94.197.400 QQBrowser/11.6.5265.400" wrapText="true" />
+      <Button fx:id="txtButton" layoutX="265.0" layoutY="279.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" text="激活" />
+      <Label layoutX="14.0" layoutY="452.0" text="Cookie" />
+      <TextArea fx:id="bsidTextArea" layoutX="14.0" layoutY="474.0" prefHeight="163.0" prefWidth="299.0" text="_lxsdk_cuid=18ee600d129c8-026dea9f0fdee8-4c657b58-1fa400-18ee600d129c8; _lxsdk=18ee600d129c8-026dea9f0fdee8-4c657b58-1fa400-18ee600d129c8; uuid=0582ab12ea8b5ce1d77e.1713255798.1.0.0; WEBDFPID=2yxw99y8wu3y5uv6z848400z7x13vu8081vv399w073979580642v71w-2028615797795-1713255797795EUSQEUIfd79fef3d01d5e9aadc18ccd4d0c95072130; _gw_ab_call_25190_31=TRUE; _gw_ab_25190_31=285; mall-login-type=epassport; unionid=mtyxsj18856050440; e_u_id_3299326472=4a83563e48013e7c12f351f86619fc81; BSID=5rkpHka7k1bPCNfHadbCjW5h4WjAk4QSROo15pUUImXfPS6s_6kAPPfPeWE39ehgJLvPhRFGI2nC4uAMTnf-tA; mall-epassport-token=5rkpHka7k1bPCNfHadbCjW5h4WjAk4QSROo15pUUImXfPS6s_6kAPPfPeWE39ehgJLvPhRFGI2nC4uAMTnf-tA; msid=mtyxsj15827329046; muid=303307; _lxsdk_s=18f1aa358df-3ba-d5f-9ab%7C%7C69; logan_session_token=ccdl1zt6zp3f5ppz57bo" wrapText="true" />
+      <TextArea fx:id="userAgentTextArea" layoutX="14.0" layoutY="668.0" prefHeight="163.0" prefWidth="299.0" text="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0" wrapText="true" />
       <Label layoutX="14.0" layoutY="646.0" text="user-agent" />
+      <Label layoutX="13.0" layoutY="427.0" text="密码" visible="false" />
+      <TextField fx:id="accountField" layoutX="87.0" layoutY="379.0" prefHeight="30.0" prefWidth="227.0" text="mtyxsj15827329046" visible="false" />
+      <Label layoutX="13.0" layoutY="384.0" text="用户名" visible="false" />
+      <PasswordField fx:id="passwordField" layoutX="87.0" layoutY="420.0" prefHeight="30.0" prefWidth="227.0" text="C9kL8P" visible="false" />
+      <TextField fx:id="urlPeriodFiled" layoutX="127.0" layoutY="19.0" prefHeight="30.0" prefWidth="187.0" text="50" />
+      <Label layoutX="13.0" layoutY="24.0" text="接口调用间隔 ms" />
    </children>
 </AnchorPane>

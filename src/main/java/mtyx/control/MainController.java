@@ -55,12 +55,16 @@ public class MainController implements Initializable {
     public Button txtButton;
     public TextArea bsidTextArea;
     public TextArea userAgentTextArea;
+    public TextField accountField;
+    public PasswordField passwordField;
+    public TextField urlPeriodFiled;
 
     private Date scheduleDate;
     private Date runStartTime;
     private Date runEndTime;
     private int otherNoRunPeriod;
     private int firstNoRunPeriod;
+    private int urlPeriod;
 
     private final Map<String, Region> regionMap = new HashMap<>();
 
@@ -141,7 +145,10 @@ public class MainController implements Initializable {
     private void loge(Exception e, String message, Object... args) {
         log("[ERROR] " + message, args);
         end();
-        throw e;
+//        if (!message.startsWith("请求")) {
+            throw e;
+//        }
+
     }
 
     private synchronized String log(String message, Object... args) {
@@ -213,10 +220,18 @@ public class MainController implements Initializable {
         configMap.put(BSID, bsid);
         String userAgent = userAgentTextArea.getText().trim();
         configMap.put(USER_AGENT, userAgent);
+        String account = accountField.getText().trim();
+        String password = passwordField.getText().trim();
+        configMap.put(ACCOUNT, account);
+        configMap.put(PASSWORD, password);
+        urlPeriod = Integer.parseInt(urlPeriodFiled.getText());
+        configMap.put(URL_PERIOD, urlPeriodFiled.getText());
         saveConfigMap(configMap);
 
         HttpUtils.initBSID(bsid);
         HttpUtils.initUserAgent(userAgent);
+
+        HttpUtils.initUserInfo(account, password);
     }
 
     private Map<String, String> getConfigMap() {
@@ -267,6 +282,9 @@ public class MainController implements Initializable {
         loadUiText(configMap, FIRST_NO_RUN_PERIOD, firstNoRunPeriodField);
         loadUiText(configMap, OTHER_NO_RUN_PERIOD, otherNoRunPeriodField);
         loadUiText(configMap, PRODUCT_PRICE_EXCEL_PATH, productPriceRangeFileField);
+        loadUiText(configMap, ACCOUNT, accountField);
+        loadUiText(configMap, PASSWORD, passwordField);
+        loadUiText(configMap, URL_PERIOD, urlPeriodFiled);
     }
 
     private void loadUiText(Map<String, String> configMap, String key, TextInputControl textInputControl) {
@@ -305,46 +323,57 @@ public class MainController implements Initializable {
     }
 
     private void execScanTask(List<ProductV2> collect, String msg) {
-        CountDownLatch latch = new CountDownLatch(collect.size());
         if (DateUtil.date().after(canUseDate)) {
             Platform.runLater(() -> {
                 log("\u7a0b\u5e8f\u5df2\u8fc7\u671f\uff0c\u8bf7\u4f7f\u7528\u6b63\u5f0f\u7248\u672c");
             });
             return;
         }
-        collect.forEach(p -> doAsync(null , () -> {
-            String activityId = p.getActivityId();
-            JSONObject recommendPriceJson = doSelectRecommendPriceByActivityId(activityId);
-            String costBaseLine = recommendPriceJson.getStr("costBaseLine");
-            String desc = recommendPriceJson.getStr("desc");
-            String biddingSort = recommendPriceJson.getStr("biddingSort");
-            if (null != costBaseLine) {
-                int line = 1;
-                try {
-                    line = Integer.parseInt(costBaseLine);
-                } catch (NumberFormatException e) {
-                    loge(e);
-                }
-                if (line > 1) {
-                    ProductV2 productV2 = needScheduleProductV2Map.get(activityId);
-                    Platform.runLater(() -> log(String.format("activityId[%s],skuId[%s],skuName:[%s] | %s | %s | %s |",
-                            activityId, productV2.getScheduleSkuDTO().getSkuId(),
-                            productV2.getScheduleSkuDTO().getSkuName(),
-                            "当前售价:" + productV2.getSettlementPrice(),
-                            biddingSort, desc)));
-
-                    doUpdateProductPrice(activityId, null, findFirstNumberStr(desc), costBaseLine);
-                }
-            }
-            latch.countDown();
-            return null;
-        }));
         try {
-            latch.await();
+            for (ProductV2 productV2 : collect) {
+                execPriceQueryAndUpdate(productV2);
+                TimeUnit.MILLISECONDS.sleep(urlPeriod);
+            }
             Platform.runLater(() -> log(msg));
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             Platform.runLater(() -> loge(e));
         }
+    }
+
+    private void execPriceQueryAndUpdate(ProductV2 p) {
+        String activityId = p.getActivityId();
+        JSONObject recommendPriceJson = doSelectRecommendPriceByActivityId(activityId);
+        String costBaseLine = recommendPriceJson.getStr("costBaseLine");
+        String desc = recommendPriceJson.getStr("desc");
+        String biddingSort = recommendPriceJson.getStr("biddingSort");
+        ProductV2 productV2 = needScheduleProductV2Map.get(activityId);
+        if (null != costBaseLine) {
+            int line = 1;
+            try {
+                line = Integer.parseInt(costBaseLine);
+            } catch (NumberFormatException e) {
+                loge(e);
+            }
+            if (line > 1) {
+                Platform.runLater(() -> logw(String.format("activityId[%s],skuId[%s],skuName:[%s] | %s | %s | %s |",
+                        activityId, productV2.getScheduleSkuDTO().getSkuId(),
+                        productV2.getScheduleSkuDTO().getSkuName(),
+                        "当前售价:" + productV2.getSettlementPrice(),
+                        biddingSort, desc)));
+
+                doUpdateProductPrice(activityId, null, findFirstNumberStr(desc), costBaseLine);
+            }
+        } else {
+//            Platform.runLater(() -> log(String.format("activityId[%s],skuId[%s],skuName:[%s] | %s | %s | %s |",
+//                    activityId, productV2.getScheduleSkuDTO().getSkuId(),
+//                    productV2.getScheduleSkuDTO().getSkuName(),
+//                    "当前售价:" + productV2.getSettlementPrice(),
+//                    biddingSort, desc)));
+        }
+    }
+
+    private void logw(String format, Object... args) {
+        log("[ATTENTION]/n/t  %s", String.format(format, args));
     }
 
     /**
@@ -824,7 +853,7 @@ public class MainController implements Initializable {
                     "尝试修改价:" + price.setScale(2, RoundingMode.FLOOR));
         }
         if (null != logMsg) {
-            Platform.runLater(() -> log(logMsg));
+            Platform.runLater(() -> logw(logMsg));
         }
     }
 
