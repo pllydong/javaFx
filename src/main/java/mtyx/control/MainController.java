@@ -353,10 +353,10 @@ public class MainController implements Initializable {
             }
             try {
                 countDownLatch.await();
+                Platform.runLater(() -> log(msg));
                 if (urlPeriod > 0) {
                     TimeUnit.MILLISECONDS.sleep(urlPeriod);
                 }
-                Platform.runLater(() -> log(msg));
             } catch (InterruptedException e) {
                 Platform.runLater(() -> loge(e));
             }
