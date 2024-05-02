@@ -15,5 +15,6 @@ public class ConfigKeyConstant {
     public static final String ACCOUNT = "account";
     public static final String PASSWORD = "password";
     public static final String URL_PERIOD = "url-period";
+    public static final String BATCH_RUN_NUM = "batch-run-num";
 
 }

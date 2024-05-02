@@ -58,6 +58,7 @@ public class MainController implements Initializable {
     public TextField accountField;
     public PasswordField passwordField;
     public TextField urlPeriodFiled;
+    public TextField batchRunNumField;
 
     private Date scheduleDate;
     private Date runStartTime;
@@ -65,6 +66,7 @@ public class MainController implements Initializable {
     private int otherNoRunPeriod;
     private int firstNoRunPeriod;
     private int urlPeriod;
+    private int batchRunNum;
 
     private final Map<String, Region> regionMap = new HashMap<>();
 
@@ -285,6 +287,7 @@ public class MainController implements Initializable {
         loadUiText(configMap, ACCOUNT, accountField);
         loadUiText(configMap, PASSWORD, passwordField);
         loadUiText(configMap, URL_PERIOD, urlPeriodFiled);
+        loadUiText(configMap, BATCH_RUN_NUM, batchRunNumField);
     }
 
     private void loadUiText(Map<String, String> configMap, String key, TextInputControl textInputControl) {
@@ -329,14 +332,34 @@ public class MainController implements Initializable {
             });
             return;
         }
-        try {
-            for (ProductV2 productV2 : collect) {
-                execPriceQueryAndUpdate(productV2);
-                TimeUnit.MILLISECONDS.sleep(urlPeriod);
+        if (batchRunNum <= 0) {
+            batchRunNum = 1;
+            logw("设置的 一批任务执行数量 小于等于0！将被认为1。");
+        }
+        for (int i = 0; i < collect.size(); i+= batchRunNum) {
+            List<ProductV2> batchProducts = collect.subList(i, Math.max(i + batchRunNum, collect.size()));
+            CountDownLatch countDownLatch = new CountDownLatch(batchProducts.size());
+            for (ProductV2 productV2 : batchProducts) {
+                doAsync(null, () -> {
+                    try {
+                        execPriceQueryAndUpdate(productV2);
+                    } catch (Exception e) {
+                        Platform.runLater(() -> loge(e));
+                    } finally {
+                        countDownLatch.countDown();
+                    }
+                    return null;
+                });
             }
-            Platform.runLater(() -> log(msg));
-        } catch (Exception e) {
-            Platform.runLater(() -> loge(e));
+            try {
+                countDownLatch.await();
+                if (urlPeriod > 0) {
+                    TimeUnit.MILLISECONDS.sleep(urlPeriod);
+                }
+                Platform.runLater(() -> log(msg));
+            } catch (InterruptedException e) {
+                Platform.runLater(() -> loge(e));
+            }
         }
     }
 
@@ -364,11 +387,11 @@ public class MainController implements Initializable {
                 doUpdateProductPrice(activityId, null, findFirstNumberStr(desc), costBaseLine);
             }
         } else {
-//            Platform.runLater(() -> log(String.format("activityId[%s],skuId[%s],skuName:[%s] | %s | %s | %s |",
-//                    activityId, productV2.getScheduleSkuDTO().getSkuId(),
-//                    productV2.getScheduleSkuDTO().getSkuName(),
-//                    "当前售价:" + productV2.getSettlementPrice(),
-//                    biddingSort, desc)));
+            Platform.runLater(() -> log(String.format("activityId[%s],skuId[%s],skuName:[%s] | %s | %s | %s |",
+                    activityId, productV2.getScheduleSkuDTO().getSkuId(),
+                    productV2.getScheduleSkuDTO().getSkuName(),
+                    "当前售价:" + productV2.getSettlementPrice(),
+                    biddingSort, desc)));
         }
     }
 
@@ -703,16 +726,20 @@ public class MainController implements Initializable {
         String runEndTimePickerText = runEndTimePicker.getText();
         String otherNoRunPeriodFieldText = otherNoRunPeriodField.getText();
         String firstNoRunPeriodFieldText = firstNoRunPeriodField.getText();
+        String batchRunNumFieldText = batchRunNumField.getText();
 
         runStartTime = getNowDate(runStartTimePickerText);
         runEndTime = getNowDate(runEndTimePickerText);
         firstNoRunPeriod = Integer.parseInt(firstNoRunPeriodFieldText);
         otherNoRunPeriod = Integer.parseInt(otherNoRunPeriodFieldText);
+        batchRunNum = Integer.parseInt(batchRunNumFieldText);
+
         Map<String, String> configMap = getConfigMap();
         configMap.put(RUN_END_TIME, runEndTimePickerText);
         configMap.put(RUN_START_TIME, runStartTimePickerText);
         configMap.put(OTHER_NO_RUN_PERIOD, otherNoRunPeriodFieldText);
         configMap.put(FIRST_NO_RUN_PERIOD, firstNoRunPeriodFieldText);
+        configMap.put(BATCH_RUN_NUM, batchRunNumFieldText);
         saveConfigMap(configMap);
 
         if (runEndTime.compareTo(runStartTime) <= 0) {
