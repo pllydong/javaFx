@@ -336,8 +336,12 @@ public class MainController implements Initializable {
             batchRunNum = 1;
             logw("设置的 一批任务执行数量 小于等于0！将被认为1。");
         }
+        if (batchRunNum >= ExecutorUtils.size()) {
+            batchRunNum = ExecutorUtils.size() - 1;
+            logw("设置的 一批任务执行数量 大于等于%s！将被认为%s。", ExecutorUtils.size(), batchRunNum);
+        }
         for (int i = 0; i < collect.size(); i+= batchRunNum) {
-            List<ProductV2> batchProducts = collect.subList(i, Math.max(i + batchRunNum, collect.size()));
+            List<ProductV2> batchProducts = collect.subList(i, Math.min(i + batchRunNum, collect.size()));
             CountDownLatch countDownLatch = new CountDownLatch(batchProducts.size());
             for (ProductV2 productV2 : batchProducts) {
                 doAsync(null, () -> {
@@ -353,7 +357,6 @@ public class MainController implements Initializable {
             }
             try {
                 countDownLatch.await();
-                Platform.runLater(() -> log(msg));
                 if (urlPeriod > 0) {
                     TimeUnit.MILLISECONDS.sleep(urlPeriod);
                 }
@@ -361,6 +364,7 @@ public class MainController implements Initializable {
                 Platform.runLater(() -> loge(e));
             }
         }
+        Platform.runLater(() -> log(msg));
     }
 
     private void execPriceQueryAndUpdate(ProductV2 p) {

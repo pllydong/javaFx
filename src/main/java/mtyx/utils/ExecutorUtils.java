@@ -31,8 +31,12 @@ public class ExecutorUtils {
     public static void open() {
         if (EXECUTOR == null || EXECUTOR.isShutdown() || EXECUTOR.isTerminated()) {
             EXECUTOR = new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(),
-                    Runtime.getRuntime().availableProcessors(), 1L, TimeUnit.MINUTES,
+                    Runtime.getRuntime().availableProcessors() * 2, 1L, TimeUnit.MINUTES,
                     new LinkedBlockingQueue<>(), r -> new Thread(r, IdUtil.fastSimpleUUID()));
         }
+    }
+
+    public static int size() {
+        return EXECUTOR.getMaximumPoolSize();
     }
 }
