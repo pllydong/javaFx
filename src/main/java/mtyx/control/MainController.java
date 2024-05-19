@@ -5,6 +5,8 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -23,7 +25,9 @@ import mtyx.utils.ExecutorUtils;
 import mtyx.utils.HttpUtils;
 import mtyx.utils.KeyValueFileUtils;
 import mtyx.utils.UseThisUtils;
+import org.apache.commons.compress.utils.Lists;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
@@ -37,7 +41,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static cn.hutool.core.date.DatePattern.NORM_DATETIME_PATTERN;
+import static cn.hutool.core.date.DatePattern.*;
 import static mtyx.constant.ConfigKeyConstant.*;
 
 public class MainController implements Initializable {
@@ -59,6 +63,10 @@ public class MainController implements Initializable {
     public PasswordField passwordField;
     public TextField urlPeriodFiled;
     public TextField batchRunNumField;
+    public ToggleButton autoUpdateDateButton;
+    public Button exportLogButton;
+    public TextField exportLogPathField;
+    public Label latestExportLogDateLabel;
 
     private Date scheduleDate;
     private Date runStartTime;
@@ -132,7 +140,32 @@ public class MainController implements Initializable {
             txtButton.setDisable(false);
         });
 
+        exportLogButton.setOnAction(event -> {
+            exportLogButton.setDisable(true);
+            try {
+                String exportDirectory = exportLogPathField.getText();
+                String exportPath = exportDirectory + "log_" + DateUtil.format(new Date(), PURE_DATETIME_PATTERN) + ".txt";
+                File file = FileUtil.file(exportPath);
+                if (KeyValueFileUtils.createFile(file)) {
+                    FileUtil.writeUtf8String(runtimeLogTextArea.getText(), file);
+                    String str = "导出至:" + exportPath;
+                    latestExportLogDateLabel.setText(str);
+                } else {
+                    latestExportLogDateLabel.setText("设置的导出路径存在问题!");
+                }
+            } catch (Exception e) {
+                loge(e);
+            }
+            exportLogButton.setDisable(false);
+        });
+
         loadUiData();
+
+        initToolTip();
+    }
+
+    private void initToolTip() {
+        autoUpdateDateButton.setTooltip(new Tooltip("排期日期自动更新日期到第二天（当超过0:00时）"));
     }
 
     private void loge(String message, Object... args) {
@@ -146,11 +179,12 @@ public class MainController implements Initializable {
     @SneakyThrows
     private void loge(Exception e, String message, Object... args) {
         log("[ERROR] " + message, args);
-        end();
+//        end();
 //        if (!message.startsWith("请求")) {
-            throw e;
+//            throw e;
 //        }
-
+        System.err.println(e.getMessage());
+        System.err.println(Arrays.stream(e.getStackTrace()).collect(Collectors.toList()));
     }
 
     private synchronized String log(String message, Object... args) {
@@ -288,6 +322,8 @@ public class MainController implements Initializable {
         loadUiText(configMap, PASSWORD, passwordField);
         loadUiText(configMap, URL_PERIOD, urlPeriodFiled);
         loadUiText(configMap, BATCH_RUN_NUM, batchRunNumField);
+        autoUpdateDateButton.setSelected(!"FALSE".equalsIgnoreCase(configMap.get(AUTO_UPDATE_DATE)));
+        loadUiText(configMap, EXPORT_LOG_PATH, exportLogPathField);
     }
 
     private void loadUiText(Map<String, String> configMap, String key, TextInputControl textInputControl) {
@@ -299,22 +335,37 @@ public class MainController implements Initializable {
 
     private void initData() {
         doAsync(r -> {
-            log(r);
+            if (r != null) {
+                log(r);
 
-            // 启动执行任务
-            doAsync(rr -> {
-                log("--执行结束--");
-            }, () -> {
-                execTask();
-                return null;
-            });
+                // 启动执行任务
+                doAsync(rr -> {
+                    log("--执行结束--");
+                }, () -> {
+                    execTask();
+                    return null;
+                });
+            }
         }, () -> {
-            initProductPriceRange();
-            initLoginAccounts();
-            initTime();
-            initNetData();
+            try {
+                initProductPriceRange();
+                initLoginAccounts();
+                initTime();
+                initOtherConfig();
+                initNetData();
+            } catch (Exception e) {
+                loge(e, "初始化数据失败！");
+                end();
+                return null;
+            }
             return "初始化数据完成。";
         });
+    }
+
+    private void initOtherConfig() {
+        Map<String, String> configMap = getConfigMap();
+        configMap.put(AUTO_UPDATE_DATE, autoUpdateDateButton.isSelected() ? "TRUE" : "FALSE");
+        configMap.put(EXPORT_LOG_PATH, exportLogPathField.getText());
     }
 
     private Map<String, String> getTxtMap() {
@@ -410,6 +461,7 @@ public class MainController implements Initializable {
         int runTimeCnt = 0;
         long execTime = 0;
         canUseDate = UseThisUtils.getCanUseDate();
+        String curDate = DateUtil.today();
         while (UiConstant.STR_END.equals(startButton.getText())) {
             runTimeCnt++;
             if (ExecutorUtils.isClosed()) {
@@ -424,9 +476,24 @@ public class MainController implements Initializable {
                     return;
                 }
             }
+            // 换了日期
+            String today = DateUtil.today();
+            if (today.compareTo(curDate) > 0) {
+                if (autoUpdateDateButton.isSelected()) {
+                    scheduleDate = DateUtil.offsetDay(scheduleDate, 1);
+                    Platform.runLater(() -> {
+                        scheduleDatePicker.setValue(LocalDateTimeUtil.of(scheduleDate).toLocalDate());
+                    });
+                }
+                curDate = today;
+            }
 
             long startTime = System.currentTimeMillis();
-            execMainBody(runTimeCnt);
+            try {
+                execMainBody(runTimeCnt);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             // 超出范围则置空，可能会导致执行顺序有问题，但问题不大。
             if (runTimeCnt > 999999999) {
                 runTimeCnt = 0;

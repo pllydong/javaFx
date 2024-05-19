@@ -150,13 +150,11 @@ public class KeyValueFileUtils {
 
     private static void write(String filePath, Map<String, String> keyValueMap) {
         filePath = getFileAbsolutePath(filePath);
-        try (FileWriter writer = new FileWriter(FileUtil.file(filePath))) {
-            for (Map.Entry<String, String> entry : keyValueMap.entrySet()) {
-                writer.write(entry.getKey() + SEPARATOR + entry.getValue() + StrUtil.LF);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, String> entry : keyValueMap.entrySet()) {
+            sb.append(entry.getKey() + SEPARATOR + entry.getValue() + StrUtil.LF);
         }
+        FileUtil.writeUtf8String(sb.toString(), FileUtil.file(filePath));
     }
 
     // 4. 存入一个Map<String,String>直接清空全部key值并存入map中全部的keyvalue
