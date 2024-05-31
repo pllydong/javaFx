@@ -67,6 +67,8 @@ public class MainController implements Initializable {
     public Button exportLogButton;
     public TextField exportLogPathField;
     public Label latestExportLogDateLabel;
+    public TextField sellEndTimeField;
+    public TextField sellStartTimeField;
 
     private Date scheduleDate;
     private Date runStartTime;
@@ -75,6 +77,8 @@ public class MainController implements Initializable {
     private int firstNoRunPeriod;
     private int urlPeriod;
     private int batchRunNum;
+    private Date sellStartTime;
+    private Date sellEndTime;
 
     private final Map<String, Region> regionMap = new HashMap<>();
 
@@ -166,6 +170,8 @@ public class MainController implements Initializable {
 
     private void initToolTip() {
         autoUpdateDateButton.setTooltip(new Tooltip("排期日期自动更新日期到第二天（当超过0:00时）"));
+        sellStartTimeField.setTooltip(new Tooltip("销售开始时间（排期当天）"));
+        sellEndTimeField.setTooltip(new Tooltip("销售结束时间（排期当天，请设置为22:59:59否则会将第二天的内容筛选进来进行改价）"));
     }
 
     private void loge(String message, Object... args) {
@@ -219,8 +225,12 @@ public class MainController implements Initializable {
      * @return
      */
     private Date getNowDate(String timeText) {
+        return getDateTime(new Date(), timeText);
+    }
+
+    private Date getDateTime(Date date, String timeText) {
         List<Integer> timeArr = getTimeArr(timeText);
-        return DateUtil.date()
+        return DateUtil.date(date)
                 .setField(DateField.HOUR_OF_DAY, timeArr.get(0))
                 .setField(DateField.MINUTE, timeArr.get(1))
                 .setField(DateField.SECOND, timeArr.get(2))
@@ -324,6 +334,8 @@ public class MainController implements Initializable {
         loadUiText(configMap, BATCH_RUN_NUM, batchRunNumField);
         autoUpdateDateButton.setSelected(!"FALSE".equalsIgnoreCase(configMap.get(AUTO_UPDATE_DATE)));
         loadUiText(configMap, EXPORT_LOG_PATH, exportLogPathField);
+        loadUiText(configMap, SELL_START_TIME, sellStartTimeField);
+        loadUiText(configMap, SELL_END_TIME, sellEndTimeField);
     }
 
     private void loadUiText(Map<String, String> configMap, String key, TextInputControl textInputControl) {
@@ -481,6 +493,8 @@ public class MainController implements Initializable {
             if (today.compareTo(curDate) > 0) {
                 if (autoUpdateDateButton.isSelected()) {
                     scheduleDate = DateUtil.offsetDay(scheduleDate, 1);
+                    sellStartTime = DateUtil.offsetDay(sellStartTime, 1);
+                    sellEndTime = DateUtil.offsetDay(sellEndTime, 1);
                     Platform.runLater(() -> {
                         scheduleDatePicker.setValue(LocalDateTimeUtil.of(scheduleDate).toLocalDate());
                     });
@@ -642,8 +656,8 @@ public class MainController implements Initializable {
         int total = 0;
         int limit = 100;
         int offset = 0;
-        long startTime = DateUtil.beginOfDay(scheduleDate).getTime();
-        long endTime = DateUtil.endOfDay(scheduleDate).getTime();
+        long startTime = sellStartTime.getTime();
+        long endTime = sellEndTime.getTime();
         JSONArray saleDate = new JSONArray();
         saleDate.add(startTime);
         saleDate.add(endTime);
@@ -798,12 +812,17 @@ public class MainController implements Initializable {
         String otherNoRunPeriodFieldText = otherNoRunPeriodField.getText();
         String firstNoRunPeriodFieldText = firstNoRunPeriodField.getText();
         String batchRunNumFieldText = batchRunNumField.getText();
+        String sellStartTimeText = sellStartTimeField.getText();
+        String sellEndTimeText = sellEndTimeField.getText();
 
         runStartTime = getNowDate(runStartTimePickerText);
         runEndTime = getNowDate(runEndTimePickerText);
         firstNoRunPeriod = Integer.parseInt(firstNoRunPeriodFieldText);
         otherNoRunPeriod = Integer.parseInt(otherNoRunPeriodFieldText);
         batchRunNum = Integer.parseInt(batchRunNumFieldText);
+        scheduleDate = DateUtil.date(scheduleDatePicker.getValue());
+        sellStartTime = getDateTime(scheduleDate, sellStartTimeText);
+        sellEndTime = getDateTime(scheduleDate, sellEndTimeText);
 
         Map<String, String> configMap = getConfigMap();
         configMap.put(RUN_END_TIME, runEndTimePickerText);
@@ -811,12 +830,16 @@ public class MainController implements Initializable {
         configMap.put(OTHER_NO_RUN_PERIOD, otherNoRunPeriodFieldText);
         configMap.put(FIRST_NO_RUN_PERIOD, firstNoRunPeriodFieldText);
         configMap.put(BATCH_RUN_NUM, batchRunNumFieldText);
+        configMap.put(SELL_START_TIME, sellStartTimeText);
+        configMap.put(SELL_END_TIME, sellEndTimeText);
         saveConfigMap(configMap);
 
         if (runEndTime.compareTo(runStartTime) <= 0) {
             loge("结束时间早于开始时间");
         }
-        scheduleDate = DateUtil.date(scheduleDatePicker.getValue());
+        if (sellEndTimeText.compareTo(sellStartTimeText) <= 0) {
+            loge("销售结束时间早于销售开始时间");
+        }
     }
 
     /**

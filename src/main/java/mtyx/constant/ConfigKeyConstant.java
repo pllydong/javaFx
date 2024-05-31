@@ -19,5 +19,7 @@ public class ConfigKeyConstant {
     public static final String AUTO_UPDATE_DATE = "auto-update-date";
     public static final String EXPORT_LOG_PATH = "export-log-path";
     public static final String LATEST_EXPORT_LOG_DATE = "latest-export-log-date";
+    public static final String SELL_START_TIME = "sell-start-time";
+    public static final String SELL_END_TIME = "sell-end-time";
 
 }

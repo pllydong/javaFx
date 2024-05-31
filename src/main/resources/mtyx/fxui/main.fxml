@@ -12,12 +12,12 @@
 
 <AnchorPane prefHeight="923.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mtyx.control.MainController">
    <children>
-      <DatePicker fx:id="scheduleDatePicker" layoutX="88.0" layoutY="52.0" prefHeight="30.0" prefWidth="227.0" promptText="排期日期建议T+3" showWeekNumbers="true" />
-      <Label layoutX="14.0" layoutY="57.0" text="排期日期" />
-      <Label layoutX="14.0" layoutY="104.0" text="开始时间" />
-      <TextField fx:id="runStartTimePicker" layoutX="88.0" layoutY="99.0" prefHeight="30.0" prefWidth="227.0" text="00:00:00" />
-      <TextField fx:id="runEndTimePicker" layoutX="88.0" layoutY="142.0" prefHeight="30.0" prefWidth="227.0" text="23:59:59" />
-      <Label layoutX="14.0" layoutY="147.0" text="结束时间" />
+      <DatePicker fx:id="scheduleDatePicker" layoutX="88.0" layoutY="6.0" prefHeight="30.0" prefWidth="227.0" promptText="排期日期建议T+3" showWeekNumbers="true" />
+      <Label layoutX="14.0" layoutY="11.0" text="排期日期" />
+      <Label layoutX="14.0" layoutY="121.0" text="运行开始时间" />
+      <TextField fx:id="runStartTimePicker" layoutX="88.0" layoutY="116.0" prefHeight="30.0" prefWidth="227.0" text="00:00:00" />
+      <TextField fx:id="runEndTimePicker" layoutX="88.0" layoutY="148.0" prefHeight="30.0" prefWidth="227.0" text="23:59:59" />
+      <Label layoutX="14.0" layoutY="153.0" text="运行结束时间" />
       <Button fx:id="startButton" layoutX="78.0" layoutY="864.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="187.0" text="开始" />
       <TextArea fx:id="runtimeLogTextArea" layoutX="334.0" layoutY="54.0" prefHeight="860.0" prefWidth="1150.0" wrapText="true" />
       <Label layoutX="1380.0" layoutY="6.0" prefHeight="38.0" prefWidth="101.0" text="运行日志" />
@@ -43,10 +43,14 @@
       <Label layoutX="13.0" layoutY="295.0" text="批处理间隔 ms" />
       <TextField fx:id="batchRunNumField" layoutX="146.0" layoutY="260.0" prefHeight="30.0" prefWidth="168.0" text="4" />
       <Label layoutX="13.0" layoutY="265.0" text="一批任务执行数量" />
-      <ToggleButton fx:id="autoUpdateDateButton" layoutX="12.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="自动更新日期" textFill="#d07373" />
+      <ToggleButton fx:id="autoUpdateDateButton" layoutX="230.0" layoutY="473.0" mnemonicParsing="false" selected="true" text="自动更新日期" textFill="#d07373" />
       <Button fx:id="exportLogButton" layoutX="334.0" layoutY="9.0" mnemonicParsing="false" text="导出日志" />
       <TextField fx:id="exportLogPathField" layoutX="525.0" layoutY="10.0" prefHeight="30.0" prefWidth="291.0" text="D:/mtyx/log/" />
       <Label layoutX="421.0" layoutY="15.0" text="日志导出目录" />
       <Label fx:id="latestExportLogDateLabel" layoutX="828.0" layoutY="15.0" prefHeight="20.0" prefWidth="480.0" />
+      <Label layoutX="13.0" layoutY="81.0" text="销售结束时间" />
+      <TextField fx:id="sellEndTimeField" layoutX="87.0" layoutY="76.0" prefHeight="30.0" prefWidth="227.0" text="22:59:59" />
+      <TextField fx:id="sellStartTimeField" layoutX="87.0" layoutY="44.0" prefHeight="30.0" prefWidth="227.0" text="00:00:00" />
+      <Label layoutX="13.0" layoutY="49.0" text="销售开始时间" />
    </children>
 </AnchorPane>
