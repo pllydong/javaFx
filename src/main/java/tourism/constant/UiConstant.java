@@ -26,15 +26,15 @@ public class UiConstant {
         /**
          * 主页
          */
-        MAIN("mtyx/fxui/main.fxml"),
+        MAIN("tourism/fxui/main.fxml"),
 
 
 
 
-        DATE_TIME_PICKER("/mtyx/component/DateTimePicker.fxml"),
-        DATE_TIME_PICKER_POPUP("/mtyx/component/DateTimePickerPopup.fxml"),
-        HOURS_PICKER("/mtyx/component/HoursPicker.fxml"),
-        MINUTE_SECOND_PICKER("/mtyx/component/MinuteSecondPicker.fxml"),
+        DATE_TIME_PICKER("/tourism/component/DateTimePicker.fxml"),
+        DATE_TIME_PICKER_POPUP("/tourism/component/DateTimePickerPopup.fxml"),
+        HOURS_PICKER("/tourism/component/HoursPicker.fxml"),
+        MINUTE_SECOND_PICKER("/tourism/component/MinuteSecondPicker.fxml"),
         ;
         private final String path;
 
@@ -50,5 +50,5 @@ public class UiConstant {
     public static final String STR_START = "开始";
     public static final String STR_END = "结束";
 
-    public static final String ICON_PATH = "/mtyx/component/icons/cat.png";
+    public static final String ICON_PATH = "/tourism/component/icons/cat.png";
 }
