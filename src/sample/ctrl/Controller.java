@@ -1,4 +1,4 @@
-package sample;
+package sample.ctrl;
 
 import javafx.fxml.Initializable;
 
