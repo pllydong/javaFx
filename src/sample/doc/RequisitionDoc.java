@@ -13,6 +13,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * 申请单
+ */
 public class RequisitionDoc {
 
 

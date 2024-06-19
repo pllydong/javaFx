@@ -1,23 +1,18 @@
 package sample.pojo;
 
-import java.time.LocalDateTime;
 import lombok.Data;
 
-/**
- * 航班信息
- */
 @Data
 public class FlightInfo {
-
     /**
      * 起飞机场/抵达机场
      */
-    private String originDestination;
+    private String originDes;
 
     /**
      * 航班号
      */
-    private String flightNumber;
+    private String flight;
 
     /**
      * 舱位等级
@@ -27,17 +22,17 @@ public class FlightInfo {
     /**
      * 出发日期
      */
-    private LocalDateTime departureDate;
+    private String date;
 
     /**
      * 起飞时间
      */
-    private LocalDateTime departureTime;
+    private String departureTime;
 
     /**
      * 抵达时间
      */
-    private LocalDateTime arrivalTime;
+    private String arrivalTime;
 
     /**
      * 状态
@@ -53,19 +48,4 @@ public class FlightInfo {
      * 抵达航站楼
      */
     private String arrivalTerminal;
-
-    @Override
-    public String toString() {
-        return "FlightInfo{" +
-                "originDestination='" + originDestination + '\'' +
-                ", flightNumber='" + flightNumber + '\'' +
-                ", flightClass='" + flightClass + '\'' +
-                ", departureDate=" + departureDate +
-                ", departureTime=" + departureTime +
-                ", arrivalTime=" + arrivalTime +
-                ", status='" + status + '\'' +
-                ", departureTerminal='" + departureTerminal + '\'' +
-                ", arrivalTerminal='" + arrivalTerminal + '\'' +
-                '}';
-    }
 }

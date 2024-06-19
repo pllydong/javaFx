@@ -72,20 +72,24 @@ public class DocUtil {
                             cellTextBuilder.append(run.getText(0));
                         }
                         String cellText = cellTextBuilder.toString().trim();
-                        if (!deque.isEmpty()) {
-                            String s = deque.pollFirst();
-                            System.out.println(s);
-                            System.out.println(cellText);
-                            for (int i = paragraph.getRuns().size() - 1; i >= 0; i--) {
-                                paragraph.removeRun(i);
-                            }
-                            XWPFRun newRun = paragraph.createRun();
-                            newRun.setText(s);
-                        }
+                        setTextCell(deque, cellText, paragraph);
                     }
                     check.set(!check.get());
                 });
             });
+        }
+    }
+
+    public static void setTextCell(ArrayDeque<String> deque, String cellText, XWPFParagraph paragraph) {
+        if (!deque.isEmpty()) {
+            String s = deque.pollFirst();
+            System.out.println(s);
+            System.out.println(cellText);
+            for (int i = paragraph.getRuns().size() - 1; i >= 0; i--) {
+                paragraph.removeRun(i);
+            }
+            XWPFRun newRun = paragraph.createRun();
+            newRun.setText(s);
         }
     }
 }
