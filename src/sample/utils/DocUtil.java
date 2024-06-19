@@ -5,6 +5,9 @@ import org.apache.poi.xwpf.usermodel.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DocUtil {
 
@@ -56,4 +59,33 @@ public class DocUtil {
         return null;
     }
 
+
+    public static void setDoc(XWPFDocument doc, ArrayDeque<String> deque) {
+        AtomicBoolean check = new AtomicBoolean(false);
+        for (XWPFTable table : doc.getTables()) {
+            table.getRows().forEach(row -> {
+                row.getTableCells().forEach(cell -> {
+                    if (check.get()) {
+                        XWPFParagraph paragraph = cell.getParagraphs().get(0);
+                        StringBuilder cellTextBuilder = new StringBuilder();
+                        for (XWPFRun run : paragraph.getRuns()) {
+                            cellTextBuilder.append(run.getText(0));
+                        }
+                        String cellText = cellTextBuilder.toString().trim();
+                        if (!deque.isEmpty()) {
+                            String s = deque.pollFirst();
+                            System.out.println(s);
+                            System.out.println(cellText);
+                            for (int i = paragraph.getRuns().size() - 1; i >= 0; i--) {
+                                paragraph.removeRun(i);
+                            }
+                            XWPFRun newRun = paragraph.createRun();
+                            newRun.setText(s);
+                        }
+                    }
+                    check.set(!check.get());
+                });
+            });
+        }
+    }
 }
