@@ -1,5 +1,6 @@
 package sample.enums;
 
+import cn.hutool.core.util.RandomUtil;
 import lombok.Getter;
 
 /**
@@ -28,5 +29,13 @@ public enum AirlineCompanyEnum {
         this.englishName = englishName;
         this.abbreviation = abbreviation;
         this.ticketNumPrefix = ticketNumPrefix;
+    }
+
+    /**
+     * 获取随机机票号码
+     * @return
+     */
+    public String getRandomTicketNum() {
+        return ticketNumPrefix + RandomUtil.randomNumbers(10);
     }
 }
