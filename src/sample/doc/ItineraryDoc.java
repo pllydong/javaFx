@@ -56,7 +56,7 @@ public class ItineraryDoc {
         list.add(itinerary2);
         list.add(itinerary3);
         list.add(itinerary4);
-        handle(list,"files/doc/6徐晗行程.docx","2025","06","12","WU HAN");
+        handle(list,"files/doc/6徐晗行程.docx","2025","06","12","WU HAN","徐涵");
     }
     private static List<String> generateActivityPlan(Random random, int minSize, int maxSize) {
         List<String> activityPlan = new ArrayList<>();
@@ -74,26 +74,27 @@ public class ItineraryDoc {
      * @param year 表单的年份
      * @param month 表单的月份（如果是单数月前面要有0 比如6月就是 06）
      * @param day 天数（单数的天数前面也要0补齐）
-     * @param name 顾客的名字，英文 比如徐涵就是 XU HAN，英文大写并中间用空格
+     * @param pinyin 顾客的名字拼音 比如徐涵就是 XU HAN，英文大写并中间用空格
+     * @param name 顾客的名字，中文名字，用来生成申请单的名字
      * @throws FileNotFoundException
      */
-    public static void handle(List<Itinerary> itinerary, String filePath,String year,String month,String day,String name) throws FileNotFoundException {
+    public static void handle(List<Itinerary> itinerary, String filePath,String year,String month,String day,String pinyin,String name) throws FileNotFoundException {
         try (FileInputStream fis = new FileInputStream(filePath);
              XWPFDocument doc = new XWPFDocument(fis)) {
 
             List<XWPFParagraph> paragraphs = doc.getParagraphs();
             XWPFRun run1 = paragraphs.get(0).getRuns().get(0);
             run1.setText("",0);
-            run1.setText(year+"(");
+            run1.setText(year+" (");
             XWPFRun run2 = paragraphs.get(0).getRuns().get(2);
             run2.setText("",0);
-            run2.setText(") "+month);
+            run2.setText(")  "+month);
             XWPFRun run3 = paragraphs.get(0).getRuns().get(6);
             run3.setText("",0);
-            run3.setText(" "+day+"(");
+            run3.setText(" "+day+" (");
             List<XWPFRun> runs = paragraphs.get(4).getRuns();
             runs.get(3).setText("",0);
-            runs.get(3).setText(name);
+            runs.get(3).setText(pinyin);
             int sum=0;
             for (Itinerary i : itinerary) {
                 sum+=i.getActivityPlan().size();
@@ -111,8 +112,8 @@ public class ItineraryDoc {
             headerRow.setHeight(600);
             // 创建一个方法设置单元格内容和换行
             headerRow.getCell(0).setWidth(String.valueOf(1500));
-            headerRow.getCell(1).setWidth(String.valueOf(4000));
-            headerRow.getCell(2).setWidth(String.valueOf(4000));
+            headerRow.getCell(1).setWidth(String.valueOf(3000));
+            headerRow.getCell(2).setWidth(String.valueOf(3000));
             setCellText(headerRow.getCell(0), "Date\n날짜");
             setCellText(headerRow.getCell(1), "Activity plan\n여행 계획");
             setCellText(headerRow.getCell(2), "Contact number\n연락처");
@@ -130,15 +131,15 @@ public class ItineraryDoc {
                     XWPFTableRow row1 = table.getRow(k);
                     row1.setHeight(600);
                     row1.getCell(0).setWidth(String.valueOf(1500));
-                    row1.getCell(1).setWidth(String.valueOf(4000));
-                    row1.getCell(2).setWidth(String.valueOf(4000));
+                    row1.getCell(1).setWidth(String.valueOf(3000));
+                    row1.getCell(2).setWidth(String.valueOf(3000));
                     setCellText(row1.getCell(1), i.getActivityPlan().get(j));
                     k++;
                 }
             }
 
 
-            try (FileOutputStream out = new FileOutputStream("6.行程单.doc")) {
+            try (FileOutputStream out = new FileOutputStream("6."+name+"行程单.doc")) {
                 doc.write(out);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -34,7 +34,15 @@ public class TicketDoc {
 
     }
 
-    public static void handle(Ticket ticket, UserInformation userInformation, String filePath, Double m1, Double m2) {
+    /**
+     *
+     * @param ticket 机票信息
+     * @param name 客户名字全称（比如:徐涵）
+     * @param filePath 模板文件地址
+     * @param m1 机票款
+     * @param m2 税费
+     */
+    public static void handle(Ticket ticket, String name, String filePath, Double m1, Double m2) {
         initQueue(ticket);
         try (FileInputStream fis = new FileInputStream(filePath);
              XWPFDocument doc = new XWPFDocument(fis)) {
@@ -113,7 +121,7 @@ public class TicketDoc {
             }
 
 
-            try (FileOutputStream fos = new FileOutputStream("5." + userInformation.getChineseLastName() + userInformation.getChineseFirstName() + "机票.docx")) {
+            try (FileOutputStream fos = new FileOutputStream("5." + name + "机票.docx")) {
                 doc.write(fos);
             }
         } catch (IOException e) {
@@ -162,6 +170,6 @@ public class TicketDoc {
         deque2.addLast(flight2.getStatus());
         deque2.addLast(flight2.getDepartureTerminal());
         deque2.addLast(flight2.getArrivalTerminal());
-        handle(new Ticket(), new UserInformation(), "files/doc/ITINERARY-中_英.docx", 1050.00, 234.00);
+        handle(new Ticket(), "徐涵", "files/doc/ITINERARY-中_英.docx", 1050.00, 234.00);
     }
 }
