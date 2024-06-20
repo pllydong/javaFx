@@ -5,6 +5,7 @@ import org.apache.xmlbeans.XmlCursor;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
 import sample.pojo.Itinerary;
+import sample.utils.MyFileUtil;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -12,7 +13,7 @@ import java.util.*;
 
 public class ItineraryDoc {
     public static void main(String[] args) throws FileNotFoundException {
-        List<Itinerary> list=new ArrayList<>();
+        List<Itinerary> list = new ArrayList<>();
         Random random = new Random();
 
         List<String> dates = Arrays.asList("2024. 07.25", "2024. 07.26", "2024. 07.27");
@@ -56,8 +57,9 @@ public class ItineraryDoc {
         list.add(itinerary2);
         list.add(itinerary3);
         list.add(itinerary4);
-        handle(list,"files/doc/6徐晗行程.docx","2025","06","12","WU HAN","徐涵");
+        handle(list, "D:/export/", "2025", "06", "12", "WU HAN", "徐涵");
     }
+
     private static List<String> generateActivityPlan(Random random, int minSize, int maxSize) {
         List<String> activityPlan = new ArrayList<>();
         int size = random.nextInt(maxSize - minSize + 1) + minSize;
@@ -68,39 +70,40 @@ public class ItineraryDoc {
     }
 
     /**
-     *
      * @param itinerary 行程单
-     * @param filePath 模板文件路径
-     * @param year 表单的年份
-     * @param month 表单的月份（如果是单数月前面要有0 比如6月就是 06）
-     * @param day 天数（单数的天数前面也要0补齐）
-     * @param pinyin 顾客的名字拼音 比如徐涵就是 XU HAN，英文大写并中间用空格
-     * @param name 顾客的名字，中文名字，用来生成申请单的名字
+     * @param filePath  文件路径
+     * @param year      表单的年份
+     * @param month     表单的月份（如果是单数月前面要有0 比如6月就是 06）
+     * @param day       天数（单数的天数前面也要0补齐）
+     * @param pinyin    顾客的名字拼音 比如徐涵就是 XU HAN，英文大写并中间用空格
+     * @param name      顾客的名字，中文名字，用来生成申请单的名字
      * @throws FileNotFoundException
      */
-    public static void handle(List<Itinerary> itinerary, String filePath,String year,String month,String day,String pinyin,String name) throws FileNotFoundException {
-        try (FileInputStream fis = new FileInputStream(filePath);
+    public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name) throws FileNotFoundException {
+        filePath = MyFileUtil.apendEndSeperator(filePath);
+        MyFileUtil.createAllDirectoriesIfNotExist(filePath);
+        try (FileInputStream fis = new FileInputStream("files/doc/6徐晗行程.docx");
              XWPFDocument doc = new XWPFDocument(fis)) {
 
             List<XWPFParagraph> paragraphs = doc.getParagraphs();
             XWPFRun run1 = paragraphs.get(0).getRuns().get(0);
-            run1.setText("",0);
-            run1.setText(year+" (");
+            run1.setText("", 0);
+            run1.setText(year + " (");
             XWPFRun run2 = paragraphs.get(0).getRuns().get(2);
-            run2.setText("",0);
-            run2.setText(")  "+month);
+            run2.setText("", 0);
+            run2.setText(")  " + month);
             XWPFRun run3 = paragraphs.get(0).getRuns().get(6);
-            run3.setText("",0);
-            run3.setText(" "+day+" (");
+            run3.setText("", 0);
+            run3.setText(" " + day + " (");
             List<XWPFRun> runs = paragraphs.get(4).getRuns();
-            runs.get(3).setText("",0);
+            runs.get(3).setText("", 0);
             runs.get(3).setText(pinyin);
-            int sum=0;
+            int sum = 0;
             for (Itinerary i : itinerary) {
-                sum+=i.getActivityPlan().size();
+                sum += i.getActivityPlan().size();
             }
 
-            XWPFTable table = doc.createTable(sum+1, 4);
+            XWPFTable table = doc.createTable(sum + 1, 4);
 
             // 设置表格宽度为100%
             CTTblWidth tblWidth = table.getCTTbl().getTblPr().addNewTblW();
@@ -120,7 +123,7 @@ public class ItineraryDoc {
             setCellText(headerRow.getCell(3), "Accommodations address\n숙소 명 및 주소");
 
 
-            int k=1;
+            int k = 1;
             for (Itinerary i : itinerary) {
                 XWPFTableRow row = table.getRow(k);
                 row.setHeight(600);
@@ -139,7 +142,7 @@ public class ItineraryDoc {
             }
 
 
-            try (FileOutputStream out = new FileOutputStream("6."+name+"行程单.doc")) {
+            try (FileOutputStream out = new FileOutputStream(filePath + name + "行程单.doc")) {
                 doc.write(out);
             } catch (IOException e) {
                 e.printStackTrace();

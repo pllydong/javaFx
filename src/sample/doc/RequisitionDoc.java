@@ -45,13 +45,13 @@ public class RequisitionDoc {
         deque.addLast(userInformation.getPlannedDurationOfStayInJapan());
         deque.addLast(userInformation.getLastStayInJapanDuration());
         deque.addLast(userInformation.getTotalStayDurationInJapanLastYear());
+
+        handle(userInformation, "D:/export/", userInformation.getChineseLastName() + userInformation.getChineseFirstName());
     }
 
     public static void handle(UserInformation userInformation, String filePath, String cusName) {
         initQueue(userInformation);
-        if (!filePath.endsWith("/")) {
-            filePath += "/";
-        }
+        filePath = MyFileUtil.apendEndSeperator(filePath);
         MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         try (FileInputStream fis = new FileInputStream("files/doc/7郑禹龙申请表.docx");
              XWPFDocument doc = new XWPFDocument(fis)) {

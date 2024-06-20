@@ -194,6 +194,17 @@ public class Controller implements Initializable {
         initCacheData();
 
         fillUserInfo();
+
+        fillFlightInfo();
+    }
+
+    /**
+     * 填充机票信息
+     */
+    private void fillFlightInfo() {
+        flightInfo = new FlightInfo();
+
+        flightInfo.setFlight();
     }
 
     /**

@@ -8,6 +8,7 @@ import java.io.File;
  */
 public class MyFileUtil {
     public static void createAllDirectoriesIfNotExist(String filePath) {
+        filePath = apendEndSeperator(filePath);
         File file = new File(filePath);
         if (!file.exists()) {
             File parent = file.getParentFile();
@@ -15,6 +16,13 @@ public class MyFileUtil {
                 createAllDirectoriesRecursively(parent);
             }
         }
+    }
+
+    public static String apendEndSeperator(String filePath) {
+        if (!filePath.endsWith("/")) {
+            filePath += "/";
+        }
+        return filePath;
     }
 
     public static void createAllDirectoriesRecursively(File file) {
