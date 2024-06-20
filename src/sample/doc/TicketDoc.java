@@ -87,7 +87,6 @@ public class TicketDoc {
                 String text = paragraph.getText();
                 if (text.contains("机票款/FARE :") || text.contains("总计金额")) {
                     paragraph.getRuns().forEach(run -> {
-                        System.out.println(run.getText(0));
                         String s1 = run.getText(0);
                         if (check[0].get()) {
                             if (l[0] == 0) {
