@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 机票
@@ -32,7 +34,7 @@ public class ItineraryDoc {
 
     }
 
-    public static void handle(Itinerary itinerary, UserInformation userInformation, String filePath) {
+    public static void handle(Itinerary itinerary, UserInformation userInformation, String filePath,Double m1,Double m2) {
         initQueue(itinerary);
         try (FileInputStream fis = new FileInputStream(filePath);
              XWPFDocument doc = new XWPFDocument(fis)) {
@@ -66,7 +68,6 @@ public class ItineraryDoc {
                                 for (int m = paragraph.getRuns().size() - 1; m >= 0; m--) {
                                     paragraph.removeRun(m);
                                 }
-                                System.out.println(paragraph.getText());
                                 if (!deque2.isEmpty()) {
                                     String s = deque2.pollFirst();
                                     XWPFRun newRun = paragraph.createRun();
@@ -82,16 +83,40 @@ public class ItineraryDoc {
                 }
                 i++;
             }
-            boolean tableFound = false;
-            for (IBodyElement element : doc.getBodyElements()) {
-                if (element.getElementType() == BodyElementType.TABLE) {
-                    tableFound = true;
-                } else if (tableFound && element.getElementType() == BodyElementType.PARAGRAPH) {
-                    XWPFParagraph paragraph = (XWPFParagraph) element;
-                    System.out.println("Paragraph after table: " + paragraph.getText());
-                    break;
+            List<XWPFParagraph> paragraphs = doc.getParagraphs();
+            final int[] l = {0};
+            final AtomicBoolean[] check = {new AtomicBoolean(false)};
+            for (XWPFParagraph paragraph : paragraphs) {
+                String text = paragraph.getText();
+                if (text.contains("机票款/FARE :")||text.contains("总计金额")) {
+                    paragraph.getRuns().forEach(run -> {
+                        System.out.println(run.getText(0));
+                        String s1 = run.getText(0);
+                        if(check[0].get()){
+                             if(l[0] ==0){
+                                 run.setText("", 0);
+                                 run.setText(String.valueOf(m1), 0);
+                                 l[0]++;
+                                 check[0].set(false);
+                             }else if(l[0] ==1){
+                                 run.setText("", 0);
+                                 run.setText(String.valueOf(m2), 0);
+                                 l[0]++;
+                                 check[0].set(false);
+                             }else if (l[0] ==2){
+                                 run.setText("", 0);
+                                 run.setText(String.valueOf(m1+m2), 0);
+                                 check[0].set(false);
+                             }
+                        }
+                        if("CNY".equals(s1)){
+                            check[0].set(true);
+                        }
+                    });
                 }
             }
+
+
             try (FileOutputStream fos = new FileOutputStream("5." + userInformation.getChineseLastName() + userInformation.getChineseFirstName() + "机票.docx")) {
                 doc.write(fos);
             }
@@ -141,6 +166,6 @@ public class ItineraryDoc {
         deque2.addLast(flight2.getStatus());
         deque2.addLast(flight2.getDepartureTerminal());
         deque2.addLast(flight2.getArrivalTerminal());
-        handle(new Itinerary(), new UserInformation(), "G:\\Code\\JavaCode\\javaFx\\files\\doc\\ITINERARY-中_英.docx");
+        handle(new Itinerary(), new UserInformation(), "files/doc/ITINERARY-中_英.docx",1050.00,234.00);
     }
 }
