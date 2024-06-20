@@ -1,171 +1,72 @@
 package sample.doc;
 
-import org.apache.poi.xwpf.usermodel.*;
-import sample.pojo.FlightInfo;
-import sample.pojo.Itinerary;
-import sample.pojo.UserInformation;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTcPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.math.BigInteger;
 
-/**
- * 机票
- */
 public class ItineraryDoc {
 
-    static ArrayDeque<String> deque = new ArrayDeque<>();
-    static ArrayDeque<String> deque2 = new ArrayDeque<>();
 
-    public static void initQueue(Itinerary itinerary) {
-        deque.addLast(itinerary.getAirlinePnr());
-        deque.addLast(itinerary.getBookingPnr());
-        deque.addLast(itinerary.getPassengerName());
-        deque.addLast(itinerary.getETicketNumber());
-        deque.addLast(itinerary.getIdNumber());
-        deque.addLast(itinerary.getConjunctionTicketNumber());
-        deque.addLast(itinerary.getIssuingAirline());
-        deque.addLast(itinerary.getDateOfIssue());
-        deque.addLast(itinerary.getIssuingAgent());
-        deque.addLast(itinerary.getIataCode());
-
-    }
-
-    public static void handle(Itinerary itinerary, UserInformation userInformation, String filePath,Double m1,Double m2) {
-        initQueue(itinerary);
+    public static void handle(String filePath) throws FileNotFoundException {
         try (FileInputStream fis = new FileInputStream(filePath);
              XWPFDocument doc = new XWPFDocument(fis)) {
-            int i = 0;
-            for (XWPFTable table : doc.getTables()) {
-                int j = 0;
-                for (XWPFTableRow row : table.getRows()) {
-                    int k = 0;
-                    for (XWPFTableCell cell : row.getTableCells()) {
-                        String cellText = cell.getText();
-                        if (i == 0) {
-                            if (cellText.contains("ITINERARY")) {
-                                continue;
-                            }
-                            if (!cellText.isEmpty()) {
-                                XWPFParagraph paragraph = cell.getParagraphs().get(0);
-                                for (int m = paragraph.getRuns().size() - 1; m >= 0; m--) {
-                                    paragraph.removeRun(i);
-                                }
-                                if (!deque.isEmpty()) {
-                                    String s = deque.pollFirst();
-                                    XWPFRun newRun = paragraph.createRun();
-                                    newRun.setText(s);
-                                }
+            XWPFTable table = doc.createTable();
 
-                            }
-                        }
-                        else if (i == 1) {
-                            if (j != 0) {
-                                XWPFParagraph paragraph = cell.getParagraphs().get(0);
-                                for (int m = paragraph.getRuns().size() - 1; m >= 0; m--) {
-                                    paragraph.removeRun(m);
-                                }
-                                if (!deque2.isEmpty()) {
-                                    String s = deque2.pollFirst();
-                                    XWPFRun newRun = paragraph.createRun();
-                                    newRun.setText(s);
-                                }
-                            }
-                        }
-//                        System.out.println("Original cell text: " + i + "-" + j + "-" + k + ": " + cellText);
-//                        System.out.println(cellText.length());
-                        k++;
-                    }
-                    j++;
-                }
-                i++;
-            }
-            List<XWPFParagraph> paragraphs = doc.getParagraphs();
-            final int[] l = {0};
-            final AtomicBoolean[] check = {new AtomicBoolean(false)};
-            for (XWPFParagraph paragraph : paragraphs) {
-                String text = paragraph.getText();
-                if (text.contains("机票款/FARE :")||text.contains("总计金额")) {
-                    paragraph.getRuns().forEach(run -> {
-                        System.out.println(run.getText(0));
-                        String s1 = run.getText(0);
-                        if(check[0].get()){
-                             if(l[0] ==0){
-                                 run.setText("", 0);
-                                 run.setText(String.valueOf(m1), 0);
-                                 l[0]++;
-                                 check[0].set(false);
-                             }else if(l[0] ==1){
-                                 run.setText("", 0);
-                                 run.setText(String.valueOf(m2), 0);
-                                 l[0]++;
-                                 check[0].set(false);
-                             }else if (l[0] ==2){
-                                 run.setText("", 0);
-                                 run.setText(String.valueOf(m1+m2), 0);
-                                 check[0].set(false);
-                             }
-                        }
-                        if("CNY".equals(s1)){
-                            check[0].set(true);
-                        }
-                    });
-                }
-            }
+            createRowWithContent(table, "英文 - 姓", "ZHENG", "汉字 - 姓", "郑");
 
 
-            try (FileOutputStream fos = new FileOutputStream("5." + userInformation.getChineseLastName() + userInformation.getChineseFirstName() + "机票.docx")) {
-                doc.write(fos);
+            try (FileOutputStream out = new FileOutputStream("6.行程单.doc")) {
+                doc.write(out);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) {
-        FlightInfo flight1 = new FlightInfo();
-        flight1.setOriginDes("ICN/SHE");
-        flight1.setFlight("KE0831");
-        flight1.setFlightClass("Economy");
-        flight1.setDate("2024-06-13");
-        flight1.setDepartureTime("08:00");
-        flight1.setArrivalTime("08:55");
-        flight1.setStatus("OK");
-        flight1.setDepartureTerminal("T2");
-        flight1.setArrivalTerminal("");
+    private static void createRowWithContent(XWPFTable table, String... contents) {
+        // 创建一个新的表格行（row），并添加到传入的table中
+        XWPFTableRow row = table.createRow();
 
-        FlightInfo flight2 = new FlightInfo();
-        flight2.setOriginDes("SHE/ICN");
-        flight2.setFlight("KE0832");
-        flight2.setFlightClass("Economy");
-        flight2.setDate("2024-06-19");
-        flight2.setDepartureTime("10:15");
-        flight2.setArrivalTime("13:15");
-        flight2.setStatus("OK");
-        flight2.setDepartureTerminal("");
-        flight2.setArrivalTerminal("T3");
+        // 计算这一行有多少列（colWidth）。可变参数contents接收多个字符串，每个字符串代表一列的内容
+        int colWidth = contents.length;
+        System.out.println(colWidth);
 
-        deque2.addLast(flight1.getOriginDes());
-        deque2.addLast(flight1.getFlight());
-        deque2.addLast(flight1.getFlightClass());
-        deque2.addLast(flight1.getDate());
-        deque2.addLast(flight1.getDepartureTime());
-        deque2.addLast(flight1.getArrivalTime());
-        deque2.addLast(flight1.getStatus());
-        deque2.addLast(flight1.getDepartureTerminal());
-        deque2.addLast(flight1.getArrivalTerminal());
-        deque2.addLast(flight2.getOriginDes());
-        deque2.addLast(flight2.getFlight());
-        deque2.addLast(flight2.getFlightClass());
-        deque2.addLast(flight2.getDate());
-        deque2.addLast(flight2.getDepartureTime());
-        deque2.addLast(flight2.getArrivalTime());
-        deque2.addLast(flight2.getStatus());
-        deque2.addLast(flight2.getDepartureTerminal());
-        deque2.addLast(flight2.getArrivalTerminal());
-        handle(new Itinerary(), new UserInformation(), "files/doc/ITINERARY-中_英.docx",1050.00,234.00);
+        // 开始遍历每一列的内容
+        for (int i=0; i < contents.length; i++) {
+
+            // 在当前行中创建一列（cell）
+            XWPFTableCell cell = row.createCell();
+
+            // 将contents数组中对应位置的字符串设置为该列的内容
+            cell.setText(contents[i]);
+
+            // 获取单元格的底层XML对象，用于设置单元格的属性
+            CTTcPr cellProps = cell.getCTTc().addNewTcPr();
+
+            // 创建一个CTTblWidth对象，用于设置单元格的宽度
+            CTTblWidth cellWidth = cellProps.addNewTcW();
+
+            // 将单元格宽度的类型设置为DXA（缇，twentieth of a point）
+            cellWidth.setType(STTblWidth.DXA);
+
+            // 计算每个单元格的宽度，并设置为表格总宽度（9000缇）除以列数
+            cellWidth.setW(BigInteger.valueOf(9000 / colWidth));
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        handle("files/doc/6徐晗行程.docx");
     }
 }
