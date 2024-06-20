@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
-<Pane fx:controller="sample.ctrl.Controller" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+
+<Pane maxHeight="1200" maxWidth="1600" minHeight="600" minWidth="800" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ctrl.Controller">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
@@ -33,9 +40,9 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="96.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="96.0" prefHeight="30.0" prefWidth="217.0" visible="false">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" visible="false">
                <children>
                   <Label layoutX="15.0" layoutY="7.0" text="年龄" />
                </children>
@@ -296,6 +303,20 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <TextField fx:id="fileNameField" layoutX="4.0" layoutY="3.0" prefHeight="23.0" prefWidth="343.0" text="\${cusName}" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.35294117647058826" layoutX="14.0" layoutY="600.0" prefHeight="30.0" prefWidth="260.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="120.0">
+               <children>
+                  <Label layoutX="6.0" layoutY="7.0" prefHeight="15.0" prefWidth="83.0" text="公司/学校地址" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="152.0">
+               <children>
+                  <TextField fx:id="companyAddress" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" />
                </children>
             </AnchorPane>
          </items>
