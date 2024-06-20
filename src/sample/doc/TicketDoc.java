@@ -44,24 +44,8 @@ public class TicketDoc {
      */
     public static void handle(Ticket ticket,FlightInfo f1,FlightInfo f2, String name, String filePath, Double m1, Double m2) {
         initQueue(ticket);
-        deque2.addLast(f1.getOriginDes());
-        deque2.addLast(f1.getFlight());
-        deque2.addLast(f1.getFlightClass());
-        deque2.addLast(f1.getDate());
-        deque2.addLast(f1.getDepartureTime());
-        deque2.addLast(f1.getArrivalTime());
-        deque2.addLast(f1.getStatus());
-        deque2.addLast(f1.getDepartureTerminal());
-        deque2.addLast(f1.getArrivalTerminal());
-        deque2.addLast(f1.getOriginDes());
-        deque2.addLast(f2.getFlight());
-        deque2.addLast(f2.getFlightClass());
-        deque2.addLast(f2.getDate());
-        deque2.addLast(f2.getDepartureTime());
-        deque2.addLast(f2.getArrivalTime());
-        deque2.addLast(f2.getStatus());
-        deque2.addLast(f2.getDepartureTerminal());
-        deque2.addLast(f2.getArrivalTerminal());
+        initDeque(f1);
+        initDeque(f2);
         try (FileInputStream fis = new FileInputStream(filePath);
              XWPFDocument doc = new XWPFDocument(fis)) {
             int i = 0;
@@ -145,6 +129,18 @@ public class TicketDoc {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void initDeque(FlightInfo f2) {
+        deque2.addLast(f2.getOriginDes());
+        deque2.addLast(f2.getFlight());
+        deque2.addLast(f2.getFlightClass());
+        deque2.addLast(f2.getDate());
+        deque2.addLast(f2.getDepartureTime());
+        deque2.addLast(f2.getArrivalTime());
+        deque2.addLast(f2.getStatus());
+        deque2.addLast(f2.getDepartureTerminal());
+        deque2.addLast(f2.getArrivalTerminal());
     }
 
 
