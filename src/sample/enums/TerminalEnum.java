@@ -9,22 +9,22 @@ import lombok.Getter;
  */
 @Getter
 public enum TerminalEnum {
-    RC_T1("仁川", "T1", "ICN"),
-    RC_T2("仁川", "T2", "ICN"),
+    RC_T1("仁川", "T1", AirportEnum.ICN),
+    RC_T2("仁川", "T2", AirportEnum.ICN),
 
-    CT_T1("成田", "T1", "NRT"),
-    CT_T2("成田", "T2", "NRT"),
+    CT_T1("成田", "T1", AirportEnum.NRT),
+    CT_T2("成田", "T2", AirportEnum.NRT),
 
-    JP_T1("金浦", "I", "ICN"),
+    JP_T1("金浦", "I", AirportEnum.ICN),
 
-    YT_T3("羽田", "T3", "NRT"),
+    YT_T3("羽田", "T3", AirportEnum.NRT),
     ;
 
     private String terminalName;
     private String terminalNo;
-    private String airport;
+    private AirportEnum airport;
 
-    TerminalEnum(String terminalName, String terminalNo, String airport) {
+    TerminalEnum(String terminalName, String terminalNo, AirportEnum airport) {
         this.terminalName = terminalName;
         this.terminalNo = terminalNo;
         this.airport = airport;

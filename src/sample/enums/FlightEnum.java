@@ -39,12 +39,27 @@ public enum FlightEnum {
 
     OZ_1085("8:40", "10:45", TerminalEnum.JP_T1, TerminalEnum.YT_T3, "OZ1085", "A330-300", AirlineCompanyEnum.OZ),
     OZ_1075("12:05", "14:25", TerminalEnum.YT_T3, TerminalEnum.JP_T1, "OZ1075", "A330-300", AirlineCompanyEnum.OZ);
+    /**
+     * 起航时间 mm:ss
+     */
     private String startTime;
+    /**
+     * 返航时间 mm:ss
+     */
     private String endTime;
     private TerminalEnum startTerminal;
     private TerminalEnum endTerminal;
+    /**
+     * 航班号
+     */
     private String code;
+    /**
+     * 机种
+     */
     private String planeType;
+    /**
+     * 航空公司
+     */
     private AirlineCompanyEnum company;
 
     FlightEnum(String startTime, String endTime, TerminalEnum startTerminal, TerminalEnum endTerminal, String code, String planeType, AirlineCompanyEnum company) {

@@ -3,6 +3,7 @@ package sample.doc;
 import org.apache.poi.xwpf.usermodel.*;
 import sample.pojo.UserInformation;
 import sample.utils.DocUtil;
+import sample.utils.MyFileUtil;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -46,16 +47,16 @@ public class RequisitionDoc {
         deque.addLast(userInformation.getTotalStayDurationInJapanLastYear());
     }
 
-    public static void main(String[] args) {
-        handle(new UserInformation(),"files/doc/7郑禹龙申请表.docx");
-    }
-
-    public static void handle(UserInformation userInformation,String filePath) {
+    public static void handle(UserInformation userInformation, String filePath, String cusName) {
         initQueue(userInformation);
-        try (FileInputStream fis = new FileInputStream(filePath);
+        if (!filePath.endsWith("/")) {
+            filePath += "/";
+        }
+        MyFileUtil.createAllDirectoriesIfNotExist(filePath);
+        try (FileInputStream fis = new FileInputStream("files/doc/7郑禹龙申请表.docx");
              XWPFDocument doc = new XWPFDocument(fis)) {
             DocUtil.setDoc(doc,deque);
-            try (FileOutputStream fos = new FileOutputStream("7."+userInformation.getChineseLastName()+userInformation.getChineseFirstName()+"申请表.docx")) {
+            try (FileOutputStream fos = new FileOutputStream(filePath + cusName + "申请表.docx")) {
                 doc.write(fos);
             }
 

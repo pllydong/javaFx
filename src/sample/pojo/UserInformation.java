@@ -122,7 +122,7 @@ public class UserInformation {
      * 일본에서 체류 예정 기간
      * 在日本预定停留期间
      */
-    private String plannedDurationOfStayInJapan = "2024년 07 월 19 일부터 2024 년 07 월 21 일까지";
+    private String plannedDurationOfStayInJapan = "%s년 %s 월 %s 일부터 %s 년 %s 월 %s 일까지";
 
     /**
      * 마지막으로 일본에 체류한 기간

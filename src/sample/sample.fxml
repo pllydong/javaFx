@@ -21,7 +21,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="lastNameField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="lastNameField" layoutX="-6.0" layoutY="3.0" text="欧阳" />
                </children>
             </AnchorPane>
          </items>
@@ -35,7 +35,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="firstNameField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="firstNameField" layoutX="-6.0" layoutY="3.0" text="于飞" />
                </children>
             </AnchorPane>
          </items>
@@ -91,7 +91,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="birthplaceField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="birthplaceField" layoutX="-6.0" layoutY="3.0" text="北京" />
                </children>
             </AnchorPane>
          </items>
@@ -105,7 +105,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="nationalityField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="nationalityField" layoutX="-6.0" layoutY="3.0" text="中国" />
                </children>
             </AnchorPane>
          </items>
@@ -119,7 +119,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="idnField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="idnField" layoutX="-6.0" layoutY="3.0" text="999999999999999999" />
                </children>
             </AnchorPane>
          </items>
@@ -133,7 +133,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="phoneField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="phoneField" layoutX="-6.0" layoutY="3.0" text="11111111111" />
                </children>
             </AnchorPane>
          </items>
@@ -161,7 +161,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="emailField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="emailField" layoutX="-6.0" layoutY="3.0" text="11111111111@qq.com" />
                </children>
             </AnchorPane>
          </items>
@@ -175,7 +175,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="addressField" layoutX="-6.0" layoutY="3.0" />
+                  <TextField fx:id="addressField" layoutX="-6.0" layoutY="3.0" text="中国北京市牛逼区牛逼街道1号" />
                </children>
             </AnchorPane>
          </items>
@@ -203,7 +203,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="152.0">
                <children>
-                  <TextField fx:id="companyName" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" />
+                  <TextField fx:id="companyName" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" text="牛逼公司" />
                </children>
             </AnchorPane>
          </items>
@@ -217,7 +217,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="companyPhone" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" />
+                  <TextField fx:id="companyPhone" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" text="666666" />
                </children>
             </AnchorPane>
          </items>
@@ -316,7 +316,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="152.0">
                <children>
-                  <TextField fx:id="companyAddress" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" />
+                  <TextField fx:id="companyAddress" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" text="中国北京市牛逼区牛逼街道666号" />
                </children>
             </AnchorPane>
          </items>

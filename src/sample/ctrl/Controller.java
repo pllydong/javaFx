@@ -1,21 +1,31 @@
 package sample.ctrl;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import com.sun.javafx.scene.control.ReadOnlyUnbackedObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import sample.enums.MarriageEnum;
-import sample.enums.OccupationEnum;
-import sample.enums.SexEnum;
+import sample.doc.RequisitionDoc;
+import sample.enums.*;
+import sample.model.CacheData;
+import sample.model.Hotel;
 import sample.pojo.FlightInfo;
-import sample.pojo.Ticket;
+import sample.pojo.Itinerary;
 import sample.pojo.UserInformation;
+import sample.utils.MyUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static cn.hutool.core.date.DatePattern.PURE_DATE_PATTERN;
 
 public class Controller implements Initializable {
     /**
@@ -114,15 +124,20 @@ public class Controller implements Initializable {
     /**
      * 用户信息
      */
-    private UserInformation userInfo = new UserInformation();
+    private UserInformation userInfo;
     /**
      * 申请表信息
      */
-    private Ticket applicationInfo = new Ticket();
+    private Itinerary applicationInfo;
     /**
      * 机票信息
      */
-    private FlightInfo flightInfo = new FlightInfo();
+    private FlightInfo flightInfo;
+
+    /**
+     * 主要信息缓存
+     */
+    private CacheData cacheData;
 
     /**
      * 界面资源加载完后调用该方法进行初始化
@@ -146,6 +161,8 @@ public class Controller implements Initializable {
 
         // 默认相隔4天（一共五天）
         endDatePicker.setValue(LocalDate.now().plusDays(4));
+
+        birthdayPicker.setValue(LocalDate.now().minusYears(20));
     }
 
     /**
@@ -154,24 +171,85 @@ public class Controller implements Initializable {
     private void initButtonClick() {
         exportFileButton.setOnAction(event -> {
             collectInfos();
+
+            exportFiles();
         });
+    }
+
+    /**
+     * 导出文件
+     */
+    private void exportFiles() {
+        String fileName = lastNameField.getText() + firstNameField.getText();
+
+        String applicationPath = applicationPathField.getText();
+
+        RequisitionDoc.handle(userInfo, applicationPath, fileName);
     }
 
     /**
      * 收集用户输入转换为class
      */
     private void collectInfos() {
+        initCacheData();
+
         fillUserInfo();
+    }
+
+    /**
+     * 初始化缓存
+     */
+    private void initCacheData() {
+        cacheData = new CacheData();
+
+        cacheData.setFlight(RandomUtil.randomEle(Arrays.stream(FlightEnum.values()).filter(f ->
+                f.getStartTerminal().getAirport() == AirportEnum.ICN
+        ).collect(Collectors.toList())));
+        cacheData.setFlight(RandomUtil.randomEle(Arrays.stream(FlightEnum.values()).filter(f ->
+                f.getEndTerminal().getAirport() == AirportEnum.ICN
+        ).collect(Collectors.toList())));
+        cacheData.setStartDt(LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN));
+        cacheData.setEndDt(LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN));
+        cacheData.setHotel(RandomUtil.randomEle(new ArrayList<>(Hotel.HOTEL_MAP.values())));
+        cacheData.setTouristMap(MyUtil.getRandomTouristMap(cacheData.getStartDt(), cacheData.getEndDt()));
     }
 
     /**
      * 填充用户信息
      */
     private void fillUserInfo() {
+        userInfo = new UserInformation();
         userInfo.setChineseLastName(lastNameField.getText());
         userInfo.setChineseFirstName(firstNameField.getText());
-        userInfo.setGender(sexCombo.cursorProperty().getName());
+        userInfo.setGender(MyUtil.setCheck(userInfo.getGender(), sexCombo.getSelectionModel().getSelectedIndex()));
+        userInfo.setDateOfBirth(DateUtil.format(LocalDateTimeUtil.of(birthdayPicker.getValue()), PURE_DATE_PATTERN));
+        userInfo.setPlaceOfBirth(birthplaceField.getText());
+        userInfo.setMaritalStatus(MyUtil.setCheck(userInfo.getGender(), marriageCombo.getSelectionModel().getSelectedIndex()));
+        userInfo.setNationality(nationalityField.getText());
+        userInfo.setForeignerRegistrationNumber(idnField.getText());
+        userInfo.setContactNumber(phoneField.getText());
+        userInfo.setEmail(emailField.getText());
+        userInfo.setAddress(addressField.getText());
+        userInfo.setCurrentOccupationAndPosition(MyUtil.setCheck(userInfo.getGender(), occupationCombo.getSelectionModel().getSelectedIndex()));
+        userInfo.setCompanyOrSchoolName(companyName.getText());
+        userInfo.setCompanyOrSchoolPhoneNumber(companyPhone.getText());
+        userInfo.setCompanyOrSchoolAddress(companyAddress.getText());
+        userInfo.setEnglishLastName(PinyinUtil.getPinyin(lastNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        userInfo.setEnglishFirstName(PinyinUtil.getPinyin(firstNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        LocalDate startDt = startDatePicker.getValue();
+        LocalDate endDt = endDatePicker.getValue();
+        userInfo.setPlannedDurationOfStayInJapan(String.format(userInfo.getPlannedDurationOfStayInJapan(),
+                StrUtil.fillBefore(String.valueOf(startDt.getYear()), '0', 4),
+                StrUtil.fillBefore(String.valueOf(startDt.getMonthValue()), '0', 2),
+                StrUtil.fillBefore(String.valueOf(startDt.getDayOfMonth()), '0', 2),
+                StrUtil.fillBefore(String.valueOf(endDt.getYear()), '0', 4),
+                StrUtil.fillBefore(String.valueOf(endDt.getMonthValue()), '0', 2),
+                StrUtil.fillBefore(String.valueOf(endDt.getDayOfMonth()), '0', 2)
+        ));
+        userInfo.setEntryPortOrFlightNumber(cacheData.getFlight().getCode());
     }
+
+
 
     /**
      * 初始化提示语

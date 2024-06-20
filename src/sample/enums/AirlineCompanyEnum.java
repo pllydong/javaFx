@@ -4,6 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import lombok.Getter;
 
 /**
+ * 航空公司枚举
  * @author guokun
  * @date 2024/6/19 22:15
  */

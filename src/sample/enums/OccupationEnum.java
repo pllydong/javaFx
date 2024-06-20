@@ -3,7 +3,7 @@ package sample.enums;
 import lombok.Getter;
 
 /**
- * 性别枚举
+ * 工作枚举
  *
  * @author guokun
  * @date 2024/6/20 21:04
