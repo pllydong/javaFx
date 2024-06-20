@@ -2,7 +2,7 @@ package sample.doc;
 
 import org.apache.poi.xwpf.usermodel.*;
 import sample.pojo.FlightInfo;
-import sample.pojo.Itinerary;
+import sample.pojo.Ticket;
 import sample.pojo.UserInformation;
 
 import java.io.FileInputStream;
@@ -20,22 +20,22 @@ public class TicketDoc {
     static ArrayDeque<String> deque = new ArrayDeque<>();
     static ArrayDeque<String> deque2 = new ArrayDeque<>();
 
-    public static void initQueue(Itinerary itinerary) {
-        deque.addLast(itinerary.getAirlinePnr());
-        deque.addLast(itinerary.getBookingPnr());
-        deque.addLast(itinerary.getPassengerName());
-        deque.addLast(itinerary.getETicketNumber());
-        deque.addLast(itinerary.getIdNumber());
-        deque.addLast(itinerary.getConjunctionTicketNumber());
-        deque.addLast(itinerary.getIssuingAirline());
-        deque.addLast(itinerary.getDateOfIssue());
-        deque.addLast(itinerary.getIssuingAgent());
-        deque.addLast(itinerary.getIataCode());
+    public static void initQueue(Ticket ticket) {
+        deque.addLast(ticket.getAirlinePnr());
+        deque.addLast(ticket.getBookingPnr());
+        deque.addLast(ticket.getPassengerName());
+        deque.addLast(ticket.getETicketNumber());
+        deque.addLast(ticket.getIdNumber());
+        deque.addLast(ticket.getConjunctionTicketNumber());
+        deque.addLast(ticket.getIssuingAirline());
+        deque.addLast(ticket.getDateOfIssue());
+        deque.addLast(ticket.getIssuingAgent());
+        deque.addLast(ticket.getIataCode());
 
     }
 
-    public static void handle(Itinerary itinerary, UserInformation userInformation, String filePath,Double m1,Double m2) {
-        initQueue(itinerary);
+    public static void handle(Ticket ticket, UserInformation userInformation, String filePath, Double m1, Double m2) {
+        initQueue(ticket);
         try (FileInputStream fis = new FileInputStream(filePath);
              XWPFDocument doc = new XWPFDocument(fis)) {
             int i = 0;
@@ -61,8 +61,7 @@ public class TicketDoc {
                                 }
 
                             }
-                        }
-                        else if (i == 1) {
+                        } else if (i == 1) {
                             if (j != 0) {
                                 XWPFParagraph paragraph = cell.getParagraphs().get(0);
                                 for (int m = paragraph.getRuns().size() - 1; m >= 0; m--) {
@@ -75,8 +74,6 @@ public class TicketDoc {
                                 }
                             }
                         }
-//                        System.out.println("Original cell text: " + i + "-" + j + "-" + k + ": " + cellText);
-//                        System.out.println(cellText.length());
                         k++;
                     }
                     j++;
@@ -88,28 +85,28 @@ public class TicketDoc {
             final AtomicBoolean[] check = {new AtomicBoolean(false)};
             for (XWPFParagraph paragraph : paragraphs) {
                 String text = paragraph.getText();
-                if (text.contains("机票款/FARE :")||text.contains("总计金额")) {
+                if (text.contains("机票款/FARE :") || text.contains("总计金额")) {
                     paragraph.getRuns().forEach(run -> {
                         System.out.println(run.getText(0));
                         String s1 = run.getText(0);
-                        if(check[0].get()){
-                             if(l[0] ==0){
-                                 run.setText("", 0);
-                                 run.setText(String.valueOf(m1), 0);
-                                 l[0]++;
-                                 check[0].set(false);
-                             }else if(l[0] ==1){
-                                 run.setText("", 0);
-                                 run.setText(String.valueOf(m2), 0);
-                                 l[0]++;
-                                 check[0].set(false);
-                             }else if (l[0] ==2){
-                                 run.setText("", 0);
-                                 run.setText(String.valueOf(m1+m2), 0);
-                                 check[0].set(false);
-                             }
+                        if (check[0].get()) {
+                            if (l[0] == 0) {
+                                run.setText("", 0);
+                                run.setText(String.valueOf(m1), 0);
+                                l[0]++;
+                                check[0].set(false);
+                            } else if (l[0] == 1) {
+                                run.setText("", 0);
+                                run.setText(String.valueOf(m2), 0);
+                                l[0]++;
+                                check[0].set(false);
+                            } else if (l[0] == 2) {
+                                run.setText("", 0);
+                                run.setText(String.valueOf(m1 + m2), 0);
+                                check[0].set(false);
+                            }
                         }
-                        if("CNY".equals(s1)){
+                        if ("CNY".equals(s1)) {
                             check[0].set(true);
                         }
                     });
@@ -166,6 +163,6 @@ public class TicketDoc {
         deque2.addLast(flight2.getStatus());
         deque2.addLast(flight2.getDepartureTerminal());
         deque2.addLast(flight2.getArrivalTerminal());
-        handle(new Itinerary(), new UserInformation(), "files/doc/ITINERARY-中_英.docx",1050.00,234.00);
+        handle(new Ticket(), new UserInformation(), "files/doc/ITINERARY-中_英.docx", 1050.00, 234.00);
     }
 }

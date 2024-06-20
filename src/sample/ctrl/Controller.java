@@ -1,7 +1,5 @@
 package sample.ctrl;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.LocalDateTimeUtil;
 import com.sun.javafx.scene.control.ReadOnlyUnbackedObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,15 +10,12 @@ import sample.enums.MarriageEnum;
 import sample.enums.OccupationEnum;
 import sample.enums.SexEnum;
 import sample.pojo.FlightInfo;
-import sample.pojo.Itinerary;
+import sample.pojo.Ticket;
 import sample.pojo.UserInformation;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
     /**
@@ -123,7 +118,7 @@ public class Controller implements Initializable {
     /**
      * 申请表信息
      */
-    private Itinerary applicationInfo = new Itinerary();
+    private Ticket applicationInfo = new Ticket();
     /**
      * 机票信息
      */
