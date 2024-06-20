@@ -42,8 +42,10 @@ public class TicketDoc {
      * @param m1 机票款
      * @param m2 税费
      */
-    public static void handle(Ticket ticket, String name, String filePath, Double m1, Double m2) {
+    public static void handle(Ticket ticket,FlightInfo f1,FlightInfo f2, String name, String filePath, Double m1, Double m2) {
         initQueue(ticket);
+        initDeque(f1);
+        initDeque(f2);
         try (FileInputStream fis = new FileInputStream(filePath);
              XWPFDocument doc = new XWPFDocument(fis)) {
             int i = 0;
@@ -129,6 +131,19 @@ public class TicketDoc {
         }
     }
 
+    private static void initDeque(FlightInfo f2) {
+        deque2.addLast(f2.getOriginDes());
+        deque2.addLast(f2.getFlight());
+        deque2.addLast(f2.getFlightClass());
+        deque2.addLast(f2.getDate());
+        deque2.addLast(f2.getDepartureTime());
+        deque2.addLast(f2.getArrivalTime());
+        deque2.addLast(f2.getStatus());
+        deque2.addLast(f2.getDepartureTerminal());
+        deque2.addLast(f2.getArrivalTerminal());
+    }
+
+
     public static void main(String[] args) {
         FlightInfo flight1 = new FlightInfo();
         flight1.setOriginDes("ICN/SHE");
@@ -151,25 +166,6 @@ public class TicketDoc {
         flight2.setStatus("OK");
         flight2.setDepartureTerminal("");
         flight2.setArrivalTerminal("T3");
-
-        deque2.addLast(flight1.getOriginDes());
-        deque2.addLast(flight1.getFlight());
-        deque2.addLast(flight1.getFlightClass());
-        deque2.addLast(flight1.getDate());
-        deque2.addLast(flight1.getDepartureTime());
-        deque2.addLast(flight1.getArrivalTime());
-        deque2.addLast(flight1.getStatus());
-        deque2.addLast(flight1.getDepartureTerminal());
-        deque2.addLast(flight1.getArrivalTerminal());
-        deque2.addLast(flight2.getOriginDes());
-        deque2.addLast(flight2.getFlight());
-        deque2.addLast(flight2.getFlightClass());
-        deque2.addLast(flight2.getDate());
-        deque2.addLast(flight2.getDepartureTime());
-        deque2.addLast(flight2.getArrivalTime());
-        deque2.addLast(flight2.getStatus());
-        deque2.addLast(flight2.getDepartureTerminal());
-        deque2.addLast(flight2.getArrivalTerminal());
-        handle(new Ticket(), "徐涵", "files/doc/ITINERARY-中_英.docx", 1050.00, 234.00);
+        handle(new Ticket(),flight1,flight2, "徐涵", "files/doc/ITINERARY-中_英.docx", 1050.00, 234.00);
     }
 }
