@@ -79,7 +79,7 @@ public class ItineraryDoc {
      * @param name      顾客的名字，中文名字，用来生成申请单的名字
      * @throws FileNotFoundException
      */
-    public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name) throws FileNotFoundException {
+    public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name) {
         filePath = MyFileUtil.apendEndSeperator(filePath);
         MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         try (FileInputStream fis = new FileInputStream("files/doc/6徐晗行程.docx");
@@ -164,7 +164,7 @@ public class ItineraryDoc {
         paragraph.setSpacingBetween(1.0);
 
         // 根据换行符拆分文本
-        String[] lines = text.split("\n");
+        String[] lines = null == text ? new String[]{} : text.split("\n");
         for (int i = 0; i < lines.length; i++) {
             XWPFRun run = paragraph.createRun();
             run.setText(lines[i]);

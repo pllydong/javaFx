@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import sample.doc.ItineraryDoc;
 import sample.doc.RequisitionDoc;
 import sample.enums.*;
 import sample.model.CacheData;
@@ -23,10 +24,12 @@ import sample.utils.MyUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static cn.hutool.core.date.DatePattern.PURE_DATE_PATTERN;
+import static sample.utils.MyUtil.addDay;
 
 public class Controller implements Initializable {
     /**
@@ -122,18 +125,6 @@ public class Controller implements Initializable {
      */
     public TextField companyAddress;
 
-    /**
-     * 用户信息
-     */
-    private UserInformation userInfo;
-    /**
-     * 申请表信息
-     */
-    private List<Itinerary> itineraryInfoList;
-    /**
-     * 机票信息
-     */
-    private FlightInfo flightInfo;
 
     /**
      * 主要信息缓存
@@ -181,11 +172,23 @@ public class Controller implements Initializable {
      * 导出文件
      */
     private void exportFiles() {
-        String fileName = lastNameField.getText() + firstNameField.getText();
+        String now = LocalDateTimeUtil.format(LocalDateTimeUtil.now(), PURE_DATE_PATTERN);
+        UserInformation userInfo = cacheData.getUserInfo();
+        String name = userInfo.getChineseLastName() + userInfo.getChineseFirstName();
+        String pinyin = userInfo.getEnglishLastName() + StrUtil.SPACE + userInfo.getEnglishFirstName();
+        String fileName = name + StrUtil.UNDERLINE + now;
 
         String applicationPath = applicationPathField.getText();
+        String travelPath = travelPathField.getText();
+        String ticketPath = ticketPathField.getText();
 
+        // 导出申请表
         RequisitionDoc.handle(userInfo, applicationPath, fileName);
+
+        // 导出行程单
+        ItineraryDoc.handle(cacheData.getItineraryInfoList(), travelPath,
+                now.substring(0, 4), now.substring(4, 6), now.substring(6, 8),
+                pinyin, fileName);
     }
 
     /**
@@ -205,30 +208,25 @@ public class Controller implements Initializable {
      * 填充化行程单信息
      */
     private void fillItineraryInfo() {
-        int startDtNum = Integer.parseInt(cacheData.getStartDt());
-        int endDtNum = Integer.parseInt(cacheData.getEndDt());
-        int size = endDtNum - startDtNum + 1;
+        cacheData.setItineraryInfoList(new ArrayList<>());
 
-        itineraryInfoList = new ArrayList<>(size);
+        // 随机分配的景点
+        Map<String, List<TouristSpot>> randomTouristMap = cacheData.getTouristMap();
 
-        // 随机分配景点
-        Map<String, List<TouristSpot>> randomTouristMap = MyUtil.getRandomTouristMap(cacheData.getStartDt(), cacheData.getEndDt());
-
-        for (int i = startDtNum; i <= endDtNum; i++) {
-            String dt = StrUtil.fillBefore(String.valueOf(i), '0', 8);
+        for (String dt = cacheData.getStartDt(); dt.compareTo(cacheData.getEndDt()) <= 0; dt = addDay(dt)) {
             List<TouristSpot> touristSpots = randomTouristMap.get(dt);
 
             Itinerary itinerary = new Itinerary();
-            itineraryInfoList.add(itinerary);
+            cacheData.getItineraryInfoList().add(itinerary);
 
             itinerary.setDate(String.format("%s.%s.%s", dt.substring(0, 4), dt.substring(4, 6), dt.substring(6, 8)));
             ArrayList<String> activityPlan = new ArrayList<>(4);
-            if (i == startDtNum) {
+            if (dt.equals(cacheData.getStartDt())) {
                 activityPlan.add(AirportEnum.ICN.getFromToStr(AirportEnum.NRT));
                 Hotel hotel = cacheData.getHotel();
                 itinerary.setContactNumber(hotel.getPhone());
                 itinerary.setAccommodationsAddress(hotel.getAddress());
-            } else if (i == endDtNum) {
+            } else if (dt.equals(cacheData.getEndDt())) {
                 activityPlan.add(AirportEnum.NRT.getFromToStr(AirportEnum.ICN));
             }
             activityPlan.addAll(touristSpots.stream().map(TouristSpot::getEnglishName).collect(Collectors.toList()));
@@ -240,7 +238,7 @@ public class Controller implements Initializable {
      * 填充机票信息
      */
     private void fillFlightInfo() {
-        flightInfo = new FlightInfo();
+        cacheData.setFlightInfo(new FlightInfo());
 
 
     }
@@ -267,27 +265,27 @@ public class Controller implements Initializable {
      * 填充用户信息
      */
     private void fillUserInfo() {
-        userInfo = new UserInformation();
-        userInfo.setChineseLastName(lastNameField.getText());
-        userInfo.setChineseFirstName(firstNameField.getText());
-        userInfo.setGender(MyUtil.setCheck(userInfo.getGender(), sexCombo.getSelectionModel().getSelectedIndex()));
-        userInfo.setDateOfBirth(DateUtil.format(LocalDateTimeUtil.of(birthdayPicker.getValue()), PURE_DATE_PATTERN));
-        userInfo.setPlaceOfBirth(birthplaceField.getText());
-        userInfo.setMaritalStatus(MyUtil.setCheck(userInfo.getGender(), marriageCombo.getSelectionModel().getSelectedIndex()));
-        userInfo.setNationality(nationalityField.getText());
-        userInfo.setForeignerRegistrationNumber(idnField.getText());
-        userInfo.setContactNumber(phoneField.getText());
-        userInfo.setEmail(emailField.getText());
-        userInfo.setAddress(addressField.getText());
-        userInfo.setCurrentOccupationAndPosition(MyUtil.setCheck(userInfo.getGender(), occupationCombo.getSelectionModel().getSelectedIndex()));
-        userInfo.setCompanyOrSchoolName(companyName.getText());
-        userInfo.setCompanyOrSchoolPhoneNumber(companyPhone.getText());
-        userInfo.setCompanyOrSchoolAddress(companyAddress.getText());
-        userInfo.setEnglishLastName(PinyinUtil.getPinyin(lastNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
-        userInfo.setEnglishFirstName(PinyinUtil.getPinyin(firstNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        cacheData.setUserInfo(new UserInformation());
+        cacheData.getUserInfo().setChineseLastName(lastNameField.getText());
+        cacheData.getUserInfo().setChineseFirstName(firstNameField.getText());
+        cacheData.getUserInfo().setGender(MyUtil.setCheck(cacheData.getUserInfo().getGender(), sexCombo.getSelectionModel().getSelectedIndex()));
+        cacheData.getUserInfo().setDateOfBirth(DateUtil.format(LocalDateTimeUtil.of(birthdayPicker.getValue()), PURE_DATE_PATTERN));
+        cacheData.getUserInfo().setPlaceOfBirth(birthplaceField.getText());
+        cacheData.getUserInfo().setMaritalStatus(MyUtil.setCheck(cacheData.getUserInfo().getGender(), marriageCombo.getSelectionModel().getSelectedIndex()));
+        cacheData.getUserInfo().setNationality(nationalityField.getText());
+        cacheData.getUserInfo().setForeignerRegistrationNumber(idnField.getText());
+        cacheData.getUserInfo().setContactNumber(phoneField.getText());
+        cacheData.getUserInfo().setEmail(emailField.getText());
+        cacheData.getUserInfo().setAddress(addressField.getText());
+        cacheData.getUserInfo().setCurrentOccupationAndPosition(MyUtil.setCheck(cacheData.getUserInfo().getGender(), occupationCombo.getSelectionModel().getSelectedIndex()));
+        cacheData.getUserInfo().setCompanyOrSchoolName(companyName.getText());
+        cacheData.getUserInfo().setCompanyOrSchoolPhoneNumber(companyPhone.getText());
+        cacheData.getUserInfo().setCompanyOrSchoolAddress(companyAddress.getText());
+        cacheData.getUserInfo().setEnglishLastName(PinyinUtil.getPinyin(lastNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        cacheData.getUserInfo().setEnglishFirstName(PinyinUtil.getPinyin(firstNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
         LocalDate startDt = startDatePicker.getValue();
         LocalDate endDt = endDatePicker.getValue();
-        userInfo.setPlannedDurationOfStayInJapan(String.format(userInfo.getPlannedDurationOfStayInJapan(),
+        cacheData.getUserInfo().setPlannedDurationOfStayInJapan(String.format(cacheData.getUserInfo().getPlannedDurationOfStayInJapan(),
                 StrUtil.fillBefore(String.valueOf(startDt.getYear()), '0', 4),
                 StrUtil.fillBefore(String.valueOf(startDt.getMonthValue()), '0', 2),
                 StrUtil.fillBefore(String.valueOf(startDt.getDayOfMonth()), '0', 2),
@@ -295,7 +293,7 @@ public class Controller implements Initializable {
                 StrUtil.fillBefore(String.valueOf(endDt.getMonthValue()), '0', 2),
                 StrUtil.fillBefore(String.valueOf(endDt.getDayOfMonth()), '0', 2)
         ));
-        userInfo.setEntryPortOrFlightNumber(cacheData.getFlight().getCode());
+        cacheData.getUserInfo().setEntryPortOrFlightNumber(cacheData.getFlight().getCode());
     }
 
 

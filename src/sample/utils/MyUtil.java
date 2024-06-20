@@ -1,6 +1,8 @@
 package sample.utils;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
@@ -42,23 +44,29 @@ public class MyUtil {
         if (startDt.compareTo(endDt) >= 0) {
             throw new RuntimeException("出发日期 小于等于 返航日期！");
         }
-        int startDtNum = Integer.parseInt(endDt);
-        int endDtNum = Integer.parseInt(startDt);
-        int size = startDtNum - endDtNum + 1;
-        HashMap<String, List<TouristSpot>> map = new HashMap<>(size);
+
+        HashMap<String, List<TouristSpot>> map = new HashMap<>();
 
         List<TouristSpot> touristSpotTmpList = new ArrayList<>(TouristSpot.TOURIST_SPOT_MAP.values());
         // 1. 第一天安排两个景点
         map.put(startDt, createRandomListFromTmpListAndRemove(touristSpotTmpList, 2));
         // 2. 中间每天安排三个景点
-        for (int i = startDtNum + 1; i < endDtNum; i++) {
-            map.put(StrUtil.fillBefore(String.valueOf(i), '0', 8),
-                    createRandomListFromTmpListAndRemove(touristSpotTmpList, 3));
+        for (String dt = addDay(startDt); dt.compareTo(endDt) < 0; dt = addDay(dt)) {
+            map.put(dt, createRandomListFromTmpListAndRemove(touristSpotTmpList, 3));
         }
         // 3. 最后一天不安排景点
         map.put(endDt, new ArrayList<>());
 
         return map;
+    }
+
+    /**
+     * yyyyMMdd 加一天
+     * @param dt
+     * @return
+     */
+    public static String addDay(String dt) {
+        return DateUtil.parseLocalDateTime(dt, DatePattern.PURE_DATE_PATTERN).plusDays(1L).format(DatePattern.PURE_DATE_FORMATTER);
     }
 
     /**
@@ -72,8 +80,9 @@ public class MyUtil {
             throw new IllegalArgumentException("剩余的景点不足够创建！");
         }
         List<T> res = RandomUtil.randomEleList(tmpList, size);
+        Collection<T> disjunction = CollUtil.disjunction(res, tmpList);
         tmpList.clear();
-        tmpList.addAll(CollUtil.disjunction(tmpList, res));
+        tmpList.addAll(disjunction);
         return res;
     }
 }

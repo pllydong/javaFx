@@ -2,6 +2,9 @@ package sample.model;
 
 import lombok.Data;
 import sample.enums.FlightEnum;
+import sample.pojo.FlightInfo;
+import sample.pojo.Itinerary;
+import sample.pojo.UserInformation;
 
 import java.util.List;
 import java.util.Map;
@@ -37,4 +40,17 @@ public class CacheData {
      * 返航航班
      */
     private FlightEnum backFlight;
+
+    /**
+     * 用户信息
+     */
+    private UserInformation userInfo;
+    /**
+     * 申请表信息
+     */
+    private List<Itinerary> itineraryInfoList;
+    /**
+     * 机票信息
+     */
+    private FlightInfo flightInfo;
 }
