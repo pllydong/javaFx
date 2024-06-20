@@ -10,7 +10,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Button?>
 
-<Pane maxHeight="1200" maxWidth="1600" minHeight="600" minWidth="800" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ctrl.Controller">
+<Pane maxHeight="1200" maxWidth="1600" minHeight="800" minWidth="1200" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ctrl.Controller">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
