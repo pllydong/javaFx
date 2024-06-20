@@ -47,7 +47,7 @@ public class RequisitionDoc {
     }
 
     public static void main(String[] args) {
-        handle(new UserInformation(),"G:\\Code\\JavaCode\\javaFx\\files\\doc\\7郑禹龙申请表.docx");
+        handle(new UserInformation(),"files/doc/7郑禹龙申请表.docx");
     }
 
     public static void handle(UserInformation userInformation,String filePath) {
