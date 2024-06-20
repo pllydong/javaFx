@@ -1,5 +1,7 @@
 package sample.ctrl;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import com.sun.javafx.scene.control.ReadOnlyUnbackedObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +16,7 @@ import sample.pojo.Itinerary;
 import sample.pojo.UserInformation;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -135,7 +138,19 @@ public class Controller implements Initializable {
 
         initComboBox();
 
+        initDatePicker();
+
         initButtonClick();
+    }
+
+    /**
+     * 初始化日期选择器
+     */
+    private void initDatePicker() {
+        startDatePicker.setValue(LocalDate.now());
+
+        // 默认相隔4天（一共五天）
+        endDatePicker.setValue(LocalDate.now().plusDays(4));
     }
 
     /**
