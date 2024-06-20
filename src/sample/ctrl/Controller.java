@@ -15,6 +15,7 @@ import sample.doc.RequisitionDoc;
 import sample.enums.*;
 import sample.model.CacheData;
 import sample.model.Hotel;
+import sample.model.TouristSpot;
 import sample.pojo.FlightInfo;
 import sample.pojo.Itinerary;
 import sample.pojo.UserInformation;
@@ -128,7 +129,7 @@ public class Controller implements Initializable {
     /**
      * 申请表信息
      */
-    private Itinerary applicationInfo;
+    private List<Itinerary> itineraryInfoList;
     /**
      * 机票信息
      */
@@ -196,6 +197,43 @@ public class Controller implements Initializable {
         fillUserInfo();
 
         fillFlightInfo();
+
+        fillItineraryInfo();
+    }
+
+    /**
+     * 填充化行程单信息
+     */
+    private void fillItineraryInfo() {
+        int startDtNum = Integer.parseInt(cacheData.getStartDt());
+        int endDtNum = Integer.parseInt(cacheData.getEndDt());
+        int size = endDtNum - startDtNum + 1;
+
+        itineraryInfoList = new ArrayList<>(size);
+
+        // 随机分配景点
+        Map<String, List<TouristSpot>> randomTouristMap = MyUtil.getRandomTouristMap(cacheData.getStartDt(), cacheData.getEndDt());
+
+        for (int i = startDtNum; i <= endDtNum; i++) {
+            String dt = StrUtil.fillBefore(String.valueOf(i), '0', 8);
+            List<TouristSpot> touristSpots = randomTouristMap.get(dt);
+
+            Itinerary itinerary = new Itinerary();
+            itineraryInfoList.add(itinerary);
+
+            itinerary.setDate(String.format("%s.%s.%s", dt.substring(0, 4), dt.substring(4, 6), dt.substring(6, 8)));
+            ArrayList<String> activityPlan = new ArrayList<>(4);
+            if (i == startDtNum) {
+                activityPlan.add(AirportEnum.ICN.getFromToStr(AirportEnum.NRT));
+                Hotel hotel = cacheData.getHotel();
+                itinerary.setContactNumber(hotel.getPhone());
+                itinerary.setAccommodationsAddress(hotel.getAddress());
+            } else if (i == endDtNum) {
+                activityPlan.add(AirportEnum.NRT.getFromToStr(AirportEnum.ICN));
+            }
+            activityPlan.addAll(touristSpots.stream().map(TouristSpot::getEnglishName).collect(Collectors.toList()));
+            itinerary.setActivityPlan(activityPlan);
+        }
     }
 
     /**
@@ -204,7 +242,7 @@ public class Controller implements Initializable {
     private void fillFlightInfo() {
         flightInfo = new FlightInfo();
 
-        flightInfo.setFlight();
+
     }
 
     /**
