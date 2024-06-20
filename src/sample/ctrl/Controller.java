@@ -209,7 +209,7 @@ public class Controller implements Initializable {
                 f.getEndTerminal().getAirport() == AirportEnum.ICN
         ).collect(Collectors.toList())));
         cacheData.setStartDt(LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN));
-        cacheData.setEndDt(LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN));
+        cacheData.setEndDt(LocalDateTimeUtil.format(endDatePicker.getValue(), PURE_DATE_PATTERN));
         cacheData.setHotel(RandomUtil.randomEle(new ArrayList<>(Hotel.HOTEL_MAP.values())));
         cacheData.setTouristMap(MyUtil.getRandomTouristMap(cacheData.getStartDt(), cacheData.getEndDt()));
     }
