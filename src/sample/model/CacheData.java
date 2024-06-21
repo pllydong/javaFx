@@ -2,7 +2,7 @@ package sample.model;
 
 import lombok.Data;
 import sample.enums.FlightEnum;
-import sample.pojo.FlightInfo;
+import sample.pojo.FligihtInfo;
 import sample.pojo.Itinerary;
 import sample.pojo.Ticket;
 import sample.pojo.UserInformation;
@@ -53,11 +53,11 @@ public class CacheData {
     /**
      * 机票信息
      */
-    private FlightInfo flightInfo;
+    private FligihtInfo flightInfo;
     /**
      * 返航机票信息
      */
-    private FlightInfo bcakFlightInfo;
+    private FligihtInfo backFlightInfo;
     /**
      * 机票信息
      */

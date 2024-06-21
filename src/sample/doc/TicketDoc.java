@@ -1,9 +1,10 @@
 package sample.doc;
 
+import cn.hutool.core.util.NumberUtil;
 import org.apache.poi.xwpf.usermodel.*;
-import sample.pojo.FlightInfo;
+import sample.pojo.FligihtInfo;
 import sample.pojo.Ticket;
-import sample.pojo.UserInformation;
+import sample.utils.MyFileUtil;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -42,11 +43,13 @@ public class TicketDoc {
      * @param m1 机票款
      * @param m2 税费
      */
-    public static void handle(Ticket ticket,FlightInfo f1,FlightInfo f2, String name, String filePath, Double m1, Double m2) {
+    public static void handle(Ticket ticket, FligihtInfo f1, FligihtInfo f2, String name, String filePath, double m1, double m2) {
+        filePath = MyFileUtil.apendEndSeperator(filePath) + "5" + name + "机票.docx";
+        MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         initQueue(ticket);
         initDeque(f1);
         initDeque(f2);
-        try (FileInputStream fis = new FileInputStream(filePath);
+        try (FileInputStream fis = new FileInputStream(TICKT_TMP_FILE_PATH);
              XWPFDocument doc = new XWPFDocument(fis)) {
             int i = 0;
             for (XWPFTable table : doc.getTables()) {
@@ -101,17 +104,17 @@ public class TicketDoc {
                         if (check[0].get()) {
                             if (l[0] == 0) {
                                 run.setText("", 0);
-                                run.setText(String.valueOf(m1), 0);
+                                run.setText(NumberUtil.roundStr(m1, 2), 0);
                                 l[0]++;
                                 check[0].set(false);
                             } else if (l[0] == 1) {
                                 run.setText("", 0);
-                                run.setText(String.valueOf(m2), 0);
+                                run.setText(NumberUtil.roundStr(m2, 2), 0);
                                 l[0]++;
                                 check[0].set(false);
                             } else if (l[0] == 2) {
                                 run.setText("", 0);
-                                run.setText(String.valueOf(m1 + m2), 0);
+                                run.setText(NumberUtil.roundStr(m1 + m2, 2), 0);
                                 check[0].set(false);
                             }
                         }
@@ -123,7 +126,7 @@ public class TicketDoc {
             }
 
 
-            try (FileOutputStream fos = new FileOutputStream("5" + name + "机票.docx")) {
+            try (FileOutputStream fos = new FileOutputStream(filePath)) {
                 doc.write(fos);
             }
         } catch (IOException e) {
@@ -131,7 +134,7 @@ public class TicketDoc {
         }
     }
 
-    private static void initDeque(FlightInfo f2) {
+    private static void initDeque(FligihtInfo f2) {
         deque2.addLast(f2.getOriginDes());
         deque2.addLast(f2.getFlight());
         deque2.addLast(f2.getFlightClass());
@@ -145,7 +148,7 @@ public class TicketDoc {
 
 
     public static void main(String[] args) {
-        FlightInfo flight1 = new FlightInfo();
+        FligihtInfo flight1 = new FligihtInfo();
         flight1.setOriginDes("ICN/SHE");
         flight1.setFlight("KE0831");
         flight1.setFlightClass("Economy");
@@ -156,7 +159,7 @@ public class TicketDoc {
         flight1.setDepartureTerminal("T2");
         flight1.setArrivalTerminal("");
 
-        FlightInfo flight2 = new FlightInfo();
+        FligihtInfo flight2 = new FligihtInfo();
         flight2.setOriginDes("SHE/ICN");
         flight2.setFlight("KE0832");
         flight2.setFlightClass("Economy");
@@ -166,6 +169,7 @@ public class TicketDoc {
         flight2.setStatus("OK");
         flight2.setDepartureTerminal("");
         flight2.setArrivalTerminal("T3");
-        handle(new Ticket(),flight1,flight2, "徐涵", "files/doc/ITINERARY-中_英.docx", 1050.00, 234.00);
+        handle(new Ticket(),flight1,flight2, "徐涵", "D:/export/", 1050.00, 234.00);
     }
+    public static String TICKT_TMP_FILE_PATH = "files/doc/ITINERARY-中_英.docx";
 }

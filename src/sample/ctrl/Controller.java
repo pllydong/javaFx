@@ -1,5 +1,6 @@
 package sample.ctrl;
 
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -13,11 +14,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import sample.doc.ItineraryDoc;
 import sample.doc.RequisitionDoc;
+import sample.doc.TicketDoc;
 import sample.enums.*;
 import sample.model.CacheData;
 import sample.model.Hotel;
 import sample.model.TouristSpot;
-import sample.pojo.FlightInfo;
+import sample.pojo.FligihtInfo;
 import sample.pojo.Itinerary;
 import sample.pojo.Ticket;
 import sample.pojo.UserInformation;
@@ -25,7 +27,6 @@ import sample.utils.MyUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -190,6 +191,10 @@ public class Controller implements Initializable {
         ItineraryDoc.handle(cacheData.getItineraryInfoList(), travelPath,
                 now.substring(0, 4), now.substring(4, 6), now.substring(6, 8),
                 pinyin, fileName, "", "", "");
+
+        // 导出机票
+        TicketDoc.handle(cacheData.getTicketInfo(), cacheData.getFlightInfo(), cacheData.getBackFlightInfo(), fileName, ticketPath,
+                1079, 1542);
     }
 
     /**
@@ -239,14 +244,19 @@ public class Controller implements Initializable {
      * 填充机票信息
      */
     private void fillFlightInfo() {
-//        cacheData.setFlightInfo(FlightInfo.createFlightInfo(cacheData));
-//        cacheData.setBcakFlightInfo(FlightInfo.createFlightInfo());
-//        Ticket ticketInfo = new Ticket();
-//        cacheData.setTicketInfo(ticketInfo);
-//
-//        flightInfo.setFlight(cacheData.getFlight().getCode());
-//        flightInfo.setDate(DateUtil.parseDate(cacheData.getStartDt()).toDateStr());
-//        flig
+        cacheData.setFlightInfo(FligihtInfo.createFlightInfo(cacheData.getFlight(), cacheData.getStartDt()));
+        cacheData.setBackFlightInfo(FligihtInfo.createFlightInfo(cacheData.getBackFlight(), cacheData.getEndDt()));
+        Ticket ticketInfo = new Ticket();
+        cacheData.setTicketInfo(ticketInfo);
+        ticketInfo.setAirlinePnr(RandomUtil.randomStringUpper(6));
+        ticketInfo.setBookingPnr(RandomUtil.randomStringUpper(6));
+        ticketInfo.seteTicketNumber(cacheData.getFlight().getCompany().getRandomTicketNum());
+        ticketInfo.setPassengerName(cacheData.getUserInfo().getEnglishLastName() + StrUtil.SLASH + cacheData.getUserInfo().getEnglishFirstName());
+        ticketInfo.setIdNumber(idnField.getText());
+        ticketInfo.setConjunctionTicketNumber("");
+        ticketInfo.setDateOfIssue(LocalDateTimeUtil.parseDate(cacheData.getStartDt(), PURE_DATE_PATTERN).minusMonths(1).format(DatePattern.NORM_DATE_FORMATTER));
+        ticketInfo.setIataCode(RandomUtil.randomNumbers(8));
+
     }
 
     /**
@@ -258,7 +268,7 @@ public class Controller implements Initializable {
         cacheData.setFlight(RandomUtil.randomEle(Arrays.stream(FlightEnum.values()).filter(f ->
                 f.getStartTerminal().getAirport() == AirportEnum.ICN
         ).collect(Collectors.toList())));
-        cacheData.setFlight(RandomUtil.randomEle(Arrays.stream(FlightEnum.values()).filter(f ->
+        cacheData.setBackFlight(RandomUtil.randomEle(Arrays.stream(FlightEnum.values()).filter(f ->
                 f.getEndTerminal().getAirport() == AirportEnum.ICN
         ).collect(Collectors.toList())));
         cacheData.setStartDt(LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN));

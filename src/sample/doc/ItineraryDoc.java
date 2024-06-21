@@ -171,7 +171,7 @@ public class ItineraryDoc {
         paragraph.setSpacingBetween(1.0);
 
         // 根据换行符拆分文本
-        String[] lines = text.split("\n");
+        String[] lines = text == null ? new String[]{} : text.split("\n");
         for (int i = 0; i < lines.length; i++) {
             XWPFRun run = paragraph.createRun();
             run.setText(lines[i]);
