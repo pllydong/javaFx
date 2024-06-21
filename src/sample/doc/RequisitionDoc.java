@@ -45,8 +45,6 @@ public class RequisitionDoc {
         deque.addLast(userInformation.getPlannedDurationOfStayInJapan());
         deque.addLast(userInformation.getLastStayInJapanDuration());
         deque.addLast(userInformation.getTotalStayDurationInJapanLastYear());
-
-        handle(userInformation, "D:/export/", userInformation.getChineseLastName() + userInformation.getChineseFirstName());
     }
 
     public static void handle(UserInformation userInformation, String filePath, String cusName) {
