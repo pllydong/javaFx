@@ -49,12 +49,12 @@ public class RequisitionDoc {
 
     public static void handle(UserInformation userInformation, String filePath, String cusName) {
         initQueue(userInformation);
-        filePath = MyFileUtil.apendEndSeperator(filePath);
+        filePath = MyFileUtil.apendEndSeperator(filePath) + cusName + "申请表.docx";
         MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         try (FileInputStream fis = new FileInputStream("files/doc/7郑禹龙申请表.docx");
              XWPFDocument doc = new XWPFDocument(fis)) {
             DocUtil.setDoc(doc,deque);
-            try (FileOutputStream fos = new FileOutputStream(filePath + cusName + "申请表.docx")) {
+            try (FileOutputStream fos = new FileOutputStream(filePath)) {
                 doc.write(fos);
             }
 

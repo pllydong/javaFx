@@ -57,7 +57,7 @@ public class ItineraryDoc {
         list.add(itinerary2);
         list.add(itinerary3);
         list.add(itinerary4);
-        handle(list, "D:/export/", "2025", "06", "12", "WU HAN", "徐涵","AC Hotel Tokyo Ginza","6 Chome-14-7 Ginza, Chuo C\n" + "ity, Tokyo 104-0061日本","+81 3-5550-0102");
+        handle(list, "D:/export/", "2025", "06", "12", "WU HAN", "徐涵", "AC Hotel Tokyo Ginza", "6 Chome-14-7 Ginza, Chuo C\n" + "ity, Tokyo 104-0061日本", "+81 3-5550-0102");
     }
 
     private static List<String> generateActivityPlan(Random random, int minSize, int maxSize) {
@@ -77,10 +77,9 @@ public class ItineraryDoc {
      * @param day       天数（单数的天数前面也要0补齐）
      * @param pinyin    顾客的名字拼音 比如徐涵就是 XU HAN，英文大写并中间用空格
      * @param name      顾客的名字，中文名字，用来生成申请单的名字
-     * @throws FileNotFoundException
      */
-    public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name,String a,String b,String c) throws FileNotFoundException {
-        filePath = MyFileUtil.apendEndSeperator(filePath);
+    public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name, String a, String b, String c) {
+        filePath = MyFileUtil.apendEndSeperator(filePath) + name + "行程单.doc";
         MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         try (FileInputStream fis = new FileInputStream("files/doc/6徐晗行程.docx");
              XWPFDocument doc = new XWPFDocument(fis)) {
@@ -103,7 +102,7 @@ public class ItineraryDoc {
                 sum += i.getActivityPlan().size();
             }
 
-            if(sum<3){
+            if (sum < 3) {
                 sum = 3;
             }
             XWPFTable table = doc.createTable(sum + 1, 4);
@@ -150,7 +149,7 @@ public class ItineraryDoc {
             }
 
 
-            try (FileOutputStream out = new FileOutputStream(filePath + name + "行程单.doc")) {
+            try (FileOutputStream out = new FileOutputStream(filePath)) {
                 doc.write(out);
             } catch (IOException e) {
                 e.printStackTrace();

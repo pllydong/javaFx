@@ -25,7 +25,7 @@ public class MyFileUtil {
         return filePath;
     }
 
-    public static void createAllDirectoriesRecursively(File file) {
+    private static void createAllDirectoriesRecursively(File file) {
         if (!file.exists()) {
             file.mkdirs();
         } else {

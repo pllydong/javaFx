@@ -4,6 +4,7 @@ import lombok.Data;
 import sample.enums.FlightEnum;
 import sample.pojo.FlightInfo;
 import sample.pojo.Itinerary;
+import sample.pojo.Ticket;
 import sample.pojo.UserInformation;
 
 import java.util.List;
@@ -53,4 +54,12 @@ public class CacheData {
      * 机票信息
      */
     private FlightInfo flightInfo;
+    /**
+     * 返航机票信息
+     */
+    private FlightInfo bcakFlightInfo;
+    /**
+     * 机票信息
+     */
+    private Ticket ticketInfo;
 }

@@ -1,6 +1,8 @@
 package sample.pojo;
 
 import lombok.Data;
+import sample.enums.FlightEnum;
+import sample.model.CacheData;
 
 @Data
 public class FlightInfo {
@@ -48,4 +50,8 @@ public class FlightInfo {
      * 抵达航站楼
      */
     private String arrivalTerminal;
+//
+//    public static FlightInfo createFlightInfo(FlightEnum flightEnum, String dt, ) {
+//        return new FlightInfo();
+//    }
 }

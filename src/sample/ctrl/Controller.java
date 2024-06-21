@@ -19,6 +19,7 @@ import sample.model.Hotel;
 import sample.model.TouristSpot;
 import sample.pojo.FlightInfo;
 import sample.pojo.Itinerary;
+import sample.pojo.Ticket;
 import sample.pojo.UserInformation;
 import sample.utils.MyUtil;
 
@@ -188,7 +189,7 @@ public class Controller implements Initializable {
         // 导出行程单
         ItineraryDoc.handle(cacheData.getItineraryInfoList(), travelPath,
                 now.substring(0, 4), now.substring(4, 6), now.substring(6, 8),
-                pinyin, fileName);
+                pinyin, fileName, "", "", "");
     }
 
     /**
@@ -238,9 +239,14 @@ public class Controller implements Initializable {
      * 填充机票信息
      */
     private void fillFlightInfo() {
-        cacheData.setFlightInfo(new FlightInfo());
-
-
+//        cacheData.setFlightInfo(FlightInfo.createFlightInfo(cacheData));
+//        cacheData.setBcakFlightInfo(FlightInfo.createFlightInfo());
+//        Ticket ticketInfo = new Ticket();
+//        cacheData.setTicketInfo(ticketInfo);
+//
+//        flightInfo.setFlight(cacheData.getFlight().getCode());
+//        flightInfo.setDate(DateUtil.parseDate(cacheData.getStartDt()).toDateStr());
+//        flig
     }
 
     /**
