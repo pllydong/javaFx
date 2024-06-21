@@ -32,6 +32,7 @@ public class MyFileUtil {
             File[] subFiles = file.listFiles();
             if (subFiles!= null) {
                 for (File subFile : subFiles) {
+                    System.out.println(subFile);
                     createAllDirectoriesRecursively(subFile);
                 }
             }

@@ -57,7 +57,7 @@ public class ItineraryDoc {
         list.add(itinerary2);
         list.add(itinerary3);
         list.add(itinerary4);
-        handle(list, "D:/export/", "2025", "06", "12", "WU HAN", "徐涵");
+        handle(list, "D:/export/", "2025", "06", "12", "WU HAN", "徐涵","AC Hotel Tokyo Ginza","6 Chome-14-7 Ginza, Chuo C\n" + "ity, Tokyo 104-0061日本","+81 3-5550-0102");
     }
 
     private static List<String> generateActivityPlan(Random random, int minSize, int maxSize) {
@@ -79,7 +79,7 @@ public class ItineraryDoc {
      * @param name      顾客的名字，中文名字，用来生成申请单的名字
      * @throws FileNotFoundException
      */
-    public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name) throws FileNotFoundException {
+    public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name,String a,String b,String c) throws FileNotFoundException {
         filePath = MyFileUtil.apendEndSeperator(filePath);
         MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         try (FileInputStream fis = new FileInputStream("files/doc/6徐晗行程.docx");
@@ -103,6 +103,9 @@ public class ItineraryDoc {
                 sum += i.getActivityPlan().size();
             }
 
+            if(sum<3){
+                sum = 3;
+            }
             XWPFTable table = doc.createTable(sum + 1, 4);
 
             // 设置表格宽度为100%
@@ -122,6 +125,12 @@ public class ItineraryDoc {
             setCellText(headerRow.getCell(2), "Contact number\n연락처");
             setCellText(headerRow.getCell(3), "Accommodations address\n숙소 명 및 주소");
 
+            XWPFTableRow rowx = table.getRow(1);
+            setCellText(rowx.getCell(3), a);
+            XWPFTableRow row2 = table.getRow(2);
+            setCellText(row2.getCell(3), b);
+            XWPFTableRow row3 = table.getRow(3);
+            setCellText(row3.getCell(3), c);
 
             int k = 1;
             for (Itinerary i : itinerary) {
@@ -129,7 +138,6 @@ public class ItineraryDoc {
                 row.setHeight(600);
                 setCellText(row.getCell(0), i.getDate());
                 setCellText(row.getCell(2), i.getContactNumber());
-                setCellText(row.getCell(3), i.getAccommodationsAddress());
                 for (int j = 0; j < i.getActivityPlan().size(); j++) {
                     XWPFTableRow row1 = table.getRow(k);
                     row1.setHeight(600);

@@ -204,7 +204,7 @@ public class Controller implements Initializable {
     private void fillFlightInfo() {
         flightInfo = new FlightInfo();
 
-        flightInfo.setFlight();
+        //flightInfo.setFlight();
     }
 
     /**
