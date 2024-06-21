@@ -79,7 +79,7 @@ public class ItineraryDoc {
      * @param name      顾客的名字，中文名字，用来生成申请单的名字
      */
     public static void handle(List<Itinerary> itinerary, String filePath, String year, String month, String day, String pinyin, String name, String a, String b, String c) {
-        filePath = MyFileUtil.apendEndSeperator(filePath) + name + "行程单.doc";
+        filePath = MyFileUtil.apendEndSeperator(filePath) +"6"+ name + "行程单.doc";
         MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         try (FileInputStream fis = new FileInputStream("files/doc/6徐晗行程.docx");
              XWPFDocument doc = new XWPFDocument(fis)) {

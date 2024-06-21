@@ -49,7 +49,7 @@ public class RequisitionDoc {
 
     public static void handle(UserInformation userInformation, String filePath, String cusName) {
         initQueue(userInformation);
-        filePath = MyFileUtil.apendEndSeperator(filePath) + cusName + "申请表.docx";
+        filePath = MyFileUtil.apendEndSeperator(filePath) +"7"+ cusName + "申请表.docx";
         MyFileUtil.createAllDirectoriesIfNotExist(filePath);
         try (FileInputStream fis = new FileInputStream("files/doc/7郑禹龙申请表.docx");
              XWPFDocument doc = new XWPFDocument(fis)) {

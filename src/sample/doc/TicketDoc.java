@@ -123,7 +123,7 @@ public class TicketDoc {
             }
 
 
-            try (FileOutputStream fos = new FileOutputStream("5." + name + "机票.docx")) {
+            try (FileOutputStream fos = new FileOutputStream("5" + name + "机票.docx")) {
                 doc.write(fos);
             }
         } catch (IOException e) {
