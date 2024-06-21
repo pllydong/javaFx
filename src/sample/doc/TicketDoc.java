@@ -59,7 +59,7 @@ public class TicketDoc {
                     for (XWPFTableCell cell : row.getTableCells()) {
                         String cellText = cell.getText();
                         if (i == 0) {
-                            if (cellText.contains("ITINERARY")) {
+                            if (cellText.contains("行程单")) {
                                 continue;
                             }
                             if (!cellText.isEmpty()) {
@@ -93,37 +93,37 @@ public class TicketDoc {
                 }
                 i++;
             }
-            List<XWPFParagraph> paragraphs = doc.getParagraphs();
-            final int[] l = {0};
-            final AtomicBoolean[] check = {new AtomicBoolean(false)};
-            for (XWPFParagraph paragraph : paragraphs) {
-                String text = paragraph.getText();
-                if (text.contains("机票款/FARE :") || text.contains("总计金额")) {
-                    paragraph.getRuns().forEach(run -> {
-                        String s1 = run.getText(0);
-                        if (check[0].get()) {
-                            if (l[0] == 0) {
-                                run.setText("", 0);
-                                run.setText(NumberUtil.roundStr(m1, 2), 0);
-                                l[0]++;
-                                check[0].set(false);
-                            } else if (l[0] == 1) {
-                                run.setText("", 0);
-                                run.setText(NumberUtil.roundStr(m2, 2), 0);
-                                l[0]++;
-                                check[0].set(false);
-                            } else if (l[0] == 2) {
-                                run.setText("", 0);
-                                run.setText(NumberUtil.roundStr(m1 + m2, 2), 0);
-                                check[0].set(false);
-                            }
-                        }
-                        if ("CNY".equals(s1)) {
-                            check[0].set(true);
-                        }
-                    });
-                }
-            }
+//            List<XWPFParagraph> paragraphs = doc.getParagraphs();
+//            final int[] l = {0};
+//            final AtomicBoolean[] check = {new AtomicBoolean(false)};
+//            for (XWPFParagraph paragraph : paragraphs) {
+//                String text = paragraph.getText();
+//                if (text.contains("机票款/FARE :") || text.contains("总计金额")) {
+//                    paragraph.getRuns().forEach(run -> {
+//                        String s1 = run.getText(0);
+//                        if (check[0].get()) {
+//                            if (l[0] == 0) {
+//                                run.setText("", 0);
+//                                run.setText(NumberUtil.roundStr(m1, 2), 0);
+//                                l[0]++;
+//                                check[0].set(false);
+//                            } else if (l[0] == 1) {
+//                                run.setText("", 0);
+//                                run.setText(NumberUtil.roundStr(m2, 2), 0);
+//                                l[0]++;
+//                                check[0].set(false);
+//                            } else if (l[0] == 2) {
+//                                run.setText("", 0);
+//                                run.setText(NumberUtil.roundStr(m1 + m2, 2), 0);
+//                                check[0].set(false);
+//                            }
+//                        }
+//                        if ("CNY".equals(s1)) {
+//                            check[0].set(true);
+//                        }
+//                    });
+//                }
+//            }
 
 
             try (FileOutputStream fos = new FileOutputStream(filePath)) {
@@ -171,5 +171,5 @@ public class TicketDoc {
         flight2.setArrivalTerminal("T3");
         handle(new Ticket(),flight1,flight2, "徐涵", "D:/export/", 1050.00, 234.00);
     }
-    public static String TICKT_TMP_FILE_PATH = "files/doc/ITINERARY-中_英.docx";
+    public static String TICKT_TMP_FILE_PATH = "files/doc/5徐晗机票.docx";
 }
