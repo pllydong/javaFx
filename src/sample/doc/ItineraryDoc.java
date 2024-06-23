@@ -90,7 +90,7 @@ public class ItineraryDoc {
             run1.setText(year + " (");
             XWPFRun run2 = paragraphs.get(0).getRuns().get(2);
             run2.setText("", 0);
-            run2.setText(")  " + month);
+            run2.setText(")  " + month+"(");
             XWPFRun run3 = paragraphs.get(0).getRuns().get(6);
             run3.setText("", 0);
             run3.setText(" " + day + " (");

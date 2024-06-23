@@ -171,5 +171,5 @@ public class TicketDoc {
         flight2.setArrivalTerminal("T3");
         handle(new Ticket(),flight1,flight2, "徐涵", "D:/export/", 1050.00, 234.00);
     }
-    public static String TICKT_TMP_FILE_PATH = "files/doc/5徐晗机票.docx";
+    public static String TICKT_TMP_FILE_PATH = "files/徐晗 010-2211-6314/5徐晗机票.docx";
 }
