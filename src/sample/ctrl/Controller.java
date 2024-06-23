@@ -8,11 +8,9 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.pinyin.PinyinUtil;
 import com.sun.javafx.scene.control.ReadOnlyUnbackedObservableList;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import sample.doc.ItineraryDoc;
 import sample.doc.RequisitionDoc;
 import sample.doc.TicketDoc;
@@ -170,14 +168,29 @@ public class Controller implements Initializable {
         birthdayPicker.setValue(LocalDate.now().minusYears(20));
     }
 
+    private void popMsg(String title, String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Pop Message");
+        alert.setHeaderText(title);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+
     /**
      * 初始化按钮点击事件
      */
     private void initButtonClick() {
         exportFileButton.setOnAction(event -> {
-            collectInfos();
+            try {
+                collectInfos();
 
-            exportFiles();
+                exportFiles();
+
+                popMsg("导出成功！", "成功将客户[" + cacheData.getUserInfo().getChineseLastName() + cacheData.getUserInfo().getChineseFirstName() + "]的申请表、行程单、机票信息导出。");
+            } catch (Exception e) {
+                popMsg("操作失败！", e.getMessage());
+                throw e;
+            }
         });
 
         randomFlightButton.setOnAction(event -> {

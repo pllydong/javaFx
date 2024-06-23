@@ -82,7 +82,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="216.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.22939068100358423" layoutX="14.0" layoutY="216.0" prefHeight="30.0" prefWidth="281.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -91,7 +91,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="birthplaceField" layoutX="-6.0" layoutY="3.0" text="北京" />
+                  <TextField fx:id="birthplaceField" layoutX="-6.0" layoutY="3.0" prefHeight="30.0" prefWidth="217.0" text="北京" />
                </children>
             </AnchorPane>
          </items>
@@ -292,7 +292,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button fx:id="exportFileButton" layoutX="391.0" layoutY="258.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="217.0" text="生成文件" />
+      <Button fx:id="exportFileButton" layoutX="304.0" layoutY="258.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="428.0" style="-fx-background-color: #54FF9F;" text="生成文件" />
       <SplitPane dividerPositions="0.18013856812933027" layoutX="300.0" layoutY="132.0" prefHeight="30.0" prefWidth="435.0" visible="false">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
