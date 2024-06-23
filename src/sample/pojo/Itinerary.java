@@ -9,5 +9,6 @@ public class Itinerary {
     private String date;
     private List<String> activityPlan;
     private String contactNumber;
+    @Deprecated
     private String accommodationsAddress;
 }

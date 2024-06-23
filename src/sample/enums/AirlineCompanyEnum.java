@@ -1,5 +1,6 @@
 package sample.enums;
 
+import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.RandomUtil;
 import lombok.Getter;
 

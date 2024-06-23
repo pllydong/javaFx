@@ -2,8 +2,6 @@ package sample.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Hotel {
     private String name;
@@ -25,11 +23,8 @@ public class Hotel {
     public String getPhone() {
         return phone;
     }
-    public int getHotelId() {
-        return hotelId;
-    }
 
-    public static Map<Integer, Hotel> HOTEL_MAP;
+    public static List<Hotel> HOTEL_LIST = new ArrayList<>();
 
     static {
         // 创建酒店对象列表
@@ -86,10 +81,6 @@ public class Hotel {
         hotels.add(new Hotel("KAIKA Tokyo by The Share Hotels", "2 Chome-16-5 Honjo, Sumida City, Tokyo 130-0004 日本", "+81 3-3625-2165", 49));
         hotels.add(new Hotel("THE skm TOKYO HOTEL&DINING", "4 Chome-25-5 Kotobashi, Sumida City, Tokyo 130-0022 日本", "+81 3-5600-7666", 50));
 
-        // 放入map中
-        HOTEL_MAP = hotels.stream().collect(Collectors.toMap(
-                Hotel::getHotelId,
-                h -> h
-        ));
+        HOTEL_LIST = hotels;
     }
 }

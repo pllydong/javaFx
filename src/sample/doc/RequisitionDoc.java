@@ -1,5 +1,6 @@
 package sample.doc;
 
+import cn.hutool.core.util.StrUtil;
 import org.apache.poi.xwpf.usermodel.*;
 import sample.pojo.UserInformation;
 import sample.utils.DocUtil;
@@ -23,28 +24,28 @@ public class RequisitionDoc {
     static ArrayDeque<String> deque= new ArrayDeque<>();
 
     public static void initQueue(UserInformation userInformation) {
-        deque.addLast(userInformation.getEnglishLastName());
-        deque.addLast(userInformation.getChineseLastName());
-        deque.addLast(userInformation.getEnglishFirstName());
-        deque.addLast(userInformation.getChineseFirstName());
-        deque.addLast(userInformation.getDateOfBirth());
-        deque.addLast(userInformation.getPlaceOfBirth());
-        deque.addLast(userInformation.getGender());
-        deque.addLast(userInformation.getMaritalStatus());
-        deque.addLast(userInformation.getNationality());
-        deque.addLast(userInformation.getForeignerRegistrationNumber());
-        deque.addLast(userInformation.getContactNumber());
-        deque.addLast(userInformation.getEmail());
-        deque.addLast(userInformation.getAddress());
-        deque.addLast(userInformation.getCurrentOccupationAndPosition());
-        deque.addLast(userInformation.getCompanyOrSchoolName());
-        deque.addLast(userInformation.getCompanyOrSchoolPhoneNumber());
-        deque.addLast(userInformation.getCompanyOrSchoolAddress());
-        deque.addLast(userInformation.getPlannedCityOfEntryInJapan());
-        deque.addLast(userInformation.getEntryPortOrFlightNumber());
-        deque.addLast(userInformation.getPlannedDurationOfStayInJapan());
-        deque.addLast(userInformation.getLastStayInJapanDuration());
-        deque.addLast(userInformation.getTotalStayDurationInJapanLastYear());
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getEnglishLastName()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getChineseLastName()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getEnglishFirstName()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getChineseFirstName()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getDateOfBirth()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getPlaceOfBirth()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getGender()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getMaritalStatus()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getNationality()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getForeignerRegistrationNumber()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getContactNumber()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getEmail()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getAddress()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getCurrentOccupationAndPosition()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getCompanyOrSchoolName()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getCompanyOrSchoolPhoneNumber()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getCompanyOrSchoolAddress()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getPlannedCityOfEntryInJapan()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getEntryPortOrFlightNumber()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getPlannedDurationOfStayInJapan()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getLastStayInJapanDuration()));
+        deque.addLast(StrUtil.emptyIfNull(userInformation.getTotalStayDurationInJapanLastYear()));
     }
 
     public static void handle(UserInformation userInformation, String filePath, String cusName) {

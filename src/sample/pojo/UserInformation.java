@@ -122,7 +122,9 @@ public class UserInformation {
      * 일본에서 체류 예정 기간
      * 在日本预定停留期间
      */
-    private String plannedDurationOfStayInJapan = "%s년 %s 월 %s 일부터 %s 년 %s 월 %s 일까지";
+    private String plannedDurationOfStayInJapan = "2024년 06 월 22 일부터 2024 년 06 월 25 일까지";
+
+    public static String DURATION_FORMAT = "%s년 %s 월 %s 일부터 %s 년 %s 월 %s 일까지";
 
     /**
      * 마지막으로 일본에 체류한 기간
@@ -135,4 +137,6 @@ public class UserInformation {
      * 最近一年在日本的停留期间
      */
     private String totalStayDurationInJapanLastYear = "NO총 ( )일 체류";
+
+    public static String STAY_DURATION_JAPAN_LAST_YEAR_FORMAT = "NO총 ( %s )일 체류";
 }
