@@ -1,6 +1,7 @@
 package sample.pojo;
 
 import lombok.Data;
+import sample.enums.SexEnum;
 
 @Data
 public class Ticket {
@@ -70,8 +71,8 @@ public class Ticket {
         this.bookingPnr = "订座记录编号/1E PNR:" + bookingPnr;
     }
 
-    public void setPassengerName(String passengerName) {
-        this.passengerName = "旅客姓名/NAME:" + passengerName + " MS";
+    public void setPassengerName(String passengerName, SexEnum sex) {
+        this.passengerName = "旅客姓名/NAME:" + passengerName + " " + sex.getCode();
     }
 
     public void seteTicketNumber(String eTicketNumber) {

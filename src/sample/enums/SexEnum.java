@@ -9,8 +9,8 @@ import lombok.Getter;
  */
 @Getter
 public enum SexEnum {
-    MAN("M", "男"),
-    WOMAN("W", "女"),
+    MAN("MR", "男"),
+    WOMAN("MS", "女"),
     ;
 
     private String code;

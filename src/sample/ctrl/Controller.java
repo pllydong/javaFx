@@ -280,12 +280,12 @@ public class Controller implements Initializable {
         ticketInfo.setAirlinePnr(RandomUtil.randomStringUpper(6));
         ticketInfo.setBookingPnr(RandomUtil.randomStringUpper(6));
         ticketInfo.seteTicketNumber(cacheData.getFlight().getCompany().getRandomTicketNum());
-        ticketInfo.setPassengerName(cacheData.getUserInfo().getEnglishLastName() + StrUtil.SLASH + cacheData.getUserInfo().getEnglishFirstName());
+        ticketInfo.setPassengerName(cacheData.getUserInfo().getEnglishLastName() + StrUtil.SLASH + cacheData.getUserInfo().getEnglishFirstName(), SexEnum.values()[sexCombo.getSelectionModel().getSelectedIndex()]);
         ticketInfo.setIdNumber(idnField.getText());
         ticketInfo.setConjunctionTicketNumber("");
         ticketInfo.setDateOfIssue(LocalDateTimeUtil.parseDate(cacheData.getStartDt(), PURE_DATE_PATTERN).minusMonths(1).format(DatePattern.NORM_DATE_FORMATTER));
         ticketInfo.setIataCode(RandomUtil.randomNumbers(8));
-
+        ticketInfo.setIssuingAgent(cacheData.getFlight().getCompany().getEnglishName());
     }
 
     /**
