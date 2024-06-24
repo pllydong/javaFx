@@ -1,0 +1,1 @@
+files\jre\bin\java.exe -jar mtyx-util.jar
