@@ -205,6 +205,7 @@ public class Controller implements Initializable {
     private void exportFiles() {
         String now = LocalDateTimeUtil.format(LocalDateTimeUtil.now(), PURE_DATE_PATTERN);
         UserInformation userInfo = cacheData.getUserInfo();
+        System.out.println("-------------------------------"+userInfo);
         String name = userInfo.getChineseLastName() + userInfo.getChineseFirstName();
         String pinyin = userInfo.getEnglishLastName() + StrUtil.SPACE + userInfo.getEnglishFirstName();
         String fileName = name + StrUtil.UNDERLINE + now;
@@ -314,13 +315,13 @@ public class Controller implements Initializable {
         cacheData.getUserInfo().setGender(MyUtil.setCheck(cacheData.getUserInfo().getGender(), sexCombo.getSelectionModel().getSelectedIndex()));
         cacheData.getUserInfo().setDateOfBirth(DateUtil.format(LocalDateTimeUtil.of(birthdayPicker.getValue()), PURE_DATE_PATTERN));
         cacheData.getUserInfo().setPlaceOfBirth(birthplaceField.getText());
-        cacheData.getUserInfo().setMaritalStatus(MyUtil.setCheck(cacheData.getUserInfo().getGender(), marriageCombo.getSelectionModel().getSelectedIndex()));
+        cacheData.getUserInfo().setMaritalStatus(MyUtil.setCheck(cacheData.getUserInfo().getMaritalStatus(), marriageCombo.getSelectionModel().getSelectedIndex()));
         cacheData.getUserInfo().setNationality(nationalityField.getText());
         cacheData.getUserInfo().setForeignerRegistrationNumber(idnField.getText());
         cacheData.getUserInfo().setContactNumber(phoneField.getText());
         cacheData.getUserInfo().setEmail(emailField.getText());
         cacheData.getUserInfo().setAddress(addressField.getText());
-        cacheData.getUserInfo().setCurrentOccupationAndPosition(MyUtil.setCheck(cacheData.getUserInfo().getGender(), occupationCombo.getSelectionModel().getSelectedIndex()));
+        cacheData.getUserInfo().setCurrentOccupationAndPosition(MyUtil.setCheck(cacheData.getUserInfo().getCurrentOccupationAndPosition(), occupationCombo.getSelectionModel().getSelectedIndex()));
         cacheData.getUserInfo().setCompanyOrSchoolName(companyName.getText());
         cacheData.getUserInfo().setCompanyOrSchoolPhoneNumber(companyPhone.getText());
         cacheData.getUserInfo().setCompanyOrSchoolAddress(companyAddress.getText());
