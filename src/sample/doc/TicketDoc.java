@@ -26,7 +26,7 @@ public class TicketDoc {
         deque.addLast(ticket.getBookingPnr());
         deque.addLast(ticket.getPassengerName());
         deque.addLast(ticket.getETicketNumber());
-        deque.addLast(ticket.);
+        deque.addLast(ticket.getIdNumber());
         deque.addLast(ticket.getConjunctionTicketNumber());
         deque.addLast(ticket.getIssuingAirline());
         deque.addLast(ticket.getDateOfIssue());
