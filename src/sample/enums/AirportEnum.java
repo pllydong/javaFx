@@ -16,6 +16,10 @@ public enum AirportEnum {
      * 东京机场
      */
     NRT("NRT", "东京机场"),
+//    /**
+//     * 金浦机场
+//     */
+//    GMP("GMP", "金浦机场"),
     ;
 
     private String code;

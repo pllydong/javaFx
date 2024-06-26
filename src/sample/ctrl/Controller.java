@@ -135,6 +135,10 @@ public class Controller implements Initializable {
     public ComboBox<String> backFlightCombo;
     public Button randomFlightButton;
     public ComboBox<String> flightCombo;
+    /**
+     * 护照号码
+     */
+    public TextField passportField;
 
 
     /**
@@ -282,7 +286,7 @@ public class Controller implements Initializable {
         ticketInfo.setBookingPnr(RandomUtil.randomStringUpper(6));
         ticketInfo.seteTicketNumber(cacheData.getFlight().getCompany().getRandomTicketNum());
         ticketInfo.setPassengerName(cacheData.getUserInfo().getEnglishLastName() + StrUtil.SLASH + cacheData.getUserInfo().getEnglishFirstName(), SexEnum.values()[sexCombo.getSelectionModel().getSelectedIndex()]);
-        ticketInfo.setIdNumber(idnField.getText());
+        ticketInfo.setIdNumber(passportField.getText());
         ticketInfo.setConjunctionTicketNumber("");
         ticketInfo.setDateOfIssue(LocalDateTimeUtil.parseDate(cacheData.getStartDt(), PURE_DATE_PATTERN).format(DatePattern.NORM_DATE_FORMATTER));
         ticketInfo.setIataCode(RandomUtil.randomNumbers(8));
@@ -310,6 +314,7 @@ public class Controller implements Initializable {
      */
     private void fillUserInfo() {
         cacheData.setUserInfo(new UserInformation());
+        cacheData.getUserInfo().setPassportNum(passportField.getText());
         cacheData.getUserInfo().setChineseLastName(lastNameField.getText());
         cacheData.getUserInfo().setChineseFirstName(firstNameField.getText());
         cacheData.getUserInfo().setGender(MyUtil.setCheck(cacheData.getUserInfo().getGender(), sexCombo.getSelectionModel().getSelectedIndex()));

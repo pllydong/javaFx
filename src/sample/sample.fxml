@@ -62,7 +62,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="177.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.34418604651162793" layoutX="14.0" layoutY="177.0" prefHeight="30.0" prefWidth="249.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -71,7 +71,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <DatePicker fx:id="birthdayPicker" layoutY="3.0" prefHeight="23.0" prefWidth="148.0" />
+                  <DatePicker fx:id="birthdayPicker" layoutX="5.0" layoutY="-1.0" prefHeight="23.0" prefWidth="148.0" />
                </children>
             </AnchorPane>
          </items>
@@ -104,7 +104,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="331.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.35348837209302325" layoutX="14.0" layoutY="331.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -118,7 +118,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="371.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.3581395348837209" layoutX="14.0" layoutY="371.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -132,7 +132,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="254.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.3953488372093023" layoutX="14.0" layoutY="254.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -146,7 +146,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="407.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.3627906976744186" layoutX="14.0" layoutY="407.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -160,7 +160,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.0898876404494382" layoutX="14.0" layoutY="444.0" prefHeight="30.0" prefWidth="714.0">
+      <SplitPane dividerPositions="0.11095505617977527" layoutX="14.0" layoutY="444.0" prefHeight="30.0" prefWidth="714.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="165.0">
                <children>
@@ -188,11 +188,11 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.35294117647058826" layoutX="14.0" layoutY="522.0" prefHeight="30.0" prefWidth="260.0">
+      <SplitPane dividerPositions="0.43410852713178294" layoutX="14.0" layoutY="522.0" prefHeight="30.0" prefWidth="260.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="120.0">
                <children>
-                  <Label layoutX="6.0" layoutY="7.0" prefHeight="15.0" prefWidth="83.0" text="公司/学校名称" />
+                  <Label layoutX="6.0" layoutY="7.0" prefHeight="20.0" prefWidth="100.0" text="公司/学校名称" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="152.0">
@@ -202,11 +202,11 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.35658914728682173" layoutX="14.0" layoutY="562.0" prefHeight="30.0" prefWidth="260.0">
+      <SplitPane dividerPositions="0.43023255813953487" layoutX="14.0" layoutY="562.0" prefHeight="30.0" prefWidth="260.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="120.0">
                <children>
-                  <Label layoutX="6.0" layoutY="7.0" prefHeight="15.0" prefWidth="83.0" text="公司/学校电话" />
+                  <Label layoutX="6.0" layoutY="7.0" prefHeight="20.0" prefWidth="100.0" text="公司/学校电话" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -216,7 +216,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="300.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.3395348837209302" layoutX="300.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -225,12 +225,12 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <DatePicker fx:id="startDatePicker" layoutY="3.0" prefHeight="23.0" prefWidth="148.0" />
+                  <DatePicker fx:id="startDatePicker" layoutY="3.0" prefHeight="30.0" prefWidth="135.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="517.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.3302325581395349" layoutX="517.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -239,12 +239,12 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <DatePicker fx:id="endDatePicker" layoutY="3.0" prefHeight="23.0" prefWidth="148.0" />
+                  <DatePicker fx:id="endDatePicker" layoutY="3.0" prefHeight="30.0" prefWidth="140.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.18013856812933027" layoutX="300.0" layoutY="162.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.22401847575057737" layoutX="300.0" layoutY="162.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -258,7 +258,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.21016166281755197" layoutX="300.0" layoutY="192.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.24942263279445728" layoutX="300.0" layoutY="192.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -272,7 +272,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.18013856812933027" layoutX="300.0" layoutY="222.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.21709006928406466" layoutX="300.0" layoutY="222.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -301,11 +301,11 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.1306179775280899" layoutX="14.0" layoutY="600.0" prefHeight="30.0" prefWidth="714.0">
+      <SplitPane dividerPositions="0.15730337078651685" layoutX="14.0" layoutY="600.0" prefHeight="30.0" prefWidth="714.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="177.0">
                <children>
-                  <Label layoutX="6.0" layoutY="7.0" prefHeight="15.0" prefWidth="83.0" text="公司/学校地址" />
+                  <Label layoutX="6.0" layoutY="7.0" prefHeight="20.0" prefWidth="100.0" text="公司/学校地址" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="152.0">
@@ -315,7 +315,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.14549653579676675" layoutX="300.0" layoutY="123.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.19399538106235567" layoutX="300.0" layoutY="123.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="93.0">
                <children>
@@ -324,12 +324,12 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="329.0">
                <children>
-                  <ComboBox fx:id="hotelCombo" layoutX="15.0" layoutY="3.0" prefHeight="23.0" prefWidth="343.0" />
+                  <ComboBox fx:id="hotelCombo" layoutX="1.0" layoutY="3.0" prefHeight="23.0" prefWidth="343.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.3488372093023256" layoutX="300.0" layoutY="55.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.44651162790697674" layoutX="300.0" layoutY="55.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -338,12 +338,12 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <DatePicker fx:id="lastStayStartDtPicker" layoutY="3.0" prefHeight="23.0" prefWidth="137.0" />
+                  <DatePicker fx:id="lastStayStartDtPicker" layoutY="3.0" prefHeight="30.0" prefWidth="114.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.3488372093023256" layoutX="517.0" layoutY="55.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.4511627906976744" layoutX="517.0" layoutY="55.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -352,12 +352,12 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <DatePicker fx:id="lastStayEndDtPicker" layoutY="3.0" prefHeight="23.0" prefWidth="137.0" />
+                  <DatePicker fx:id="lastStayEndDtPicker" layoutY="3.0" prefHeight="30.0" prefWidth="114.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.5162790697674419" layoutX="300.0" layoutY="85.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.6232558139534884" layoutX="300.0" layoutY="85.0" prefHeight="30.0" prefWidth="242.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -371,7 +371,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.14549653579676675" layoutX="300.0" layoutY="293.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.17551963048498845" layoutX="300.0" layoutY="293.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="93.0">
                <children>
@@ -380,12 +380,12 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="329.0">
                <children>
-                  <ComboBox fx:id="flightCombo" layoutX="15.0" layoutY="3.0" prefHeight="23.0" prefWidth="343.0" />
+                  <ComboBox fx:id="flightCombo" layoutX="5.0" layoutY="3.0" prefHeight="23.0" prefWidth="343.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.14549653579676675" layoutX="300.0" layoutY="331.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.17551963048498845" layoutX="300.0" layoutY="331.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="93.0">
                <children>
@@ -394,11 +394,25 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="329.0">
                <children>
-                  <ComboBox fx:id="backFlightCombo" layoutX="15.0" layoutY="3.0" prefHeight="23.0" prefWidth="343.0" />
+                  <ComboBox fx:id="backFlightCombo" layoutX="7.0" layoutY="3.0" prefHeight="30.0" prefWidth="343.0" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
       <Button fx:id="randomFlightButton" layoutX="391.0" layoutY="371.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="217.0" text="随机航班生成" />
+      <SplitPane dividerPositions="0.35348837209302325" layoutX="14.0" layoutY="100.0" prefHeight="30.0" prefWidth="217.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="护照号码" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="passportField" layoutX="-6.0" layoutY="3.0" prefHeight="30.0" prefWidth="143.0" text="050428-7780209" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
    </children>
 </Pane>

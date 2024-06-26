@@ -89,7 +89,7 @@ public class TouristSpot {
             "\t" +
             "긴자 미츠코시\n" +
             "座三越\n" +
-            "ginja micheukosi\n" +
+            "Ginza Mitsukoshi\n" +
             "\t" +
             "마츠야 긴자\n" +
             "松屋銀座\n" +
@@ -97,7 +97,7 @@ public class TouristSpot {
             "\t" +
             "긴자 와코\n" +
             "銀座和子\n" +
-            "Ginza Kazuko\n" +
+            "Ginza Wako\n" +
             "\t" +
             "키라리토 긴자\n" +
             "きらりと銀座\n" +
@@ -117,12 +117,15 @@ public class TouristSpot {
             "\t" +
             "도큐플라자 긴자\n" +
             "東急プラザ銀座\n" +
+            "Documentary Plaza Ginza\n" +
             "\t" +
             "애플스토어 긴자\n" +
             "アップルストア銀座\n" +
+            "Apple Store Ginza\n" +
             "\t" +
             "시세이도 더 긴자\n" +
             "生堂 もっと 銀座\n" +
+            "Shiseido Ginza\n" +
             "\t" +
             "긴자플레이스\n" +
             "銀座プレイス\n" +
@@ -178,7 +181,7 @@ public class TouristSpot {
             "\t" +
             "스페인자카\n" +
             "スペイン坂\n" +
-            "Spanishzaka\n" +
+            "SPAIN ZAKA\n" +
             "\t" +
             "시부야 히카리에\n" +
             "渋谷ヒカリエ\n" +
@@ -186,7 +189,7 @@ public class TouristSpot {
             "\t" +
             "메이지신궁\n" +
             "めいじじんぐう\n" +
-            "Meiji Jingu Shrine\n" +
+            "Meiji Shrine\n" +
             "\t" +
             "다케시타도리\n" +
             "たけしたどおり\n" +
@@ -266,7 +269,7 @@ public class TouristSpot {
             "\t" +
             "21_21 디자인사이트\n" +
             "21_21 デザインサイト\n" +
-            "21_21 Design Site\n" +
+            "21_21 DESIGN SITE\n" +
             "\t" +
             "산토리 미술관\n" +
             "サントリーびじゅつかん\n" +
@@ -282,12 +285,12 @@ public class TouristSpot {
             "\t" +
             "시바 공원\n" +
             "芝公園\n" +
-            "shiva park\n" +
+            "Shibakoen\n" +
             "\t" +
-            "죠죠지\n" +
-            "定常寺\n" +
-            "Jojoji\n" +
-            "\t" +
+//            "죠죠지\n" +
+//            "定常寺\n" +
+//            "Jojoji\n" +
+//            "\t" +
             "스타벅스커피 시바다이몬점\n" +
             "スターバックスコーヒー芝大門店\n" +
             "Starbucks Coffee Shiba Daimon Branch\n" +
@@ -411,11 +414,11 @@ public class TouristSpot {
             "\t" +
             "아사쿠사홋피도리\n" +
             "浅草ホッピー通り\n" +
-            "Asakusa Hoppi Dori\n" +
+            "Asakusa Hoppy street\n" +
             "\t" +
             "갓파바시도구거리\n" +
             "かっぱ橋道具通り\n" +
-            "Kappabashi Tool Street\n" +
+            "Kappabashi Dougu Street\n" +
             "\t" +
             "도쿄 스카이트리타운\n" +
             "東京スカイツリータウン\n" +

@@ -65,6 +65,11 @@ public class UserInformation {
     private String foreignerRegistrationNumber = "951202—5760018";
 
     /**
+     * 护照号码
+     */
+    private String passportNum = "951202—5760018";
+
+    /**
      * 연락처
      * 联系电话
      */
