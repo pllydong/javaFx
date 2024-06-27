@@ -69,7 +69,7 @@ public class TouristSpot {
             "\t" +
             "고쿄\n" +
             "ごきょう\n" +
-            "고쿄\n" +
+            "Tokyo Imperial Palace\n" +
             "\t" +
             "고쿄 히가시교엔\n" +
             "皇居東御苑\n" +

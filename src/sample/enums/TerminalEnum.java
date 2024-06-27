@@ -14,10 +14,10 @@ public enum TerminalEnum {
 
     CT_T1("成田", "T1", AirportEnum.NRT),
     CT_T2("成田", "T2", AirportEnum.NRT),
+    CT_T3("成田", "T3", AirportEnum.NRT),
 
 //    JP_T1("金浦", "I", AirportEnum.GMP),
 
-    YT_T3("羽田", "T3", AirportEnum.NRT),
     ;
 
     private String terminalName;

@@ -9,13 +9,13 @@ import lombok.Getter;
 @Getter
 public enum AirportEnum {
     /**
-     * 首尔机场
+     * 成田
      */
-    ICN("ICN", "首尔机场"),
+    ICN("ICN", "成田"),
     /**
-     * 东京机场
+     * 仁川
      */
-    NRT("NRT", "东京机场"),
+    NRT("NRT", "仁川"),
 //    /**
 //     * 金浦机场
 //     */

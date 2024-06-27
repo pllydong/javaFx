@@ -264,8 +264,7 @@ public class Controller implements Initializable {
             ArrayList<String> activityPlan = new ArrayList<>(4);
             if (dt.equals(cacheData.getStartDt())) {
                 activityPlan.add(AirportEnum.ICN.getFromToStr(AirportEnum.NRT));
-                Hotel hotel = cacheData.getHotel();
-                itinerary.setContactNumber(hotel.getPhone());
+                itinerary.setContactNumber(phoneField.getText());
             } else if (dt.equals(cacheData.getEndDt())) {
                 activityPlan.add(AirportEnum.NRT.getFromToStr(AirportEnum.ICN));
             }
@@ -440,7 +439,7 @@ public class Controller implements Initializable {
 
             @Override
             public String get(int i) {
-                FlightEnum flightEnum = BACK_FLIGHT_LIST.get(i);
+                FlightEnum flightEnum = FLIGHT_LIST.get(i);
                 return getFlightComboStr(flightEnum);
             }
 

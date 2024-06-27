@@ -31,14 +31,18 @@ public enum FlightEnum {
     OZ_102("9:00", "11:20", TerminalEnum.RC_T1, TerminalEnum.CT_T1, "OZ102", "A380-800", AirlineCompanyEnum.OZ),
     OZ_101("13:20", "15:50", TerminalEnum.CT_T1, TerminalEnum.RC_T1, "OZ101", "A380-800", AirlineCompanyEnum.OZ),
 
-    _7C_1106("10:35", "12:55", TerminalEnum.RC_T1, TerminalEnum.YT_T3, "7C1106", "", AirlineCompanyEnum._7C),
-    _7C_1105("13:55", "16:35", TerminalEnum.YT_T3, TerminalEnum.RC_T1, "7C1105", "", AirlineCompanyEnum._7C),
+    _7C_1106("10:35", "12:55", TerminalEnum.RC_T1, TerminalEnum.CT_T3, "7C1106", "", AirlineCompanyEnum._7C),
+    _7C_1105("13:55", "16:35", TerminalEnum.CT_T3, TerminalEnum.RC_T1, "7C1105", "", AirlineCompanyEnum._7C),
 
-//    KE_2101("9:00", "11:20", TerminalEnum.JP_T1, TerminalEnum.YT_T3, "KE2101", "A330-300", AirlineCompanyEnum.KE),
-//    KE_2102("12:30", "14:50", TerminalEnum.YT_T3, TerminalEnum.JP_T1, "KE2102", "A330-300", AirlineCompanyEnum.KE),
-//
-//    OZ_1085("8:40", "10:45", TerminalEnum.JP_T1, TerminalEnum.YT_T3, "OZ1085", "A330-300", AirlineCompanyEnum.OZ),
-//    OZ_1075("12:05", "14:25", TerminalEnum.YT_T3, TerminalEnum.JP_T1, "OZ1075", "A330-300", AirlineCompanyEnum.OZ),
+    ZE601("8:00", "10:30", TerminalEnum.RC_T1, TerminalEnum.CT_T2, "ZE601", "", AirlineCompanyEnum.ZE),
+    ZE606("10:50", "13:35", TerminalEnum.CT_T2, TerminalEnum.RC_T1, "ZE606", "", AirlineCompanyEnum.ZE),
+    ZE602("11:30", "14:35", TerminalEnum.CT_T2, TerminalEnum.RC_T1, "ZE602", "", AirlineCompanyEnum.ZE),
+
+    LJ201("6:45", "9:20", TerminalEnum.RC_T2, TerminalEnum.CT_T1, "LJ201", "", AirlineCompanyEnum.LJ),
+    LJ204("10:50", "13:35", TerminalEnum.CT_T1, TerminalEnum.RC_T2, "LJ204", "", AirlineCompanyEnum.LJ),
+    LJ202("10:20", "13:00", TerminalEnum.CT_T1, TerminalEnum.RC_T2, "LJ202", "", AirlineCompanyEnum.LJ),
+    LJ203("7:25", "10:00", TerminalEnum.RC_T2, TerminalEnum.CT_T1, "LJ203", "", AirlineCompanyEnum.LJ),
+
     ;
     /**
      * 起航时间 mm:ss
