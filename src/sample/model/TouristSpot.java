@@ -269,7 +269,7 @@ public class TouristSpot {
             "\t" +
             "21_21 디자인사이트\n" +
             "21_21 デザインサイト\n" +
-            "21_21 DESIGN SITE\n" +
+            "21_21 Design Sight\n" +
             "\t" +
             "산토리 미술관\n" +
             "サントリーびじゅつかん\n" +

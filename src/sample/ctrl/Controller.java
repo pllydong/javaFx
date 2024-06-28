@@ -158,6 +158,8 @@ public class Controller implements Initializable {
         initDatePicker();
 
         initButtonClick();
+
+//        clearPanelValues();
     }
 
     /**
@@ -287,7 +289,7 @@ public class Controller implements Initializable {
         ticketInfo.setPassengerName(cacheData.getUserInfo().getEnglishLastName() + StrUtil.SLASH + cacheData.getUserInfo().getEnglishFirstName(), SexEnum.values()[sexCombo.getSelectionModel().getSelectedIndex()]);
         ticketInfo.setIdNumber(passportField.getText());
         ticketInfo.setConjunctionTicketNumber("");
-        ticketInfo.setDateOfIssue(LocalDateTimeUtil.parseDate(cacheData.getStartDt(), PURE_DATE_PATTERN).format(DatePattern.NORM_DATE_FORMATTER));
+        ticketInfo.setDateOfIssue(LocalDateTimeUtil.now().format(DatePattern.NORM_DATE_FORMATTER));
         ticketInfo.setIataCode(RandomUtil.randomNumbers(8));
         ticketInfo.setIssuingAirline(cacheData.getFlight().getCompany().getEnglishName());
     }
