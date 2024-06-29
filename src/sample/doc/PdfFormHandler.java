@@ -3,6 +3,7 @@ package sample.doc;
 import com.aspose.pdf.internal.imaging.internal.Exceptions.IO.IOException;
 import com.itextpdf.forms.fields.PdfButtonFormField;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.*;
 import sample.pojo.JapanVisaApplication;
 
@@ -24,75 +25,19 @@ public class PdfFormHandler {
                 throw new RuntimeException(e);
             }
 
-
+            BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\msyh.ttc,0", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
+            Font font = new Font(bf, 8, Font.BOLD);
             // 创建输出流和 PDFStamper
             FileOutputStream outputStream = new FileOutputStream(filePath + "申请表.pdf");
             PdfStamper stamper = new PdfStamper(reader, outputStream);
 
-
-            BaseFont bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",BaseFont.NOT_EMBEDDED);
-            ArrayList<BaseFont> fontList = new ArrayList<BaseFont>();
-            fontList.add(bf);
-
-
-
-
             // 获取表单字段
             AcroFields form = stamper.getAcroFields();
 
-
-
-            AcroFields.FieldPosition rb1 = form.getFieldPositions("rb-1").get(0);
-            if (japanVisaApplication.getSex() == 1) {
-                form.setField("rb-1", "M",true);
-            } else {
-                form.setField("rb-1", "F",true);
-            }
-            stamper.getOverContent(rb1.page).setLiteral("1 0 0 1 0 0 cm");
-            stamper.getOverContent(rb1.page).stroke();
-            stamper.getOverContent(rb1.page).resetRGBColorStroke();
-
-
-            AcroFields.FieldPosition rb2 = form.getFieldPositions("rb-2").get(0);
-            switch (japanVisaApplication.getMaritalStatus()) {
-                case 1:
-                    form.setField("rb-2", "1",true);
-                    break;
-                case 2:
-                    form.setField("rb-2", "2",true);
-                    break;
-                case 3:
-                    form.setField("rb-2", "3",true);
-                    break;
-                case 4:
-                    form.setField("rb-2", "4",true);
-                    break;
-            }
-            stamper.getOverContent(rb2.page).setLiteral("1 0 0 1 0 0 cm");
-            stamper.getOverContent(rb2.page).stroke();
-            stamper.getOverContent(rb2.page).resetRGBColorStroke();
-
-
-
-            AcroFields.FieldPosition rb3 = form.getFieldPositions("rb-3").get(0);
-            switch (japanVisaApplication.getPassportType()) {
-                case 1:
-                    form.setField("rb-3", "1",true);
-                    break;
-                case 2:
-                    form.setField("rb-3", "2",true);
-                    break;
-                case 3:
-                    form.setField("rb-3", "3",true);
-                    break;
-                case 4:
-                    form.setField("rb-3", "4",true);
-                    break;
-            }
-            stamper.getOverContent(rb3.page).setLiteral("1 0 0 1 0 0 cm");
-            stamper.getOverContent(rb3.page).stroke();
-            stamper.getOverContent(rb3.page).resetRGBColorStroke();
-
+            // 在适当的位置调用重构后的方法
+            setRadioButtonField(stamper, form, "rb-1", japanVisaApplication.getSex());
+            setRadioButtonField(stamper, form, "rb-2", japanVisaApplication.getMaritalStatus());
+            setRadioButtonField(stamper, form, "rb-3", japanVisaApplication.getPassportType());
 
 
 
@@ -109,11 +54,10 @@ public class PdfFormHandler {
 
                    // 获取字段位置信息
                    AcroFields.FieldPosition position = form.getFieldPositions(fieldName).get(0);
-
                    // 设置字段值
                    String fieldValue = getFieldFromApplication(japanVisaApplication, fieldName);
+                   form.setFieldProperty(fieldName, "textfont", bf, null);
                    form.setField(fieldName, fieldValue);
-
                    // 标记字段位置为已填写
                    stamper.getOverContent(position.page).setLiteral("1 0 0 1 0 0 cm");
                    stamper.getOverContent(position.page).stroke();
@@ -140,6 +84,32 @@ public class PdfFormHandler {
         } catch (java.io.IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void setRadioButtonField(PdfStamper stamper, AcroFields form, String fieldName, int option) throws IOException, DocumentException, java.io.IOException {
+        AcroFields.FieldPosition fieldPosition = form.getFieldPositions(fieldName).get(0);
+
+        switch (option) {
+            case 1:
+                form.setField(fieldName, "1", true);
+                break;
+            case 2:
+                form.setField(fieldName, "2", true);
+                break;
+            case 3:
+                form.setField(fieldName, "3", true);
+                break;
+            case 4:
+                form.setField(fieldName, "4", true);
+                break;
+            default:
+                // Handle default case if necessary
+                break;
+        }
+
+        stamper.getOverContent(fieldPosition.page).setLiteral("1 0 0 1 0 0 cm");
+        stamper.getOverContent(fieldPosition.page).stroke();
+        stamper.getOverContent(fieldPosition.page).resetRGBColorStroke();
     }
 
     private static String getFieldFromApplication(JapanVisaApplication application, String fieldName) {
