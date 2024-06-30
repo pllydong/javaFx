@@ -2,10 +2,7 @@ package sample.model;
 
 import lombok.Data;
 import sample.enums.FlightEnum;
-import sample.pojo.FligihtInfo;
-import sample.pojo.Itinerary;
-import sample.pojo.Ticket;
-import sample.pojo.UserInformation;
+import sample.pojo.*;
 
 import java.util.List;
 import java.util.Map;
@@ -62,4 +59,8 @@ public class CacheData {
      * 机票信息
      */
     private Ticket ticketInfo;
+    /**
+     * 日本申请单2
+     */
+    private JapanVisaApplication japanVisaApplication;
 }

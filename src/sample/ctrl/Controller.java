@@ -18,14 +18,12 @@ import sample.enums.*;
 import sample.model.CacheData;
 import sample.model.Hotel;
 import sample.model.TouristSpot;
-import sample.pojo.FligihtInfo;
-import sample.pojo.Itinerary;
-import sample.pojo.Ticket;
-import sample.pojo.UserInformation;
+import sample.pojo.*;
 import sample.utils.MyUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -245,6 +243,24 @@ public class Controller implements Initializable {
         fillFlightInfo();
 
         fillItineraryInfo();
+
+        fillJapanVisaApplicationInfo();
+    }
+
+    private void fillJapanVisaApplicationInfo() {
+        JapanVisaApplication info = new JapanVisaApplication();
+        cacheData.setJapanVisaApplication(info);
+
+        info.setEmail(emailField.getText());
+        info.setDateOfBirth(birthdayPicker.getValue() == null ?
+                StrUtil.EMPTY :
+                birthdayPicker.getValue().format(DateTimeFormatter.ISO_DATE));
+        info.setSurname(PinyinUtil.getPinyin(lastNameField.getText()).toLowerCase(Locale.ROOT));
+        info.setGivenAndMiddleNames(PinyinUtil.getPinyin(firstNameField.getText()).toLowerCase(Locale.ROOT));
+        info.setPlaceOfBirthCountry(birthplaceField.getText());
+        info.setSex(sexCombo.getSelectionModel().getSelectedIndex() + 1);
+        info.setMaritalStatus(marriageCombo.getSelectionModel().getSelectedIndex() + 1);
+
     }
 
     /**

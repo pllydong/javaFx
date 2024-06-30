@@ -1,6 +1,8 @@
 package sample.pojo;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.Data;
+import sample.enums.SexEnum;
 
 import java.util.Date;
 
