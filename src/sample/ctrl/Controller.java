@@ -24,6 +24,7 @@ import sample.utils.MyUtil;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -137,6 +138,10 @@ public class Controller implements Initializable {
      * 护照号码
      */
     public TextField passportField;
+    /**
+     * 护照类型
+     */
+    public ComboBox<String> passportTypeComb;
 
 
     /**
@@ -252,15 +257,28 @@ public class Controller implements Initializable {
         cacheData.setJapanVisaApplication(info);
 
         info.setEmail(emailField.getText());
+        DateTimeFormatter ddMMyyyy = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         info.setDateOfBirth(birthdayPicker.getValue() == null ?
                 StrUtil.EMPTY :
-                birthdayPicker.getValue().format(DateTimeFormatter.ISO_DATE));
+                birthdayPicker.getValue().format(ddMMyyyy));
         info.setSurname(PinyinUtil.getPinyin(lastNameField.getText()).toLowerCase(Locale.ROOT));
         info.setGivenAndMiddleNames(PinyinUtil.getPinyin(firstNameField.getText()).toLowerCase(Locale.ROOT));
         info.setPlaceOfBirthCountry(birthplaceField.getText());
         info.setSex(sexCombo.getSelectionModel().getSelectedIndex() + 1);
         info.setMaritalStatus(marriageCombo.getSelectionModel().getSelectedIndex() + 1);
+        info.setNationalityOrCitizenship(nationalityField.getText());
+        info.setFormerNationalitiesOrCitizenships(nationalityField.getText());
+        info.setGovernmentIdNumber(idnField.getText());
+        info.setPassportType(passportTypeComb.getSelectionModel().getSelectedIndex() + 1);
+        info.setPassportNumber(passportField.getText());
+        
+        info.setPlaceOfIssue(StrUtil.EMPTY);
+        info.setDateOfIssue(StrUtil.EMPTY);
+        info.setIssuingAuthority(StrUtil.EMPTY);
+        info.setDateOfExpiry(StrUtil.EMPTY);
 
+        info.setCertificateOfEligibilityNumber(StrUtil.EMPTY);
+        info.setPurposeOfVisitOrResidenceStatus(StrUtil.EMPTY);
     }
 
     /**
@@ -484,6 +502,21 @@ public class Controller implements Initializable {
             }
         });
         backFlightCombo.getSelectionModel().select(RandomUtil.randomInt(BACK_FLIGHT_LIST.size()));
+
+        passportTypeComb.setItems(new ReadOnlyUnbackedObservableList<String>() {
+
+
+            @Override
+            public String get(int i) {
+                return RandomUtil.randomEle(PassportTypeEnum.values()).getDesc();
+            }
+
+            @Override
+            public int size() {
+                return PassportTypeEnum.values().length;
+            }
+        });
+        passportTypeComb.getSelectionModel().select(PassportTypeEnum.DIPLOMATIC.ordinal());
 
     }
 
