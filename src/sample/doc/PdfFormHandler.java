@@ -1,5 +1,6 @@
 package sample.doc;
 
+import cn.hutool.core.date.DateUtil;
 import com.aspose.pdf.internal.imaging.internal.Exceptions.IO.IOException;
 import com.itextpdf.forms.fields.PdfButtonFormField;
 import com.itextpdf.text.DocumentException;
@@ -10,10 +11,12 @@ import sample.pojo.JapanVisaApplication;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PdfFormHandler {
-    public static void handle(JapanVisaApplication japanVisaApplication, String filePath) {
+    public static void handle(JapanVisaApplication japanVisaApplication, String filePath, String cusName) {
         String pdfFilePath = "files/doc/申请表.pdf";
         try {
 
@@ -28,7 +31,7 @@ public class PdfFormHandler {
             BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\msyh.ttc,0", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
             Font font = new Font(bf, 8, Font.BOLD);
             // 创建输出流和 PDFStamper
-            FileOutputStream outputStream = new FileOutputStream(filePath + "申请表.pdf");
+            FileOutputStream outputStream = new FileOutputStream(filePath + cusName + "申请表2.pdf");
             PdfStamper stamper = new PdfStamper(reader, outputStream);
 
             // 获取表单字段
@@ -188,6 +191,6 @@ public class PdfFormHandler {
         JapanVisaApplication application = new JapanVisaApplication();
         // 假设这里初始化了 application 对象的各个字段
 
-        handle(application, "D:/export/");
+        handle(application, "D:/export/", "test");
     }
 }

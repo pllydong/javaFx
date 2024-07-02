@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import sample.doc.ItineraryDoc;
+import sample.doc.PdfFormHandler;
 import sample.doc.RequisitionDoc;
 import sample.doc.TicketDoc;
 import sample.enums.*;
@@ -19,12 +20,12 @@ import sample.model.CacheData;
 import sample.model.Hotel;
 import sample.model.TouristSpot;
 import sample.pojo.*;
+import sample.utils.ActivationUtil;
 import sample.utils.MyUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -91,7 +92,7 @@ public class Controller implements Initializable {
     /**
      * 公司/学校 联系电话
      */
-    public TextField companyPhone;
+    public TextField companyPhoneField;
     /**
      * 出发日期
      */
@@ -123,7 +124,7 @@ public class Controller implements Initializable {
     /**
      * 公司/学校 地址
      */
-    public TextField companyAddress;
+    public TextField companyAddressField;
     /**
      * 酒店选择器
      */
@@ -142,6 +143,13 @@ public class Controller implements Initializable {
      * 护照类型
      */
     public ComboBox<String> passportTypeComb;
+    public TextField issuingAuthorityField;
+    public TextField placeOfIssueField;
+    public DatePicker passportEndDtPicker;
+    public DatePicker passportStartDtPicker;
+    public TextField certificateField;
+    public TextField purposeField;
+    public TextField portOfEntryIntoJapanField;
 
 
     /**
@@ -162,7 +170,46 @@ public class Controller implements Initializable {
 
         initButtonClick();
 
-//        clearPanelValues();
+        clearPanelValues();
+
+        activation();
+    }
+
+    /**
+     * 激活
+     */
+    private void activation() {
+        // 是否已经激活
+        if (ActivationUtil.simpleActivation(null)) {
+            return;
+        }
+
+        TextInputDialog dialog = new TextInputDialog(StrUtil.EMPTY);
+        dialog.setTitle("激活程序");
+        dialog.setHeaderText("激活程序");
+        dialog.setContentText("请输入激活码:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (!result.isPresent() || !ActivationUtil.simpleActivation(result.get())) {
+            activation();
+        }
+    }
+
+    private void clearPanelValues() {
+        firstNameField.setText(StrUtil.EMPTY);
+        lastNameField.setText(StrUtil.EMPTY);
+        birthplaceField.setText(StrUtil.EMPTY);
+        birthdayPicker.setValue(null);
+        nationalityField.setText(StrUtil.EMPTY);
+        idnField.setText(StrUtil.EMPTY);
+        phoneField.setText(StrUtil.EMPTY);
+        emailField.setText(StrUtil.EMPTY);
+        addressField.setText(StrUtil.EMPTY);
+        companyName.setText(StrUtil.EMPTY);
+        companyAddressField.setText(StrUtil.EMPTY);
+        companyPhoneField.setText(StrUtil.EMPTY);
+        startDatePicker.setValue(null);
+        endDatePicker.setValue(null);
     }
 
     /**
@@ -222,6 +269,7 @@ public class Controller implements Initializable {
         String applicationPath = applicationPathField.getText();
         String travelPath = travelPathField.getText();
         String ticketPath = ticketPathField.getText();
+        String pdfApplicationPath = applicationPathField.getText();
 
         // 导出申请表
         RequisitionDoc.handle(userInfo, applicationPath, fileName);
@@ -235,6 +283,9 @@ public class Controller implements Initializable {
         // 导出机票
         TicketDoc.handle(cacheData.getTicketInfo(), cacheData.getFlightInfo(), cacheData.getBackFlightInfo(), fileName, ticketPath,
                 1079, 1542);
+
+        // 导出申请表2
+        PdfFormHandler.handle(cacheData.getJapanVisaApplication(), pdfApplicationPath, fileName);
     }
 
     /**
@@ -257,7 +308,7 @@ public class Controller implements Initializable {
         cacheData.setJapanVisaApplication(info);
 
         info.setEmail(emailField.getText());
-        DateTimeFormatter ddMMyyyy = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         info.setDateOfBirth(birthdayPicker.getValue() == null ?
                 StrUtil.EMPTY :
                 birthdayPicker.getValue().format(ddMMyyyy));
@@ -269,16 +320,66 @@ public class Controller implements Initializable {
         info.setNationalityOrCitizenship(nationalityField.getText());
         info.setFormerNationalitiesOrCitizenships(nationalityField.getText());
         info.setGovernmentIdNumber(idnField.getText());
+
+        // 护照信息
         info.setPassportType(passportTypeComb.getSelectionModel().getSelectedIndex() + 1);
         info.setPassportNumber(passportField.getText());
-        
-        info.setPlaceOfIssue(StrUtil.EMPTY);
-        info.setDateOfIssue(StrUtil.EMPTY);
-        info.setIssuingAuthority(StrUtil.EMPTY);
-        info.setDateOfExpiry(StrUtil.EMPTY);
+        info.setPlaceOfIssue(placeOfIssueField.getText());
+        info.setDateOfIssue(getDdMmYyyyTimeStr(passportStartDtPicker.getValue()));
+        info.setIssuingAuthority(issuingAuthorityField.getText());
+        info.setDateOfExpiry(getDdMmYyyyTimeStr(passportEndDtPicker.getValue()));
 
-        info.setCertificateOfEligibilityNumber(StrUtil.EMPTY);
-        info.setPurposeOfVisitOrResidenceStatus(StrUtil.EMPTY);
+        info.setCertificateOfEligibilityNumber(certificateField.getText());
+        info.setPurposeOfVisitOrResidenceStatus(purposeField.getText());
+
+        // 计划在日本停留时间
+        LocalDate startDt = startDatePicker.getValue();
+        LocalDate endDt = endDatePicker.getValue();
+        info.setIntendedLengthOfStay(null != startDt && null != endDt ?
+                String.valueOf(LocalDateTimeUtil.betweenPeriod(startDt, endDt).getDays())
+                : StrUtil.EMPTY);
+        // 抵达日本时间（出发日期）
+        info.setDateOfArrivalInJapan(null != startDt ?
+                startDt.format(ddMMyyyy) : StrUtil.EMPTY);
+        // 入境日本口岸
+        info.setPortOfEntryIntoJapan(portOfEntryIntoJapanField.getText());
+        // 入境航空公司名称
+        info.setNameOfShipOrAirline(cacheData.getFlight().getCompany().getEnglishName());
+
+        // 入住酒店名称
+        Hotel hotel = cacheData.getHotel();
+        info.setNamesAndAddressesOfIntendedStays(hotel.getName());
+        // 酒店联系方式
+        info.setTelOfIntendedStays(hotel.getPhone());
+        // 酒店地址
+        info.setAddressOfIntendedStays(hotel.getAddress());
+
+        // 之前在日本居住的时间
+        info.setPreviousStaysInJapan(last1yStayDaysField.getText());
+
+        // 当前居住地址
+        info.setCurrentResidentialAddress(addressField.getText());
+        info.setTelephone(phoneField.getText());
+        info.setMobileNumber(phoneField.getText());
+        info.setEmail(emailField.getText());
+
+        // 当前职位
+        info.setProfessionOrOccupation(OccupationEnum.values()[passportTypeComb.getSelectionModel().getSelectedIndex()].getDesc());
+
+        // 工作地址
+        info.setEmployerAddress(companyAddressField.getText());
+        info.setEmployerTelephone(companyPhoneField.getText());
+        info.setEmployerName(companyName.getText());
+
+        // 伴侣或父母的职业
+        info.setPartnersProfessionOrOccupation(StrUtil.EMPTY);
+
+
+    }
+
+    private static final DateTimeFormatter ddMMyyyy = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private String getDdMmYyyyTimeStr(LocalDate localDate) {
+        return null == localDate ? StrUtil.EMPTY : localDate.format(ddMMyyyy);
     }
 
     /**
@@ -363,8 +464,8 @@ public class Controller implements Initializable {
         cacheData.getUserInfo().setAddress(addressField.getText());
         cacheData.getUserInfo().setCurrentOccupationAndPosition(MyUtil.setCheck(cacheData.getUserInfo().getCurrentOccupationAndPosition(), occupationCombo.getSelectionModel().getSelectedIndex()));
         cacheData.getUserInfo().setCompanyOrSchoolName(companyName.getText());
-        cacheData.getUserInfo().setCompanyOrSchoolPhoneNumber(companyPhone.getText());
-        cacheData.getUserInfo().setCompanyOrSchoolAddress(companyAddress.getText());
+        cacheData.getUserInfo().setCompanyOrSchoolPhoneNumber(companyPhoneField.getText());
+        cacheData.getUserInfo().setCompanyOrSchoolAddress(companyAddressField.getText());
         cacheData.getUserInfo().setEnglishLastName(PinyinUtil.getPinyin(lastNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
         cacheData.getUserInfo().setEnglishFirstName(PinyinUtil.getPinyin(firstNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
         LocalDate startDt = startDatePicker.getValue();

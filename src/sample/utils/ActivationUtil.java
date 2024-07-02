@@ -1,6 +1,7 @@
 package sample.utils;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 
 import java.io.*;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
  */
 public class ActivationUtil {
     private static final String SIMPLE_ACTIVATION_CODE = "87efe37797d84043b5b19ece94dbbe4d";
-    private static final String SIMPLE_ACTIVATION_TXT_PATH = "./files/activation/simpleActivation.txt";
+    private static final String SIMPLE_ACTIVATION_TXT_PATH = "files/activation/simpleActivation.txt";
     /**
      * 简易激活方式
      *
@@ -32,8 +33,11 @@ public class ActivationUtil {
     public static boolean simpleActivation(String activationCode) {
         // 先检查是否已经激活
         try {
-            BufferedReader reader = FileUtil.getReader(SIMPLE_ACTIVATION_TXT_PATH, Charset.defaultCharset());
-            String encodedCpu = reader.readLine().trim();
+            File directory = new File("");// 参数为空
+            String courseFile = directory.getCanonicalPath();
+            BufferedReader reader = FileUtil.getReader(courseFile + File.separator + SIMPLE_ACTIVATION_TXT_PATH, Charset.defaultCharset());
+            String line = reader.readLine();
+            String encodedCpu = StrUtil.isBlank(line) ? StrUtil.EMPTY : line.trim();
             reader.close();
             String curCpu = getCPUID_Windows();
             String md5Cpu = SecureUtil.md5(curCpu);
@@ -42,7 +46,7 @@ public class ActivationUtil {
             }
             boolean active = SIMPLE_ACTIVATION_CODE.equals(activationCode);
             if (active) {
-                FileUtil.writeString(md5Cpu, SIMPLE_ACTIVATION_TXT_PATH, Charset.defaultCharset());
+                FileUtil.writeString(md5Cpu, courseFile + File.separator + SIMPLE_ACTIVATION_TXT_PATH, Charset.defaultCharset());
             }
             return active;
         } catch (IOException e) {

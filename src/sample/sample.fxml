@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="1200" maxWidth="1600" minHeight="621.0" minWidth="755.0" prefHeight="642.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ctrl.Controller">
+<Pane maxHeight="1200" maxWidth="1600" minHeight="621.0" minWidth="755.0" prefHeight="635.0" prefWidth="1205.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ctrl.Controller">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
@@ -146,14 +146,14 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.3627906976744186" layoutX="14.0" layoutY="407.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.3627906976744186" layoutX="14.0" layoutY="407.0" prefHeight="30.0" prefWidth="321.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="7.0" layoutY="7.0" text="电子邮箱" />
                </children>
             </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="195.0">
                <children>
                   <TextField fx:id="emailField" layoutX="-6.0" layoutY="3.0" text="auyune.z@gmail.com" />
                </children>
@@ -211,7 +211,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="companyPhone" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" text="02-3290-2971" />
+                  <TextField fx:id="companyPhoneField" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="170.0" text="02-3290-2971" />
                </children>
             </AnchorPane>
          </items>
@@ -310,7 +310,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="152.0">
                <children>
-                  <TextField fx:id="companyAddress" layoutX="-6.0" layoutY="3.0" prefHeight="23.0" prefWidth="616.0" text="서울특별시 성북구 북악산로27길 41" />
+                  <TextField fx:id="companyAddressField" layoutX="-6.0" layoutY="3.0" prefHeight="30.0" prefWidth="596.0" text="서울특별시 성북구 북악산로27길 41" />
                </children>
             </AnchorPane>
          </items>
@@ -366,7 +366,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="104.0">
                <children>
-                  <TextField fx:id="last1yStayDaysField" layoutX="6.0" layoutY="3.0" prefHeight="23.0" prefWidth="84.0" />
+                  <TextField fx:id="last1yStayDaysField" layoutX="6.0" layoutY="3.0" prefHeight="30.0" prefWidth="90.0" />
                </children>
             </AnchorPane>
          </items>
@@ -400,7 +400,7 @@
          </items>
       </SplitPane>
       <Button fx:id="randomFlightButton" layoutX="391.0" layoutY="371.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="217.0" text="随机航班生成" />
-      <SplitPane dividerPositions="0.35348837209302325" layoutX="300.0" layoutY="484.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.35348837209302325" layoutX="754.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -414,7 +414,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.3953488372093023" layoutX="517.0" layoutY="484.0" prefHeight="30.0" prefWidth="217.0">
+      <SplitPane dividerPositions="0.3953488372093023" layoutX="971.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -424,6 +424,104 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <ComboBox fx:id="passportTypeComb" layoutX="-1.0" layoutY="3.0" prefWidth="150.0" promptText="外交护照" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.3953488372093023" layoutX="971.0" layoutY="46.0" prefHeight="30.0" prefWidth="217.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="发行机关" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="issuingAuthorityField" layoutX="-8.0" layoutY="-1.0" prefHeight="30.0" prefWidth="143.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.35348837209302325" layoutX="754.0" layoutY="46.0" prefHeight="30.0" prefWidth="217.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="发行地" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="placeOfIssueField" layoutX="-6.0" layoutY="3.0" prefHeight="30.0" prefWidth="143.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.3302325581395349" layoutX="971.0" layoutY="77.0" prefHeight="30.0" prefWidth="217.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="过期日期" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <DatePicker fx:id="passportEndDtPicker" layoutY="3.0" prefHeight="30.0" prefWidth="140.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.3395348837209302" layoutX="754.0" layoutY="77.0" prefHeight="30.0" prefWidth="217.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="发行日期" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <DatePicker fx:id="passportStartDtPicker" layoutY="3.0" prefHeight="30.0" prefWidth="135.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.28169014084507044" layoutX="754.0" layoutY="111.0" prefHeight="30.0" prefWidth="428.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="证书编号" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="certificateField" layoutX="-6.0" layoutY="3.0" prefHeight="30.0" prefWidth="353.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.284037558685446" layoutX="754.0" layoutY="147.0" prefHeight="30.0" prefWidth="428.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="114.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="访日目的/状态" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="purposeField" layoutX="-8.0" layoutY="-1.0" prefHeight="30.0" prefWidth="311.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.284037558685446" layoutX="754.0" layoutY="192.0" prefHeight="30.0" prefWidth="428.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="114.0">
+               <children>
+                  <Label layoutX="7.0" layoutY="7.0" text="入境港口" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextField fx:id="portOfEntryIntoJapanField" layoutX="-8.0" layoutY="-1.0" prefHeight="30.0" prefWidth="311.0" />
                </children>
             </AnchorPane>
          </items>
