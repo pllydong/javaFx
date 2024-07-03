@@ -29,7 +29,6 @@ public class PdfFormHandler {
             }
 
             BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\msyh.ttc,0", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
-            Font font = new Font(bf, 8, Font.BOLD);
             // 创建输出流和 PDFStamper
             FileOutputStream outputStream = new FileOutputStream(filePath + cusName + "申请表2.pdf");
             PdfStamper stamper = new PdfStamper(reader, outputStream);
