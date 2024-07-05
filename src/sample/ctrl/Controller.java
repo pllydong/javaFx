@@ -609,7 +609,7 @@ public class Controller implements Initializable {
 
             @Override
             public String get(int i) {
-                return RandomUtil.randomEle(PassportTypeEnum.values()).getDesc();
+                return PassportTypeEnum.values()[i].getDesc();
             }
 
             @Override
