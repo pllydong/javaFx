@@ -3,6 +3,7 @@ package sample.ctrl;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
@@ -210,6 +211,7 @@ public class Controller implements Initializable {
         companyPhoneField.setText(StrUtil.EMPTY);
         startDatePicker.setValue(null);
         endDatePicker.setValue(null);
+        passportField.setText(StrUtil.EMPTY);
     }
 
     /**
@@ -226,9 +228,19 @@ public class Controller implements Initializable {
 
     private void popMsg(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Pop Message");
+        alert.setTitle(title);
         alert.setHeaderText(title);
         alert.setContentText(msg);
+        alert.getDialogPane().setPrefSize(500, 500);
+        alert.showAndWait();
+    }
+
+    private void popMsg(String title, String headerText, String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(msg);
+        alert.getDialogPane().setPrefSize(500, 500);
         alert.showAndWait();
     }
 
@@ -244,7 +256,7 @@ public class Controller implements Initializable {
 
                 popMsg("导出成功！", "成功将客户[" + cacheData.getUserInfo().getChineseLastName() + cacheData.getUserInfo().getChineseFirstName() + "]的申请表、行程单、机票信息导出。");
             } catch (Exception e) {
-                popMsg("操作失败！", e.getMessage());
+                popMsg("操作失败！", StrUtil.blankToDefault(e.getMessage(), "操作失败"), Arrays.toString(e.getStackTrace()));
                 throw e;
             }
         });
@@ -437,8 +449,12 @@ public class Controller implements Initializable {
 
         cacheData.setFlight(FLIGHT_LIST.get(flightCombo.getSelectionModel().getSelectedIndex()));
         cacheData.setBackFlight(BACK_FLIGHT_LIST.get(backFlightCombo.getSelectionModel().getSelectedIndex()));
-        cacheData.setStartDt(LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN));
-        cacheData.setEndDt(LocalDateTimeUtil.format(endDatePicker.getValue(), PURE_DATE_PATTERN));
+        String startDt = LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN);
+        cacheData.setStartDt(startDt);
+        String endDt = LocalDateTimeUtil.format(endDatePicker.getValue(), PURE_DATE_PATTERN);
+        Assert.notBlank(startDt, "开始日期不能为空");
+        Assert.notBlank(endDt, "结束日期不能为空");
+        cacheData.setEndDt(endDt);
         cacheData.setTouristMap(MyUtil.getRandomTouristMap(cacheData.getStartDt(), cacheData.getEndDt()));
 
 
@@ -451,8 +467,14 @@ public class Controller implements Initializable {
     private void fillUserInfo() {
         cacheData.setUserInfo(new UserInformation());
         cacheData.getUserInfo().setPassportNum(passportField.getText());
-        cacheData.getUserInfo().setChineseLastName(lastNameField.getText());
-        cacheData.getUserInfo().setChineseFirstName(firstNameField.getText());
+        String lastName = lastNameField.getText();
+        cacheData.getUserInfo().setChineseLastName(lastName);
+        String firstName = firstNameField.getText();
+        cacheData.getUserInfo().setChineseFirstName(firstName);
+
+        Assert.notBlank(lastName, "姓氏不能为空");
+        Assert.notBlank(firstName, "名称不能为空");
+
         cacheData.getUserInfo().setGender(MyUtil.setCheck(cacheData.getUserInfo().getGender(), sexCombo.getSelectionModel().getSelectedIndex()));
         cacheData.getUserInfo().setDateOfBirth(DateUtil.format(LocalDateTimeUtil.of(birthdayPicker.getValue()), PURE_DATE_PATTERN));
         cacheData.getUserInfo().setPlaceOfBirth(birthplaceField.getText());
@@ -466,8 +488,8 @@ public class Controller implements Initializable {
         cacheData.getUserInfo().setCompanyOrSchoolName(companyName.getText());
         cacheData.getUserInfo().setCompanyOrSchoolPhoneNumber(companyPhoneField.getText());
         cacheData.getUserInfo().setCompanyOrSchoolAddress(companyAddressField.getText());
-        cacheData.getUserInfo().setEnglishLastName(PinyinUtil.getPinyin(lastNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
-        cacheData.getUserInfo().setEnglishFirstName(PinyinUtil.getPinyin(firstNameField.getText(), StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        cacheData.getUserInfo().setEnglishLastName(PinyinUtil.getPinyin(lastName, StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        cacheData.getUserInfo().setEnglishFirstName(PinyinUtil.getPinyin(firstName, StrUtil.EMPTY).toUpperCase(Locale.ROOT));
         LocalDate startDt = startDatePicker.getValue();
         LocalDate endDt = endDatePicker.getValue();
         cacheData.getUserInfo().setPlannedDurationOfStayInJapan(String.format(UserInformation.DURATION_FORMAT,
@@ -503,6 +525,7 @@ public class Controller implements Initializable {
         cacheData.getUserInfo().setEntryPortOrFlightNumber(cacheData.getFlight().getEndTerminal().getAirport()
                 + StrPool.COMMA
                 + cacheData.getFlight().getCode());
+
     }
 
 
@@ -617,7 +640,7 @@ public class Controller implements Initializable {
                 return PassportTypeEnum.values().length;
             }
         });
-        passportTypeComb.getSelectionModel().select(PassportTypeEnum.DIPLOMATIC.ordinal());
+        passportTypeComb.getSelectionModel().select(PassportTypeEnum.ORDINARY.ordinal());
 
     }
 
