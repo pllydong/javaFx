@@ -353,8 +353,7 @@ public class Controller implements Initializable {
         int i = Integer.parseInt(between) + 1;
         info.setIntendedLengthOfStay(i + " day");
         // 抵达日本时间（出发日期）
-        info.setDateOfArrivalInJapan(null != startDt ?
-                startDt.format(ddMMyyyy) : StrUtil.EMPTY);
+        info.setDateOfArrivalInJapan(startDt.format(ddMMyyyy));
         // 入境日本口岸
         info.setPortOfEntryIntoJapan(portOfEntryIntoJapanField.getText());
         // 入境航空公司名称
