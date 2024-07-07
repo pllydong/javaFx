@@ -324,8 +324,8 @@ public class Controller implements Initializable {
         info.setDateOfBirth(birthdayPicker.getValue() == null ?
                 StrUtil.EMPTY :
                 birthdayPicker.getValue().format(ddMMyyyy));
-        info.setSurname(PinyinUtil.getPinyin(lastNameField.getText()).toLowerCase(Locale.ROOT));
-        info.setGivenAndMiddleNames(PinyinUtil.getPinyin(firstNameField.getText()).toLowerCase(Locale.ROOT));
+        info.setSurname(PinyinUtil.getPinyin(lastNameField.getText()).toUpperCase(Locale.ROOT));
+        info.setGivenAndMiddleNames(PinyinUtil.getPinyin(firstNameField.getText()).toUpperCase(Locale.ROOT));
         info.setPlaceOfBirthCountry(birthplaceField.getText());
         info.setSex(sexCombo.getSelectionModel().getSelectedIndex() + 1);
         info.setMaritalStatus(marriageCombo.getSelectionModel().getSelectedIndex() + 1);
