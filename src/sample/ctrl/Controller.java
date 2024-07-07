@@ -273,7 +273,7 @@ public class Controller implements Initializable {
     private void exportFiles() {
         String now = LocalDateTimeUtil.format(LocalDateTimeUtil.now(), PURE_DATE_PATTERN);
         UserInformation userInfo = cacheData.getUserInfo();
-        System.out.println("-------------------------------" + userInfo);
+        //System.out.println("-------------------------------" + userInfo);
         String name = userInfo.getChineseLastName() + userInfo.getChineseFirstName();
         String pinyin = userInfo.getEnglishLastName() + StrUtil.SPACE + userInfo.getEnglishFirstName();
         String fileName = name + StrUtil.UNDERLINE + now;

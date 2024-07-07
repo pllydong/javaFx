@@ -1,19 +1,12 @@
 package sample.doc;
 
-import cn.hutool.core.date.DateUtil;
 import com.aspose.pdf.internal.imaging.internal.Exceptions.IO.IOException;
-import com.itextpdf.forms.fields.PdfButtonFormField;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.*;
 import sample.pojo.JapanVisaApplication;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class PdfFormHandler {
     public static void handle(JapanVisaApplication japanVisaApplication, String filePath, String cusName) {
@@ -64,8 +57,8 @@ public class PdfFormHandler {
                    stamper.getOverContent(position.page).setLiteral("1 0 0 1 0 0 cm");
                    stamper.getOverContent(position.page).stroke();
                    stamper.getOverContent(position.page).resetRGBColorStroke();
-               }catch (NullPointerException e){
-                   System.out.println("没有找到"+fieldName);
+               }catch (NullPointerException ignored){
+
                }
             }
 

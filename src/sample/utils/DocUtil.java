@@ -83,8 +83,6 @@ public class DocUtil {
     public static void setTextCell(ArrayDeque<String> deque, String cellText, XWPFParagraph paragraph) {
         if (!deque.isEmpty()) {
             String s = deque.pollFirst();
-            System.out.println(s);
-            System.out.println(cellText);
             for (int i = paragraph.getRuns().size() - 1; i >= 0; i--) {
                 paragraph.removeRun(i);
             }
