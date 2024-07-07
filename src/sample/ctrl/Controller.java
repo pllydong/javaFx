@@ -273,7 +273,7 @@ public class Controller implements Initializable {
     private void exportFiles() {
         String now = LocalDateTimeUtil.format(LocalDateTimeUtil.now(), PURE_DATE_PATTERN);
         UserInformation userInfo = cacheData.getUserInfo();
-        System.out.println("-------------------------------"+userInfo);
+        System.out.println("-------------------------------" + userInfo);
         String name = userInfo.getChineseLastName() + userInfo.getChineseFirstName();
         String pinyin = userInfo.getEnglishLastName() + StrUtil.SPACE + userInfo.getEnglishFirstName();
         String fileName = name + StrUtil.UNDERLINE + now;
@@ -347,9 +347,11 @@ public class Controller implements Initializable {
         // 计划在日本停留时间
         LocalDate startDt = startDatePicker.getValue();
         LocalDate endDt = endDatePicker.getValue();
-        info.setIntendedLengthOfStay(null != startDt && null != endDt ?
+        String between = null != startDt && null != endDt ?
                 String.valueOf(LocalDateTimeUtil.betweenPeriod(startDt, endDt).getDays())
-                : StrUtil.EMPTY);
+                : StrUtil.EMPTY;
+        int i = Integer.parseInt(between) + 1;
+        info.setIntendedLengthOfStay(i + " day");
         // 抵达日本时间（出发日期）
         info.setDateOfArrivalInJapan(null != startDt ?
                 startDt.format(ddMMyyyy) : StrUtil.EMPTY);
@@ -390,6 +392,7 @@ public class Controller implements Initializable {
     }
 
     private static final DateTimeFormatter ddMMyyyy = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     private String getDdMmYyyyTimeStr(LocalDate localDate) {
         return null == localDate ? StrUtil.EMPTY : localDate.format(ddMMyyyy);
     }
@@ -527,7 +530,6 @@ public class Controller implements Initializable {
                 + cacheData.getFlight().getCode());
 
     }
-
 
 
     /**
