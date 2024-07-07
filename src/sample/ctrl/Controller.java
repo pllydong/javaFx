@@ -378,7 +378,7 @@ public class Controller implements Initializable {
 
         // 当前职位
         int selectedIndex = occupationCombo.getSelectionModel().getSelectedIndex();
-        info.setProfessionOrOccupation(OccupationEnum.values()[selectedIndex].getDesc());
+        info.setProfessionOrOccupation(OccupationEnum.values()[selectedIndex].getCode());
 
         // 工作地址
         info.setEmployerAddress(companyAddressField.getText());
