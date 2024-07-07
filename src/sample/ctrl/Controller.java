@@ -351,7 +351,7 @@ public class Controller implements Initializable {
                 String.valueOf(LocalDateTimeUtil.betweenPeriod(startDt, endDt).getDays())
                 : StrUtil.EMPTY;
         int i = Integer.parseInt(between) + 1;
-        info.setIntendedLengthOfStay(i + " day");
+        info.setIntendedLengthOfStay(i + " days");
         // 抵达日本时间（出发日期）
         info.setDateOfArrivalInJapan(getDdMmYyyyTimeStr(startDt));
         // 入境日本口岸
