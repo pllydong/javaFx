@@ -10,10 +10,10 @@ import lombok.Getter;
  */
 @Getter
 public enum OccupationEnum {
-    STAFF("staff", "会社员(职员)"),
-    SELF_OPERATING("self-operating", "自营业"),
-    DAILY_WORK("daily word", "日当"),
-    JOBLESS("jobless", "无业"),
+    STAFF("office employee", "会社员(职员)"),
+    SELF_OPERATING("self-employed", "自营业"),
+    DAILY_WORK("part time", "日当"),
+    JOBLESS("no occupation", "无职业"),
     STUDENT("student", "学生"),
     ;
 

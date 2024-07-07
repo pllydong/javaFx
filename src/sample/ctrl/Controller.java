@@ -353,11 +353,11 @@ public class Controller implements Initializable {
         int i = Integer.parseInt(between) + 1;
         info.setIntendedLengthOfStay(i + " day");
         // 抵达日本时间（出发日期）
-        info.setDateOfArrivalInJapan(startDt.format(ddMMyyyy));
+        info.setDateOfArrivalInJapan(getDdMmYyyyTimeStr(startDt));
         // 入境日本口岸
         info.setPortOfEntryIntoJapan(portOfEntryIntoJapanField.getText());
         // 入境航空公司名称
-        info.setNameOfShipOrAirline(cacheData.getFlight().getCompany().getEnglishName());
+        info.setNameOfShipOrAirline(cacheData.getFlight().getCode());
 
         // 入住酒店名称
         Hotel hotel = cacheData.getHotel();
@@ -368,7 +368,7 @@ public class Controller implements Initializable {
         info.setAddressOfIntendedStays(hotel.getAddress());
 
         // 之前在日本居住的时间
-        info.setPreviousStaysInJapan(last1yStayDaysField.getText());
+        info.setPreviousStaysInJapan(getDdMmYyyyTimeStr(startDt) + "~" + getDdMmYyyyTimeStr(endDt));
 
         // 当前居住地址
         info.setCurrentResidentialAddress(addressField.getText());
