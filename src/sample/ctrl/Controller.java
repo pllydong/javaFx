@@ -200,7 +200,7 @@ public class Controller implements Initializable {
         firstNameField.setText(StrUtil.EMPTY);
         lastNameField.setText(StrUtil.EMPTY);
         birthplaceField.setText(StrUtil.EMPTY);
-        birthdayPicker.setValue(null);
+//        birthdayPicker.setValue(null);
         nationalityField.setText(StrUtil.EMPTY);
         idnField.setText(StrUtil.EMPTY);
         phoneField.setText(StrUtil.EMPTY);
@@ -209,8 +209,8 @@ public class Controller implements Initializable {
         companyName.setText(StrUtil.EMPTY);
         companyAddressField.setText(StrUtil.EMPTY);
         companyPhoneField.setText(StrUtil.EMPTY);
-        startDatePicker.setValue(null);
-        endDatePicker.setValue(null);
+//        startDatePicker.setValue(null);
+//        endDatePicker.setValue(null);
         passportField.setText(StrUtil.EMPTY);
     }
 

@@ -1,12 +1,14 @@
 package sample.doc;
 
-import com.aspose.pdf.internal.imaging.internal.Exceptions.IO.IOException;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.AcroFields;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import sample.pojo.JapanVisaApplication;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class PdfFormHandler {
     public static void handle(JapanVisaApplication japanVisaApplication, String filePath, String cusName) {
@@ -57,8 +59,8 @@ public class PdfFormHandler {
                    stamper.getOverContent(position.page).setLiteral("1 0 0 1 0 0 cm");
                    stamper.getOverContent(position.page).stroke();
                    stamper.getOverContent(position.page).resetRGBColorStroke();
-               }catch (NullPointerException ignored){
-
+               }catch (NullPointerException e){
+                   System.out.println("没有找到"+fieldName);
                }
             }
 
@@ -74,10 +76,6 @@ public class PdfFormHandler {
 
         } catch (IOException | DocumentException e) {
             e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (java.io.IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
