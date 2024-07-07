@@ -377,7 +377,8 @@ public class Controller implements Initializable {
         info.setEmail(emailField.getText());
 
         // 当前职位
-        info.setProfessionOrOccupation(OccupationEnum.values()[passportTypeComb.getSelectionModel().getSelectedIndex()].getDesc());
+        int selectedIndex = occupationCombo.getSelectionModel().getSelectedIndex();
+        info.setProfessionOrOccupation(OccupationEnum.values()[selectedIndex].getDesc());
 
         // 工作地址
         info.setEmployerAddress(companyAddressField.getText());
