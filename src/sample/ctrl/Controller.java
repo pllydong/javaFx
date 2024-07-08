@@ -368,7 +368,7 @@ public class Controller implements Initializable {
         info.setAddressOfIntendedStays(hotel.getAddress());
 
         // 之前在日本居住的时间
-        info.setPreviousStaysInJapan(getDdMmYyyyTimeStr(startDt) + "~" + getDdMmYyyyTimeStr(endDt));
+        info.setPreviousStaysInJapan(getDdMmYyyyTimeStr(lastStayStartDtPicker.getValue()) + "~" + getDdMmYyyyTimeStr(lastStayEndDtPicker.getValue()));
 
         // 当前居住地址
         info.setCurrentResidentialAddress(addressField.getText());
