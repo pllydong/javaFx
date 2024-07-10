@@ -38,6 +38,6 @@ public enum AirlineCompanyEnum {
      * @return
      */
     public String getRandomTicketNum() {
-        return ticketNumPrefix + "-" + RandomUtil.randomNumbers(10);
+        return ticketNumPrefix + RandomUtil.randomNumbers(10);
     }
 }

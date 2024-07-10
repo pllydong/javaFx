@@ -502,24 +502,18 @@ public class TouristSpot {
             "\t" +
             "모토하코네\n" +
             "もとはこね \n" +
-            "Motohakone\n" +
-            "\t" +
-            "\t";
+            "Motohakone";
 
     static {
         TOURIST_SPOT_MAP = new HashMap<>();
         for (String txt : TXT.split("\t")) {
             String[] names = txt.split("\n");
-            if (names.length > 0) {
+            if (names.length >= 3) {
                 TouristSpot t = new TouristSpot();
                 t.setId(TOURIST_SPOT_MAP.size() + 1);
                 t.setKoreanName(names[0]);
-                if (names.length > 1) {
-                    t.setJapaneseName(names[1]);
-                }
-                if (names.length > 2) {
-                    t.setEnglishName(names[2]);
-                }
+                t.setJapaneseName(names[1]);
+                t.setEnglishName(names[2]);
                 System.out.println(t);
                 TOURIST_SPOT_MAP.put(t.getId(), t);
             }
