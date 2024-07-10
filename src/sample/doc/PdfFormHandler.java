@@ -59,8 +59,8 @@ public class PdfFormHandler {
                    stamper.getOverContent(position.page).setLiteral("1 0 0 1 0 0 cm");
                    stamper.getOverContent(position.page).stroke();
                    stamper.getOverContent(position.page).resetRGBColorStroke();
-               }catch (NullPointerException e){
-                   System.out.println("没有找到"+fieldName);
+               }catch (NullPointerException ignored){
+
                }
             }
 

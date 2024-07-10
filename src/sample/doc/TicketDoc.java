@@ -59,7 +59,7 @@ public class TicketDoc {
                     for (XWPFTableCell cell : row.getTableCells()) {
                         String cellText = cell.getText();
                         if (i == 0) {
-                            if (cellText.contains("行程单")) {
+                            if (cellText.contains("ITINERARY")) {
                                 continue;
                             }
                             if (!cellText.isEmpty()) {

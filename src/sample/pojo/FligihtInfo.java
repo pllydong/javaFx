@@ -60,11 +60,29 @@ public class FligihtInfo {
         flightInfo.setFlight(flightEnum.getCode());
         flightInfo.setDate(DateUtil.parse(dt, PURE_DATE_PATTERN).toDateStr());
         flightInfo.setDepartureTerminal(flightEnum.getStartTerminal().getTerminalNo());
-        flightInfo.setDepartureTime(flightEnum.getStartTime());
+
+        String startTime = formatTime(flightEnum.getStartTime());
+        flightInfo.setDepartureTime(startTime);
+
         flightInfo.setArrivalTerminal(flightEnum.getEndTerminal().getTerminalNo());
-        flightInfo.setArrivalTime(flightEnum.getEndTime());
+
+        String endTime = formatTime(flightEnum.getEndTime());
+        flightInfo.setArrivalTime(endTime);
+
         flightInfo.setOriginDes(flightEnum.getStartTerminal().getAirport().getCode() + StrUtil.SLASH + flightEnum.getEndTerminal().getAirport().getCode());
         return flightInfo;
     }
+
+    private static String formatTime(String time) {
+        if (time.matches("\\d:\\d{2}")) {
+            return "0" + time;
+        } else if (time.matches("\\d\\.\\d{2}")) {
+            return "0" + time.replace('.', ':');
+        } else if (time.matches("\\d{2}\\.\\d{2}")) {
+            return time.replace('.', ':');
+        }
+        return time;
+    }
+
 
 }
