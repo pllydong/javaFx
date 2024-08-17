@@ -3,9 +3,9 @@ package sample.model;
 import lombok.Data;
 import sample.enums.FlightEnum;
 import sample.pojo.*;
+import sample.utils.MyMap;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author guokun
@@ -13,6 +13,33 @@ import java.util.Map;
  */
 @Data
 public class CacheData {
+
+    private static Branch rootBranch;
+    private static final MyMap<Branch> branchMap = new MyMap<>();
+    private static final MyMap<TouristSpot> touristSpotMap = new MyMap<>();
+    private static final MyMap<Hotel> hotelMap = new MyMap<>();
+
+    public static Branch getRootBranch() {
+        return rootBranch;
+    }
+
+    public static void setRootBranch(Branch rootBranch) {
+        CacheData.rootBranch = rootBranch;
+    }
+
+    public static MyMap<Branch> getBranchMap() {
+        return branchMap;
+    }
+
+    public static MyMap<TouristSpot> getTouristSpotMap() {
+        return touristSpotMap;
+    }
+
+    public static MyMap<Hotel> getHotelMap() {
+        return hotelMap;
+    }
+
+
     /**
      * 出发日期 yyyyMMdd
      */

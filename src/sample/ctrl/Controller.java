@@ -1,5 +1,6 @@
 package sample.ctrl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
@@ -9,7 +10,6 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.pinyin.PinyinUtil;
 import com.sun.javafx.scene.control.ReadOnlyUnbackedObservableList;
-import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import sample.doc.ItineraryDoc;
@@ -17,6 +17,7 @@ import sample.doc.PdfFormHandler;
 import sample.doc.RequisitionDoc;
 import sample.doc.TicketDoc;
 import sample.enums.*;
+import sample.model.Branch;
 import sample.model.CacheData;
 import sample.model.Hotel;
 import sample.model.TouristSpot;
@@ -151,6 +152,10 @@ public class Controller implements Initializable {
     public TextField certificateField;
     public TextField purposeField;
     public TextField portOfEntryIntoJapanField;
+    public TreeView<Branch> branchTreeView
+            ;
+
+    private List<Hotel> showHotelList = new ArrayList<>();
 
 
     /**
@@ -165,6 +170,8 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initTooTip();
 
+        initTreeView();
+
         initComboBox();
 
         initDatePicker();
@@ -174,6 +181,54 @@ public class Controller implements Initializable {
         clearPanelValues();
 
         activation();
+    }
+
+    private void initTreeView() {
+        if (null == branchTreeView.getRoot()) {
+            branchTreeView.setRoot(new TreeItem<>());
+        }
+        buildBranchTreeView(branchTreeView.getRoot(), CacheData.getRootBranch());
+        branchTreeView.setCellFactory(param -> new TreeCell<Branch>() {
+            @Override
+            protected void updateItem(Branch item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(StrUtil.EMPTY);
+                } else {
+                    setText(item.getZhName());
+                }
+            }
+        });
+        branchTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            // 更新酒店选项
+            System.out.println(newValue.getValue().getZhName());
+            showHotelList.clear();
+            showHotelList.addAll(CacheData.getHotelMap().getListByIdSet(newValue.getValue().getAllHotels()));
+            hotelCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
+                @Override
+                public String get(int i) {
+                    return showHotelList.get(i).getZhName();
+                }
+
+                @Override
+                public int size() {
+                    return showHotelList.size();
+                }
+            });
+            if (CollUtil.isNotEmpty(showHotelList)) {
+                hotelCombo.getSelectionModel().select(RandomUtil.randomInt(showHotelList.size()));
+            }
+        });
+    }
+
+    private void buildBranchTreeView(TreeItem<Branch> root, Branch rootBranch) {
+        root.setValue(rootBranch);
+
+        for (String childId : rootBranch.getChildren()) {
+            TreeItem<Branch> item = new TreeItem<>();
+            buildBranchTreeView(item, CacheData.getBranchMap().get(childId));
+            root.getChildren().add(item);
+        }
     }
 
     /**
@@ -250,7 +305,9 @@ public class Controller implements Initializable {
     private void initButtonClick() {
         exportFileButton.setOnAction(event -> {
             try {
-                collectInfos();
+                if (!collectInfos()) {
+                    return;
+                }
 
                 exportFiles();
 
@@ -290,7 +347,7 @@ public class Controller implements Initializable {
         ItineraryDoc.handle(cacheData.getItineraryInfoList(), travelPath,
                 now.substring(0, 4), now.substring(4, 6), now.substring(6, 8),
                 pinyin, fileName,
-                cacheData.getHotel().getName(), cacheData.getHotel().getAddress(), cacheData.getHotel().getPhone());
+                cacheData.getHotel().getEnName(), cacheData.getHotel().getAddress(), cacheData.getHotel().getPhone());
 
         // 导出机票
         TicketDoc.handle(cacheData.getTicketInfo(), cacheData.getFlightInfo(), cacheData.getBackFlightInfo(), fileName, ticketPath,
@@ -303,8 +360,10 @@ public class Controller implements Initializable {
     /**
      * 收集用户输入转换为class
      */
-    private void collectInfos() {
-        initCacheData();
+    private boolean collectInfos() {
+        if (!initCacheData()) {
+            return false;
+        };
 
         fillUserInfo();
 
@@ -313,6 +372,8 @@ public class Controller implements Initializable {
         fillItineraryInfo();
 
         fillJapanVisaApplicationInfo();
+
+        return true;
     }
 
     private void fillJapanVisaApplicationInfo() {
@@ -361,7 +422,7 @@ public class Controller implements Initializable {
 
         // 入住酒店名称
         Hotel hotel = cacheData.getHotel();
-        info.setNamesAndAddressesOfIntendedStays(hotel.getName());
+        info.setNamesAndAddressesOfIntendedStays(hotel.getEnName());
         // 酒店联系方式
         info.setTelOfIntendedStays(hotel.getPhone());
         // 酒店地址
@@ -447,8 +508,15 @@ public class Controller implements Initializable {
     /**
      * 初始化缓存
      */
-    private void initCacheData() {
+    private boolean initCacheData() {
         cacheData = new CacheData();
+
+        int selectedIndex = hotelCombo.getSelectionModel().getSelectedIndex();
+        if (selectedIndex < 0) {
+            popMsg("警告", "请选择酒店后再开始！");
+            return false;
+        }
+        cacheData.setHotel(CacheData.getHotelMap().indexOf(selectedIndex));
 
         cacheData.setFlight(FLIGHT_LIST.get(flightCombo.getSelectionModel().getSelectedIndex()));
         cacheData.setBackFlight(BACK_FLIGHT_LIST.get(backFlightCombo.getSelectionModel().getSelectedIndex()));
@@ -458,10 +526,19 @@ public class Controller implements Initializable {
         Assert.notBlank(startDt, "开始日期不能为空");
         Assert.notBlank(endDt, "结束日期不能为空");
         cacheData.setEndDt(endDt);
-        cacheData.setTouristMap(MyUtil.getRandomTouristMap(cacheData.getStartDt(), cacheData.getEndDt()));
 
 
-        cacheData.setHotel(Hotel.HOTEL_LIST.get(hotelCombo.getSelectionModel().getSelectedIndex()));
+        TreeItem<Branch> selectedBranch = branchTreeView.getSelectionModel().getSelectedItem();
+        if (null == selectedBranch) {
+            popMsg("警告", "请选择城市后再开始！");
+            return false;
+        }
+        cacheData.setTouristMap(
+                MyUtil.getRandomTouristMap(CacheData.getTouristSpotMap().getListByIdSet(selectedBranch.getValue().getAllSports()),
+                        cacheData.getStartDt(), cacheData.getEndDt()));
+
+
+        return true;
     }
 
     /**
@@ -582,23 +659,7 @@ public class Controller implements Initializable {
         });
         occupationCombo.getSelectionModel().select(OccupationEnum.STUDENT.ordinal());
 
-        hotelCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
-            @Override
-            public String get(int i) {
-                return Hotel.HOTEL_LIST.get(i).getName();
-            }
-
-            @Override
-            public int size() {
-                return Hotel.HOTEL_LIST.size();
-            }
-        });
-        hotelCombo.getSelectionModel().select(RandomUtil.randomInt(Hotel.HOTEL_LIST.size()));
-
-
         flightCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
-
-
             @Override
             public String get(int i) {
                 FlightEnum flightEnum = FLIGHT_LIST.get(i);
@@ -643,7 +704,6 @@ public class Controller implements Initializable {
             }
         });
         passportTypeComb.getSelectionModel().select(PassportTypeEnum.ORDINARY.ordinal());
-
     }
 
     private String getFlightComboStr(FlightEnum flightEnum) {

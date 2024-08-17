@@ -33,26 +33,27 @@ public class MyUtil {
 
     /**
      * 生成随机景点安排
-     *  1. 第一天安排两个景点
+     *  1. 第一天安排一个景点
      *  2. 中间每天安排三个景点
      *  3. 最后一天不安排景点
+     *
+     * @param sports
      * @param startDt yyyyMMdd
      * @param endDt yyyyMMdd
      * @return
      */
-    public static Map<String, List<TouristSpot>> getRandomTouristMap(String startDt, String endDt) {
+    public static Map<String, List<TouristSpot>> getRandomTouristMap(List<TouristSpot> sports, String startDt, String endDt) {
         if (startDt.compareTo(endDt) >= 0) {
             throw new RuntimeException("出发日期 小于等于 返航日期！");
         }
 
         HashMap<String, List<TouristSpot>> map = new HashMap<>();
 
-        List<TouristSpot> touristSpotTmpList = new ArrayList<>(TouristSpot.TOURIST_SPOT_MAP.values());
-        // 1. 第一天安排两个景点
-        map.put(startDt, createRandomListFromTmpListAndRemove(touristSpotTmpList, 2));
+        // 1. 第一天安排一个景点
+        map.put(startDt, createRandomListFromTmpListAndRemove(sports, 1));
         // 2. 中间每天安排三个景点
         for (String dt = addDay(startDt); dt.compareTo(endDt) < 0; dt = addDay(dt)) {
-            map.put(dt, createRandomListFromTmpListAndRemove(touristSpotTmpList, 3));
+            map.put(dt, createRandomListFromTmpListAndRemove(sports, 3));
         }
         // 3. 最后一天不安排景点
         map.put(endDt, new ArrayList<>());
