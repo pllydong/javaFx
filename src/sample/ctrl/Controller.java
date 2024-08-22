@@ -194,10 +194,12 @@ public class Controller implements Initializable {
         branchTreeView.setCellFactory(param -> new TreeCell<Branch>() {
             @Override
             protected void updateItem(Branch item, boolean empty) {
+                // 这一行代码不能删除！
+                super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(StrUtil.EMPTY);
                 } else {
-                    setText(String.format("%s (%s)", item.getZhName(), item.getJaName()));
+                    setText(String.format("%s (%s)", item.getZhName(), item.getEnName()));
                 }
             }
         });
