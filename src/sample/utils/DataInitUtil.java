@@ -201,6 +201,65 @@ public class DataInitUtil {
     private static void initBranchJiuZhou(Branch rootBranch) {
         Branch branch = newBranch(rootBranch.getId(), "九州 (九州)");
 
+        createBranch(branch.getId(), "福岡 (Fukuoka)",
+                "1.     Fukuoka Castle (福岡城)    \n" +
+                        "2.     Ohori Park (大濠公園)    \n" +
+                        "3.     Fukuoka Tower (福岡タワー)    \n" +
+                        "4.     Dazaifu Tenmangu Shrine (太宰府天満宮)    \n" +
+                        "5.     Marine World Uminonakamichi (マリンワールド海の中道)    \n" +
+                        "6.     Hakata Station (博多駅)    \n" +
+                        "7.     Nakasu Yatai Street (中洲屋台街)    \n" +
+                        "8.     Canal City Hakata (キャナルシティ博多)    \n" +
+                        "9.     Tenjin Underground Shopping Mall (天神地下街)    \n" +
+                        "10.    Fukuoka Art Museum (福岡市美術館)    \n" +
+                        "11.    Fukuoka City Zoological Garden (福岡市動植物園)    \n" +
+                        "12.    Hakata Dontaku Festival (博多どんたく港まつり)    \n" +
+                        "13.    Kushida Shrine (櫛田神社)    \n" +
+                        "14.    Fukuoka Anpanman Children's Museum (福岡アンパンマンこどもミュージアム)    \n" +
+                        "15.    Yanagawa River Cruising (柳川川下り)    \n" +
+                        "16.    Nokonoshima Island (能古島)    \n" +
+                        "17.    Fukuoka City Museum (福岡市博物館)    \n" +
+                        "18.    ACROS Fukuoka (アクロス福岡)    \n" +
+                        "19.    Momochi Seaside Park (ももち浜ビーチ)    \n" +
+                        "20.    Hakata Port Bayside Place (博多港ベイサイドプレイス)    \n" +
+                        "1.     Ramen Stadium (ラーメンスタジアム)    \n" +
+                        "2.     Fukuoka Parco (福岡パルコ)    \n" +
+                        "3.     Hakataza Theater (博多座)    \n" +
+                        "4.     Ichiran Main Store (一蘭本社総本店)    \n" +
+                        "5.     Fukuoka Asian Art Museum (福岡アジア美術館)    \n" +
+                        "6.     Riverwalk Kitakyushu (リバーウォーク北九州)    \n" +
+                        "7.     Seaside Momochi (シーサイドももち)    \n" +
+                        "8.     Motsunabe Yamaya (もつ鍋やまや)    \n" +
+                        "9.     Hakata Ichibangai (博多一番街)    \n" +
+                        "10.   Tempura Hirao (天ぷらひらお)  ",
+                "1. 福冈 - 福冈日航酒店 (Hotel Nikko Fukuoka)\n" +
+                        "   - 地址: 2-18-25 Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan\n" +
+                        "   - 电话: +81 92-482-1111\n" +
+                        "2. 福冈大仓酒店 (Hotel Okura Fukuoka)\n" +
+                        "   - 地址: 3-2 Shimokawabata-machi, Hakata-ku, Fukuoka 812-0027, Japan\n" +
+                        "   - 电话: +81 92-262-1111\n" +
+                        "3. 福冈希尔顿酒店 (Hilton Fukuoka Sea Hawk)\n" +
+                        "   - 地址: 2-2-3 Jigyohama, Chuo-ku, Fukuoka 810-8650, Japan\n" +
+                        "   - 电话: +81 92-844-8111\n" +
+                        "4. 福冈万豪酒店 (The Ritz-Carlton, Fukuoka)\n" +
+                        "   - 地址: 2-6-60 Daimyo, Chuo-ku, Fukuoka 810-0041, Japan\n" +
+                        "   - 电话: +81 92-715-1111\n" +
+                        "5. 福冈哈卡塔皇家酒店 (Grand Hyatt Fukuoka)\n" +
+                        "   - 地址: 1-2-82 Sumiyoshi, Hakata-ku, Fukuoka 812-0018, Japan\n" +
+                        "   - 电话: +81 92-282-1234\n" +
+                        "6. 福冈皇宫酒店 (Hotel New Otani Hakata)\n" +
+                        "   - 地址: 1-1-2 Watanabe-dori, Chuo-ku, Fukuoka 810-0004, Japan\n" +
+                        "   - 电话: +81 92-714-1111\n" +
+                        "7. 福冈君悦酒店 (Grand Hyatt Fukuoka)\n" +
+                        "   - 地址: 1-2-82 Sumiyoshi, Hakata-ku, Fukuoka 812-0018, Japan\n" +
+                        "   - 电话: +81 92-282-1234\n" +
+                        "8. 福冈美丽殿酒店 (Hotel Monterey Fukuoka)\n" +
+                        "   - 地址: 3-4-24 Watanabe-dori, Chuo-ku, Fukuoka 810-0004, Japan\n" +
+                        "   - 电话: +81 92-737-7111\n" +
+                        "9. 福冈皇家花园酒店 (Royal Park Hotel The Fukuoka)\n" +
+                        "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
+                        "   - 电话: +81 92-414-1111");
+
         createBranch(branch.getId(), " 冲绳 (Okinawa)",
                 "1.     Shurijo Castle (首里城)    \n" +
                         "2.     Okinawa Churaumi Aquarium (美ら海水族館)    \n" +

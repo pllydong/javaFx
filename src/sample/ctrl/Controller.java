@@ -151,6 +151,9 @@ public class Controller implements Initializable {
     public DatePicker passportStartDtPicker;
     public TextField certificateField;
     public TextField purposeField;
+    /**
+     * 入境港口
+     */
     public TextField portOfEntryIntoJapanField;
     public TreeView<Branch> branchTreeView
             ;
@@ -191,11 +194,10 @@ public class Controller implements Initializable {
         branchTreeView.setCellFactory(param -> new TreeCell<Branch>() {
             @Override
             protected void updateItem(Branch item, boolean empty) {
-                super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(StrUtil.EMPTY);
                 } else {
-                    setText(item.getZhName());
+                    setText(String.format("%s (%s)", item.getZhName(), item.getJaName()));
                 }
             }
         });
@@ -204,6 +206,7 @@ public class Controller implements Initializable {
             System.out.println(newValue.getValue().getZhName());
             showHotelList.clear();
             showHotelList.addAll(CacheData.getHotelMap().getListByIdSet(newValue.getValue().getAllHotels()));
+            showHotelList.sort(Comparator.comparing(Hotel::getHotelId));
             hotelCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
                 @Override
                 public String get(int i) {
@@ -229,6 +232,7 @@ public class Controller implements Initializable {
             buildBranchTreeView(item, CacheData.getBranchMap().get(childId));
             root.getChildren().add(item);
         }
+        root.getChildren().sort(Comparator.comparing(a -> a.getValue().getId()));
     }
 
     /**
@@ -606,6 +610,11 @@ public class Controller implements Initializable {
                 + StrPool.COMMA
                 + cacheData.getFlight().getCode());
 
+        // 入境港口
+        String portName = portOfEntryIntoJapanField.getText();
+        if (StrUtil.isNotBlank(portName)) {
+            cacheData.getUserInfo().setPlannedCityOfEntryInJapan(portName);
+        }
     }
 
 
