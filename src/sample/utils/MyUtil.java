@@ -34,7 +34,7 @@ public class MyUtil {
     /**
      * 生成随机景点安排
      *  1. 第一天安排一个景点
-     *  2. 中间每天安排三个景点
+     *  2. 中间每天安排两个景点
      *  3. 最后一天不安排景点
      *
      * @param sports
@@ -53,7 +53,7 @@ public class MyUtil {
         map.put(startDt, createRandomListFromTmpListAndRemove(sports, 1));
         // 2. 中间每天安排三个景点
         for (String dt = addDay(startDt); dt.compareTo(endDt) < 0; dt = addDay(dt)) {
-            map.put(dt, createRandomListFromTmpListAndRemove(sports, 3));
+            map.put(dt, createRandomListFromTmpListAndRemove(sports, 2));
         }
         // 3. 最后一天不安排景点
         map.put(endDt, new ArrayList<>());

@@ -130,7 +130,7 @@ public class Controller implements Initializable {
     /**
      * 酒店选择器
      */
-    public ComboBox<String> hotelCombo;
+    public ComboBox<Hotel> hotelCombo;
     public TextField last1yStayDaysField;
     public DatePicker lastStayEndDtPicker;
     public DatePicker lastStayStartDtPicker;
@@ -155,10 +155,9 @@ public class Controller implements Initializable {
      * 入境港口
      */
     public TextField portOfEntryIntoJapanField;
-    public TreeView<Branch> branchTreeView
-            ;
+    public TreeView<Branch> branchTreeView;
 
-    private List<Hotel> showHotelList = new ArrayList<>();
+    private final List<Hotel> showHotelList = new ArrayList<>();
 
 
     /**
@@ -199,7 +198,10 @@ public class Controller implements Initializable {
                 if (empty || item == null) {
                     setText(StrUtil.EMPTY);
                 } else {
-                    setText(String.format("%s (%s)", item.getZhName(), item.getEnName()));
+                    setText(String.format("%s (%s)",
+                            StrUtil.blankToDefault(item.getZhName(), StrUtil.EMPTY),
+                            StrUtil.blankToDefault(item.getEnName(), StrUtil.EMPTY)
+                    ));
                 }
             }
         });
@@ -209,10 +211,10 @@ public class Controller implements Initializable {
             showHotelList.clear();
             showHotelList.addAll(CacheData.getHotelMap().getListByIdSet(newValue.getValue().getAllHotels()));
             showHotelList.sort(Comparator.comparing(Hotel::getHotelId));
-            hotelCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
+            hotelCombo.setItems(new ReadOnlyUnbackedObservableList<Hotel>() {
                 @Override
-                public String get(int i) {
-                    return showHotelList.get(i).getZhName();
+                public Hotel get(int i) {
+                    return showHotelList.get(i);
                 }
 
                 @Override
@@ -517,13 +519,15 @@ public class Controller implements Initializable {
     private boolean initCacheData() {
         cacheData = new CacheData();
 
+        // 选择的酒店
         int selectedIndex = hotelCombo.getSelectionModel().getSelectedIndex();
         if (selectedIndex < 0) {
             popMsg("警告", "请选择酒店后再开始！");
             return false;
         }
-        cacheData.setHotel(CacheData.getHotelMap().indexOf(selectedIndex));
+        cacheData.setHotel(hotelCombo.getItems().get(selectedIndex));
 
+        // 选择的航班
         cacheData.setFlight(FLIGHT_LIST.get(flightCombo.getSelectionModel().getSelectedIndex()));
         cacheData.setBackFlight(BACK_FLIGHT_LIST.get(backFlightCombo.getSelectionModel().getSelectedIndex()));
         String startDt = LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN);
@@ -539,6 +543,7 @@ public class Controller implements Initializable {
             popMsg("警告", "请选择城市后再开始！");
             return false;
         }
+        // 生成随机行程
         cacheData.setTouristMap(
                 MyUtil.getRandomTouristMap(CacheData.getTouristSpotMap().getListByIdSet(selectedBranch.getValue().getAllSports()),
                         cacheData.getStartDt(), cacheData.getEndDt()));

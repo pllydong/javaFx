@@ -18,4 +18,9 @@ public class Hotel {
         this.hotelId = hotelId;
     }
 
+
+    @Override
+    public String toString() {
+        return getZhName();
+    }
 }

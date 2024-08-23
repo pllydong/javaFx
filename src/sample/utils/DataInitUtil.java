@@ -234,28 +234,28 @@ public class DataInitUtil {
                         "10.   Tempura Hirao (天ぷらひらお)  ",
                 "1. 福冈 - 福冈日航酒店 (Hotel Nikko Fukuoka)\n" +
                         "   - 地址: 2-18-25 Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan\n" +
-                        "   - 电话: +81 92-482-1111\n" +
+                        "   - 电话: +81 92-482-1111\r" +
                         "2. 福冈大仓酒店 (Hotel Okura Fukuoka)\n" +
                         "   - 地址: 3-2 Shimokawabata-machi, Hakata-ku, Fukuoka 812-0027, Japan\n" +
-                        "   - 电话: +81 92-262-1111\n" +
+                        "   - 电话: +81 92-262-1111\r" +
                         "3. 福冈希尔顿酒店 (Hilton Fukuoka Sea Hawk)\n" +
                         "   - 地址: 2-2-3 Jigyohama, Chuo-ku, Fukuoka 810-8650, Japan\n" +
-                        "   - 电话: +81 92-844-8111\n" +
+                        "   - 电话: +81 92-844-8111\r" +
                         "4. 福冈万豪酒店 (The Ritz-Carlton, Fukuoka)\n" +
                         "   - 地址: 2-6-60 Daimyo, Chuo-ku, Fukuoka 810-0041, Japan\n" +
-                        "   - 电话: +81 92-715-1111\n" +
+                        "   - 电话: +81 92-715-1111\r" +
                         "5. 福冈哈卡塔皇家酒店 (Grand Hyatt Fukuoka)\n" +
                         "   - 地址: 1-2-82 Sumiyoshi, Hakata-ku, Fukuoka 812-0018, Japan\n" +
-                        "   - 电话: +81 92-282-1234\n" +
+                        "   - 电话: +81 92-282-1234\r" +
                         "6. 福冈皇宫酒店 (Hotel New Otani Hakata)\n" +
                         "   - 地址: 1-1-2 Watanabe-dori, Chuo-ku, Fukuoka 810-0004, Japan\n" +
-                        "   - 电话: +81 92-714-1111\n" +
+                        "   - 电话: +81 92-714-1111\r" +
                         "7. 福冈君悦酒店 (Grand Hyatt Fukuoka)\n" +
                         "   - 地址: 1-2-82 Sumiyoshi, Hakata-ku, Fukuoka 812-0018, Japan\n" +
-                        "   - 电话: +81 92-282-1234\n" +
+                        "   - 电话: +81 92-282-1234\r" +
                         "8. 福冈美丽殿酒店 (Hotel Monterey Fukuoka)\n" +
                         "   - 地址: 3-4-24 Watanabe-dori, Chuo-ku, Fukuoka 810-0004, Japan\n" +
-                        "   - 电话: +81 92-737-7111\n" +
+                        "   - 电话: +81 92-737-7111\r" +
                         "9. 福冈皇家花园酒店 (Royal Park Hotel The Fukuoka)\n" +
                         "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
                         "   - 电话: +81 92-414-1111");
@@ -269,7 +269,7 @@ public class DataInitUtil {
                         "6.     Manzamo (万座毛)    \n" +
                         "7.     Sefa-utaki (斎場御嶽)    \n" +
                         "8.     Kouri Bridge (古宇利大橋)    \n" +
-                        "9.     Peace Memorial Park (平和祈念公園)    \n" +
+                        "9.     Okinawa Peace Memorial Park (平和祈念公園)     \n" +
                         "10.   Katsuren Castle Ruins (勝連城跡)    \n" +
                         "11.   Zakimi Castle Ruins (座喜味城跡)    \n" +
                         "12.   Sesoko Beach (瀬底ビーチ)    \n" +
@@ -452,36 +452,36 @@ public class DataInitUtil {
                         "8.     Sakuranobaba Josaien (桜の馬場 城彩苑) \n" +
                         "9.     Basashi Izakaya Sakura (馬刺し 居酒屋桜)  \n" +
                         "10.   Kumamoto Ramen Keika (熊本ラーメン 桂花) ",
-                "1.熊本之花酒店（THE BLOSSOM KUMAMOTO）\n" +
+                "1.熊本之花酒店(THE BLOSSOM KUMAMOTO)\n" +
                         "-地址：3 Chome-15-26 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
-                        "-电话：+81 96-327-8763\n" +
-                        "2.三井花园饭店熊本-（Mitsui Garden Hotel Kumamoto）\n" +
+                        "-电话：+81 96-327-8763\r" +
+                        "2.三井花园饭店熊本-(Mitsui Garden Hotel Kumamoto)\n" +
                         "-地址：1-20 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012 Japan\n" +
-                        "-电话：+81 96-352-1131\n" +
-                        "3.船舶酒店集团熊本REF酒店-（REF Kumamoto by VESSEL HOTELS）\n" +
+                        "-电话：+81 96-352-1131\r" +
+                        "3.船舶酒店集团熊本REF酒店-(REF Kumamoto by VESSEL HOTELS)\n" +
                         "-地址:7-2 Shinshigai, Chuo Ward, Kumamoto, 860-0803,Japan\n" +
-                        "-电话:+81 96-328-7777\n" +
-                        "4.熊本法夫酒店-（FAV HOTEL KUMAMOTO）\n" +
+                        "-电话:+81 96-328-7777\r" +
+                        "4.熊本法夫酒店-(FAV HOTEL KUMAMOTO)\n" +
                         "-地址:9-1 Kajiyamachi, Chuo Ward, Kumamoto, 860-0026 Japan \n" +
-                        "-电话:+81 92-292-2431\n" +
-                        "5.阿斯科特广场饭店-（Place Hotel Ascot）\n" +
+                        "-电话:+81 92-292-2431\r" +
+                        "5.阿斯科特广场饭店-(Place Hotel Ascot)\n" +
                         "-地址:6-4 Anseimachi, Chuo Ward, Kumamoto, 860-0801 Japan\n" +
-                        "-电话:+81 96-328-6000\n" +
-                        "6.熊本网格高级酒店-（Grids Premium Hotel Kumamoto）\n" +
+                        "-电话:+81 96-328-6000\r" +
+                        "6.熊本网格高级酒店-(Grids Premium Hotel Kumamoto)\n" +
                         "-地址:1-7 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012,Japan\n" +
-                        "-电话:+81 96-312-2700\n" +
-                        "7.多米熊本酒店-（Dormy Inn Kumamoto）\n" +
+                        "-电话:+81 96-312-2700\r" +
+                        "7.多米熊本酒店-(Dormy Inn Kumamoto)\n" +
                         "-地址:3-1 Karashimacho, Chuo Ward, Kumamoto, 860-0804,Japan\n" +
-                        "-电话:+81 96-311-5489\n" +
-                        "8.熊本新酒店-（THE NEW hotel kumamoto）\n" +
+                        "-电话:+81 96-311-5489\r" +
+                        "8.熊本新酒店-(THE NEW hotel kumamoto)\n" +
                         "-地址:1 Chome-13-1 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
-                        "-电话:+81 96-326-1111\n" +
-                        "9.熊本大和魯內酒店-（Daiwa Roynet Hotel Kumamoto）\n" +
+                        "-电话:+81 96-326-1111\r" +
+                        "9.熊本大和魯內酒店-(Daiwa Roynet Hotel Kumamoto)\n" +
                         "-地址:10-22 Hanabatacho, Chuo Ward, Kumamoto, 860-0806,Japan\n" +
-                        "-电话:+81 96-319-1050\n" +
-                        "10.方舟大熊本酒店-（Ark Hotel Kumamotojomae）\n" +
+                        "-电话:+81 96-319-1050\r" +
+                        "10.方舟大熊本酒店-(Ark Hotel Kumamotojomae)\n" +
                         "-地址:5-16 Jotomachi, Chuo Ward, Kumamoto, 860-0846,Japan\n" +
-                        "-电话:+81 96-351-2222\n"
+                        "-电话:+81 96-351-2222\r"
         );
     }
 
@@ -1183,6 +1183,7 @@ public class DataInitUtil {
                 hotel.setAddress(address);
                 hotel.setEnName(englishName);
                 hotel.setZhName(chineseName);
+                hotel.setPhone(phone);
                 list.add(hotel);
                 CacheData.getHotelMap().put(number, hotel);
             }
