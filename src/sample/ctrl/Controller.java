@@ -198,9 +198,10 @@ public class Controller implements Initializable {
                 if (empty || item == null) {
                     setText(StrUtil.EMPTY);
                 } else {
-                    setText(String.format("%s (%s)",
+                    setText(String.format("%s (%s) [%s]",
                             StrUtil.blankToDefault(item.getZhName(), StrUtil.EMPTY),
-                            StrUtil.blankToDefault(item.getEnName(), StrUtil.EMPTY)
+                            StrUtil.blankToDefault(item.getEnName(), StrUtil.EMPTY),
+                            StrUtil.blankToDefault(item.getShortName(), StrUtil.EMPTY)
                     ));
                 }
             }

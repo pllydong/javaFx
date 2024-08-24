@@ -22,6 +22,10 @@ public class Branch {
      */
     private String enName;
     /**
+     * 简称
+     */
+    private String shortName;
+    /**
      * 中文名
      */
     private String zhName;

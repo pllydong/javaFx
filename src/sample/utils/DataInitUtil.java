@@ -49,6 +49,7 @@ public class DataInitUtil {
 
     private static void initBranchBeiHaiDao(Branch rootBranch) {
         Branch branch = newBranch(rootBranch.getId(), "北海道 (北海道)");
+        branch.setShortName("CTS");
 
         createBranch(branch.getId(), "登别、洞爷湖 (Noboribetsu、Lake Toya)",
                 "1.     Noboribetsu Onsen (登別温泉)    \n" +
@@ -201,7 +202,7 @@ public class DataInitUtil {
     private static void initBranchJiuZhou(Branch rootBranch) {
         Branch branch = newBranch(rootBranch.getId(), "九州 (九州)");
 
-        createBranch(branch.getId(), "福岡 (Fukuoka)",
+        createBranch(branch.getId(), "福岡 (Fukuoka)", "FUK",
                 "1.     Fukuoka Castle (福岡城)    \n" +
                         "2.     Ohori Park (大濠公園)    \n" +
                         "3.     Fukuoka Tower (福岡タワー)    \n" +
@@ -260,7 +261,171 @@ public class DataInitUtil {
                         "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
                         "   - 电话: +81 92-414-1111");
 
-        createBranch(branch.getId(), " 冲绳 (Okinawa)",
+        createBranch(branch.getId(), " 熊本 (Kumamoto)", "KMJ",
+                "1.     Kumamoto Castle (熊本城)    \n" +
+                        "2.     Suizenji Jojuen Garden (水前寺成趣園)    \n" +
+                        "3.     Mount Aso (阿蘇山)    \n" +
+                        "4.     Kusasenri (草千里ヶ浜)    \n" +
+                        "5.     Kurokawa Onsen (黒川温泉)    \n" +
+                        "6.     Kamitori Arcade (上通りアーケード)    \n" +
+                        "7.     Shimotori Arcade (下通りアーケード)    \n" +
+                        "8.     Kumamoto City Zoological and Botanical Gardens (熊本市動植物園)    \n" +
+                        "9.     Mushagaeshi no Saka (武者返しの坂)    \n" +
+                        "10.   Yachiyoza Theatre (八千代座)    \n" +
+                        "11.   Greenland Amusement Park (グリーンランド)    \n" +
+                        "12.   Kumamoto Prefectural Museum of Art (熊本県立美術館)    \n" +
+                        "13.   Tsuruya Department Store (鶴屋百貨店)    \n" +
+                        "14.   Mitsui Greenland (三井グリーンランド)    \n" +
+                        "15.   Shirakawa Springs (白川水源)    \n" +
+                        "16.   Minamata Bay Park (水俣湾親水公園)    \n" +
+                        "17.   Nabegataki Waterfall (鍋ヶ滝)    \n" +
+                        "18.   Amakusa Pearl Center (天草パールセンター)    \n" +
+                        "19.   Shirakawa Onsen (白川温泉)    \n" +
+                        "1.     BAZAKURA (馬桜)   \n" +
+                        "2.     Ichiran Kumamoto (一蘭 熊本店)   \n" +
+                        "3.     Suganoya (菅乃屋)    \n" +
+                        "4.     Ramen Akagumi (ラーメン赤組)  \n" +
+                        "5.     Kumamoto Tonkotsu Ramen (くまもと豚骨ラーメン)  \n" +
+                        "6.     Ikinari Dango Honpo (いきなり団子本舗)  \n" +
+                        "7.     Daikokuya (大黒屋)   \n" +
+                        "8.     Sakuranobaba Josaien (桜の馬場 城彩苑) \n" +
+                        "9.     Basashi Izakaya Sakura (馬刺し 居酒屋桜)  \n" +
+                        "10.   Kumamoto Ramen Keika (熊本ラーメン 桂花) ",
+                "1.熊本之花酒店 (THE BLOSSOM KUMAMOTO)\n" +
+                        "- 地址: 3 Chome-15-26 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
+                        "- 电话: +81 96-327-8763\r" +
+                        "2.三井花园饭店熊本 (Mitsui Garden Hotel Kumamoto)\n" +
+                        "- 地址: 1-20 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012 Japan\n" +
+                        "- 电话: +81 96-352-1131\r" +
+                        "3.船舶酒店集团熊本REF酒店 (REF Kumamoto by VESSEL HOTELS)\n" +
+                        "- 地址: 7-2 Shinshigai, Chuo Ward, Kumamoto, 860-0803,Japan\n" +
+                        "- 电话: +81 96-328-7777\r" +
+                        "4.熊本法夫酒店 (FAV HOTEL KUMAMOTO)\n" +
+                        "- 地址: 9-1 Kajiyamachi, Chuo Ward, Kumamoto, 860-0026 Japan \n" +
+                        "- 电话: +81 92-292-2431\r" +
+                        "5.阿斯科特广场饭店 (Place Hotel Ascot)\n" +
+                        "- 地址: 6-4 Anseimachi, Chuo Ward, Kumamoto, 860-0801 Japan\n" +
+                        "- 电话: +81 96-328-6000\r" +
+                        "6.熊本网格高级酒店 (Grids Premium Hotel Kumamoto)\n" +
+                        "- 地址: 1-7 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012,Japan\n" +
+                        "- 电话: +81 96-312-2700\r" +
+                        "7.多米熊本酒店 (Dormy Inn Kumamoto)\n" +
+                        "- 地址: 3-1 Karashimacho, Chuo Ward, Kumamoto, 860-0804,Japan\n" +
+                        "- 电话: +81 96-311-5489\r" +
+                        "8.熊本新酒店 (THE NEW hotel kumamoto)\n" +
+                        "- 地址: 1 Chome-13-1 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
+                        "- 电话: +81 96-326-1111\r" +
+                        "9.熊本大和魯內酒店 (Daiwa Roynet Hotel Kumamoto)\n" +
+                        "- 地址: 10-22 Hanabatacho, Chuo Ward, Kumamoto, 860-0806,Japan\n" +
+                        "- 电话: +81 96-319-1050\r" +
+                        "10.方舟大熊本酒店 (Ark Hotel Kumamotojomae)\n" +
+                        "- 地址: 5-16 Jotomachi, Chuo Ward, Kumamoto, 860-0846,Japan\n" +
+                        "- 电话: +81 96-351-2222\r"
+        );
+
+
+        createBranch(branch.getId(), " 宮崎 (Miyazaki)", "KMI",
+                "1.     Aoshima Shrine (青島神社)    \n" +
+                        "2.     Devil's Washboard (鬼の洗濯板)    \n" +
+                        "3.     Udo Shrine (鵜戸神宮)    \n" +
+                        "4.     Takachiho Gorge (高千穂峡)    \n" +
+                        "5.     Takachiho Shrine (高千穂神社)    \n" +
+                        "6.     Nichinan Coast (日南海岸)    \n" +
+                        "7.     Toi Cape (都井岬)    \n" +
+                        "8.     Obi Castle (飫肥城)    \n" +
+                        "9.     Phoenix Zoo (フェニックス自然動物園)    \n" +
+                        "10.   Ebino Plateau (えびの高原)    \n" +
+                        "11.   Sun Messe Nichinan (サンメッセ日南)    \n" +
+                        "12.   Aoshima Beach (青島海水浴場)    \n" +
+                        "13.   Miyazaki Prefectural Museum of Nature and History (宮崎県総合博物館)    \n" +
+                        "14.   Saitobaru Burial Mounds (西都原古墳群)    \n" +
+                        "15.   Miyazaki Science Center (宮崎科学技術館)   \n" +
+                        "16.   Michi-no-Eki Phoenix (道の駅フェニックス) 17.   Miyazaki City Phoenix Zoo (宮崎市フェニックス自然動物園)    \n" +
+                        "1.     Jidori Sumibiyaki Kuruma (地鶏炭火焼 車) \n" +
+                        "2.     Mango Farm (マンゴー農園)  \n" +
+                        "3.     Kamaage Udon Togakushi (釜揚げうどん 戸隠)\n" +
+                        "4.     Kaisenyasan Umi-Sachi (海鮮居酒屋 海幸)  \n" +
+                        "5.     Chicken Nanban Ogura Honten (チキン南蛮のお店 おぐら本店)   \n" +
+                        "6.   Saito Winery (西都ワイナリー) ",
+                "1. 宫崎温泉酒店 (ANA Holiday Inn Resort Miyazaki)\n" +
+                        "   - 地址: 1-16-1 Aoshima, Miyazaki, 889-2162, Japan\n" +
+                        "   - 电话: +81 985-65-1555\r" +
+                        "2. 宫崎东方酒店 (Hotel Marix Lagoon)\n" +
+                        "   - 地址: 3-2-23 Tachibanadorihigashi, Miyazaki, 880-0805, Japan\n" +
+                        "   - 电话: +81 985-28-1111\r" +
+                        "3. 宫崎太阳酒店 (Sun Messe Miyazaki)\n" +
+                        "   - 地址: 2650-1 Miyakoda, Miyazaki, 880-2101, Japan\n" +
+                        "   - 电话: +81 985-65-2021\r" +
+                        "4.宫崎山荘酒店 (Garden Terrace Miyazaki Hotels & Resorts)\n" +
+                        "   - 地址: 4-8-1 Miyazakiekihigashi, Miyazaki, 880-0812, Japan\n" +
+                        "   - 电话: +81 985-73-8888\r" +
+                        "5. 宫崎万豪酒店 (Sheraton Grande Ocean Resort)\n" +
+                        "   - 地址: Hamayama, Yamasaki-cho, Miyazaki, 880-8545, Japan\n" +
+                        "   - 电话: +81 985-21-1113\r" +
+                        "6. 宫崎温泉乡村酒店 (Aoshima Grand Hotel)\n" +
+                        "   - 地址: 1-16-64 Aoshima, Miyazaki, 889-2162, Japan\n" +
+                        "   - 电话: +81 985-65-2011\r" +
+                        "7. 宫崎海滨酒店 (Seagaia Ocean Resort)\n" +
+                        "   - 地址: 3083-1 Hamayama, Yamasaki-cho, Miyazaki, 880-8545, Japan\n" +
+                        "   - 电话: +81 985-21-1311\r" +
+                        "8. 宫崎豪华酒店 (Garden Terrace Miyazaki Hotels & Resorts)\n" +
+                        "    - 地址: 4-8-1 Miyazakiekihigashi, Miyazaki, 880-0812, Japan\n" +
+                        "    - 电话: +81 985-73-8888"
+        );
+        createBranch(branch.getId(), " 鹿児島 (Kagoshima)", "KOJ",
+                "1.     Sakurajima (桜島)    \n" +
+                        "2.     Kagoshima Castle (鹿児島城)    \n" +
+                        "3.     Senganen Garden (仙巌園)    \n" +
+                        "4.     Kagoshima Chuo Station (鹿児島中央駅)    \n" +
+                        "5.     Shiroyama Observatory (城山展望台)    \n" +
+                        "6.     Tenmonkan (天文館)    \n" +
+                        "7.     Hirakawa Zoological Park (平川動物園)    \n" +
+                        "8.     Ibusuki Onsen (指宿温泉)    \n" +
+                        "9.     Chiran Peace Museum (知覧特攻平和会館)  10.    Kirishima Shrine (霧島神宮)    \n" +
+                        "11.    Kagoshima City Museum of Art (鹿児島市立美術館)    \n" +
+                        "12.    Kagoshima Aquarium (鹿児島水族館)    \n" +
+                        "13.    Museum of the Meiji Restoration (維新ふるさと館)    \n" +
+                        "14.    Reimeikan, Kagoshima Prefectural Center for Historical Material (鹿児島県歴史資料センター黎明館)    \n" +
+                        "15.    Sakurajima Ferry (桜島フェリー)    \n" +
+                        "16.    Kagoshima Meiji Restoration Museum (かごしま明治維新館)    \n" +
+                        "17.    Satsuma Denshokan (薩摩伝承館)    \n" +
+                        "1.     Tenmonkan Mujyaki (天文館むじゃき)    \n" +
+                        "2.     Shiroyama Park (城山公園)    \n" +
+                        "3.     Kagoshima Ramen Buta-Toro (鹿児島ラーメン豚とろ)    \n" +
+                        "4.     Satsuma Kinzangura Shochu Brewery (焼酎蔵 薩摩金山蔵)    \n" +
+                        "5.     Cape Nagasakibana (長崎鼻)    \n" +
+                        "6.     Senganen Tea House (仙巌園の茶室)    \n" +
+                        "7.     Nanshu Shrine (南洲神社)    \n" +
+                        "8.     Kirishima Onsen Market (霧島温泉市場)    \n" +
+                        "9.     Kagoshima Central Market (鹿児島中央市場)    \n" +
+                        "10.   Senganen Garden Restaurant (名勝 仙巌園の料亭)  ",
+                "1. 鹿儿岛皇家酒店 (Hotel Shiroyama Kagoshima)\n" +
+                        "   - 地址: 41-1 Shinsyouincho, Kagoshima, Kagoshima 890-8586, Japan\n" +
+                        "   - 电话: +81 99-224-2211\r" +
+                        "2. 鹿儿岛日航酒店 (Hotel Nikko Kagoshima)\n" +
+                        "   - 地址: 15-1 Kamoike, Kagoshima, Kagoshima 890-0064, Japan\n" +
+                        "   - 电话: +81 99-257-2411\r" +
+                        "3. 鹿儿岛万豪酒店 (Sheraton Kagoshima)\n" +
+                        "   - 地址: 1-3-1 Furusato-cho, Kagoshima, Kagoshima 890-0045, Japan\n" +
+                        "   - 电话: +81 99-214-7766\r" +
+                        "4. 鹿儿岛喜来登酒店 (Sheraton Kagoshima)\n" +
+                        "   - 地址: 1-3-1 Furusato-cho, Kagoshima, Kagoshima 890-0045, Japan\n" +
+                        "   - 电话: +81 99-214-7766\r" +
+                        "5. 鹿儿岛皇冠假日酒店 (ANA Crowne Plaza Hotel Kagoshima)\n" +
+                        "   - 地址: 8-1-1 Nishihara, Kagoshima, Kagoshima 890-8581, Japan\n" +
+                        "   - 电话: +81 99-213-2211\r" +
+                        "6. 鹿儿岛皇家花园酒店 (The Royal Park Hotel Fukuoka)\n" +
+                        "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
+                        "   - 电话: +81 92-414-1111\r" +
+                        "7. 鹿儿岛豪华酒店 (Kagoshima Tokyu Hotel)\n" +
+                        "   - 地址: 22-1 Kamoike, Kagoshima, Kagoshima 890-0063, Japan\n" +
+                        "   - 电话: +81 99-257-2411\r" +
+                        "8. 鹿儿岛温泉酒店 (Kirishima Kokusai Hotel)\n" +
+                        "   - 地址: 3930-12 Makizonocho Takachiho, Kirishima, Kagoshima 899-6603, Japan\n" +
+                        "   - 电话: +81 995-78-2525\r"
+        );
+
+        createBranch(branch.getId(), " 冲绳 (Okinawa)", "OKA",
                 "1.     Shurijo Castle (首里城)    \n" +
                         "2.     Okinawa Churaumi Aquarium (美ら海水族館)    \n" +
                         "3.     Kokusai Street (国際通り)    \n" +
@@ -322,173 +487,13 @@ public class DataInitUtil {
                         "   - 地址: 1967-1 Nakama, Onna-son, Kunigami-gun, Okinawa 904-0401, Japan\n" +
                         "   - 电话: +81 98-953-8600\r"
         );
-        createBranch(branch.getId(), " 宮崎 (Miyazaki)",
-                "1.     Aoshima Shrine (青島神社)    \n" +
-                        "2.     Devil's Washboard (鬼の洗濯板)    \n" +
-                        "3.     Udo Shrine (鵜戸神宮)    \n" +
-                        "4.     Takachiho Gorge (高千穂峡)    \n" +
-                        "5.     Takachiho Shrine (高千穂神社)    \n" +
-                        "6.     Nichinan Coast (日南海岸)    \n" +
-                        "7.     Toi Cape (都井岬)    \n" +
-                        "8.     Obi Castle (飫肥城)    \n" +
-                        "9.     Phoenix Zoo (フェニックス自然動物園)    \n" +
-                        "10.   Ebino Plateau (えびの高原)    \n" +
-                        "11.   Sun Messe Nichinan (サンメッセ日南)    \n" +
-                        "12.   Aoshima Beach (青島海水浴場)    \n" +
-                        "13.   Miyazaki Prefectural Museum of Nature and History (宮崎県総合博物館)    \n" +
-                        "14.   Saitobaru Burial Mounds (西都原古墳群)    \n" +
-                        "15.   Miyazaki Science Center (宮崎科学技術館)   \n" +
-                        "16.   Michi-no-Eki Phoenix (道の駅フェニックス) 17.   Miyazaki City Phoenix Zoo (宮崎市フェニックス自然動物園)    \n" +
-                        "1.     Jidori Sumibiyaki Kuruma (地鶏炭火焼 車) \n" +
-                        "2.     Mango Farm (マンゴー農園)  \n" +
-                        "3.     Kamaage Udon Togakushi (釜揚げうどん 戸隠)\n" +
-                        "4.     Kaisenyasan Umi-Sachi (海鮮居酒屋 海幸)  \n" +
-                        "5.     Chicken Nanban Ogura Honten (チキン南蛮のお店 おぐら本店)   \n" +
-                        "6.   Saito Winery (西都ワイナリー) ",
-                "1. 宫崎温泉酒店 (ANA Holiday Inn Resort Miyazaki)\n" +
-                        "   - 地址: 1-16-1 Aoshima, Miyazaki, 889-2162, Japan\n" +
-                        "   - 电话: +81 985-65-1555\r" +
-                        "2. 宫崎东方酒店 (Hotel Marix Lagoon)\n" +
-                        "   - 地址: 3-2-23 Tachibanadorihigashi, Miyazaki, 880-0805, Japan\n" +
-                        "   - 电话: +81 985-28-1111\r" +
-                        "3. 宫崎太阳酒店 (Sun Messe Miyazaki)\n" +
-                        "   - 地址: 2650-1 Miyakoda, Miyazaki, 880-2101, Japan\n" +
-                        "   - 电话: +81 985-65-2021\r" +
-                        "4.宫崎山荘酒店 (Garden Terrace Miyazaki Hotels & Resorts)\n" +
-                        "   - 地址: 4-8-1 Miyazakiekihigashi, Miyazaki, 880-0812, Japan\n" +
-                        "   - 电话: +81 985-73-8888\r" +
-                        "5. 宫崎万豪酒店 (Sheraton Grande Ocean Resort)\n" +
-                        "   - 地址: Hamayama, Yamasaki-cho, Miyazaki, 880-8545, Japan\n" +
-                        "   - 电话: +81 985-21-1113\r" +
-                        "6. 宫崎温泉乡村酒店 (Aoshima Grand Hotel)\n" +
-                        "   - 地址: 1-16-64 Aoshima, Miyazaki, 889-2162, Japan\n" +
-                        "   - 电话: +81 985-65-2011\r" +
-                        "7. 宫崎海滨酒店 (Seagaia Ocean Resort)\n" +
-                        "   - 地址: 3083-1 Hamayama, Yamasaki-cho, Miyazaki, 880-8545, Japan\n" +
-                        "   - 电话: +81 985-21-1311\r" +
-                        "8. 宫崎豪华酒店 (Garden Terrace Miyazaki Hotels & Resorts)\n" +
-                        "    - 地址: 4-8-1 Miyazakiekihigashi, Miyazaki, 880-0812, Japan\n" +
-                        "    - 电话: +81 985-73-8888"
-        );
-        createBranch(branch.getId(), " 鹿児島 (Kagoshima)",
-                "1.     Sakurajima (桜島)    \n" +
-                        "2.     Kagoshima Castle (鹿児島城)    \n" +
-                        "3.     Senganen Garden (仙巌園)    \n" +
-                        "4.     Kagoshima Chuo Station (鹿児島中央駅)    \n" +
-                        "5.     Shiroyama Observatory (城山展望台)    \n" +
-                        "6.     Tenmonkan (天文館)    \n" +
-                        "7.     Hirakawa Zoological Park (平川動物園)    \n" +
-                        "8.     Ibusuki Onsen (指宿温泉)    \n" +
-                        "9.     Chiran Peace Museum (知覧特攻平和会館)  10.    Kirishima Shrine (霧島神宮)    \n" +
-                        "11.    Kagoshima City Museum of Art (鹿児島市立美術館)    \n" +
-                        "12.    Kagoshima Aquarium (鹿児島水族館)    \n" +
-                        "13.    Museum of the Meiji Restoration (維新ふるさと館)    \n" +
-                        "14.    Reimeikan, Kagoshima Prefectural Center for Historical Material (鹿児島県歴史資料センター黎明館)    \n" +
-                        "15.    Sakurajima Ferry (桜島フェリー)    \n" +
-                        "16.    Kagoshima Meiji Restoration Museum (かごしま明治維新館)    \n" +
-                        "17.    Satsuma Denshokan (薩摩伝承館)    \n" +
-                        "1.     Tenmonkan Mujyaki (天文館むじゃき)    \n" +
-                        "2.     Shiroyama Park (城山公園)    \n" +
-                        "3.     Kagoshima Ramen Buta-Toro (鹿児島ラーメン豚とろ)    \n" +
-                        "4.     Satsuma Kinzangura Shochu Brewery (焼酎蔵 薩摩金山蔵)    \n" +
-                        "5.     Cape Nagasakibana (長崎鼻)    \n" +
-                        "6.     Senganen Tea House (仙巌園の茶室)    \n" +
-                        "7.     Nanshu Shrine (南洲神社)    \n" +
-                        "8.     Kirishima Onsen Market (霧島温泉市場)    \n" +
-                        "9.     Kagoshima Central Market (鹿児島中央市場)    \n" +
-                        "10.   Senganen Garden Restaurant (名勝 仙巌園の料亭)  ",
-                "1. 鹿儿岛皇家酒店 (Hotel Shiroyama Kagoshima)\n" +
-                        "   - 地址: 41-1 Shinsyouincho, Kagoshima, Kagoshima 890-8586, Japan\n" +
-                        "   - 电话: +81 99-224-2211\r" +
-                        "2. 鹿儿岛日航酒店 (Hotel Nikko Kagoshima)\n" +
-                        "   - 地址: 15-1 Kamoike, Kagoshima, Kagoshima 890-0064, Japan\n" +
-                        "   - 电话: +81 99-257-2411\r" +
-                        "3. 鹿儿岛万豪酒店 (Sheraton Kagoshima)\n" +
-                        "   - 地址: 1-3-1 Furusato-cho, Kagoshima, Kagoshima 890-0045, Japan\n" +
-                        "   - 电话: +81 99-214-7766\r" +
-                        "4. 鹿儿岛喜来登酒店 (Sheraton Kagoshima)\n" +
-                        "   - 地址: 1-3-1 Furusato-cho, Kagoshima, Kagoshima 890-0045, Japan\n" +
-                        "   - 电话: +81 99-214-7766\r" +
-                        "5. 鹿儿岛皇冠假日酒店 (ANA Crowne Plaza Hotel Kagoshima)\n" +
-                        "   - 地址: 8-1-1 Nishihara, Kagoshima, Kagoshima 890-8581, Japan\n" +
-                        "   - 电话: +81 99-213-2211\r" +
-                        "6. 鹿儿岛皇家花园酒店 (The Royal Park Hotel Fukuoka)\n" +
-                        "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
-                        "   - 电话: +81 92-414-1111\r" +
-                        "7. 鹿儿岛豪华酒店 (Kagoshima Tokyu Hotel)\n" +
-                        "   - 地址: 22-1 Kamoike, Kagoshima, Kagoshima 890-0063, Japan\n" +
-                        "   - 电话: +81 99-257-2411\r" +
-                        "8. 鹿儿岛温泉酒店 (Kirishima Kokusai Hotel)\n" +
-                        "   - 地址: 3930-12 Makizonocho Takachiho, Kirishima, Kagoshima 899-6603, Japan\n" +
-                        "   - 电话: +81 995-78-2525\r"
-        );
-        createBranch(branch.getId(), " 熊本 (Kumamoto)",
-                "1.     Kumamoto Castle (熊本城)    \n" +
-                        "2.     Suizenji Jojuen Garden (水前寺成趣園)    \n" +
-                        "3.     Mount Aso (阿蘇山)    \n" +
-                        "4.     Kusasenri (草千里ヶ浜)    \n" +
-                        "5.     Kurokawa Onsen (黒川温泉)    \n" +
-                        "6.     Kamitori Arcade (上通りアーケード)    \n" +
-                        "7.     Shimotori Arcade (下通りアーケード)    \n" +
-                        "8.     Kumamoto City Zoological and Botanical Gardens (熊本市動植物園)    \n" +
-                        "9.     Mushagaeshi no Saka (武者返しの坂)    \n" +
-                        "10.   Yachiyoza Theatre (八千代座)    \n" +
-                        "11.   Greenland Amusement Park (グリーンランド)    \n" +
-                        "12.   Kumamoto Prefectural Museum of Art (熊本県立美術館)    \n" +
-                        "13.   Tsuruya Department Store (鶴屋百貨店)    \n" +
-                        "14.   Mitsui Greenland (三井グリーンランド)    \n" +
-                        "15.   Shirakawa Springs (白川水源)    \n" +
-                        "16.   Minamata Bay Park (水俣湾親水公園)    \n" +
-                        "17.   Nabegataki Waterfall (鍋ヶ滝)    \n" +
-                        "18.   Amakusa Pearl Center (天草パールセンター)    \n" +
-                        "19.   Shirakawa Onsen (白川温泉)    \n" +
-                        "1.     BAZAKURA (馬桜)   \n" +
-                        "2.     Ichiran Kumamoto (一蘭 熊本店)   \n" +
-                        "3.     Suganoya (菅乃屋)    \n" +
-                        "4.     Ramen Akagumi (ラーメン赤組)  \n" +
-                        "5.     Kumamoto Tonkotsu Ramen (くまもと豚骨ラーメン)  \n" +
-                        "6.     Ikinari Dango Honpo (いきなり団子本舗)  \n" +
-                        "7.     Daikokuya (大黒屋)   \n" +
-                        "8.     Sakuranobaba Josaien (桜の馬場 城彩苑) \n" +
-                        "9.     Basashi Izakaya Sakura (馬刺し 居酒屋桜)  \n" +
-                        "10.   Kumamoto Ramen Keika (熊本ラーメン 桂花) ",
-                "1.熊本之花酒店(THE BLOSSOM KUMAMOTO)\n" +
-                        "-地址：3 Chome-15-26 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
-                        "-电话：+81 96-327-8763\r" +
-                        "2.三井花园饭店熊本-(Mitsui Garden Hotel Kumamoto)\n" +
-                        "-地址：1-20 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012 Japan\n" +
-                        "-电话：+81 96-352-1131\r" +
-                        "3.船舶酒店集团熊本REF酒店-(REF Kumamoto by VESSEL HOTELS)\n" +
-                        "-地址:7-2 Shinshigai, Chuo Ward, Kumamoto, 860-0803,Japan\n" +
-                        "-电话:+81 96-328-7777\r" +
-                        "4.熊本法夫酒店-(FAV HOTEL KUMAMOTO)\n" +
-                        "-地址:9-1 Kajiyamachi, Chuo Ward, Kumamoto, 860-0026 Japan \n" +
-                        "-电话:+81 92-292-2431\r" +
-                        "5.阿斯科特广场饭店-(Place Hotel Ascot)\n" +
-                        "-地址:6-4 Anseimachi, Chuo Ward, Kumamoto, 860-0801 Japan\n" +
-                        "-电话:+81 96-328-6000\r" +
-                        "6.熊本网格高级酒店-(Grids Premium Hotel Kumamoto)\n" +
-                        "-地址:1-7 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012,Japan\n" +
-                        "-电话:+81 96-312-2700\r" +
-                        "7.多米熊本酒店-(Dormy Inn Kumamoto)\n" +
-                        "-地址:3-1 Karashimacho, Chuo Ward, Kumamoto, 860-0804,Japan\n" +
-                        "-电话:+81 96-311-5489\r" +
-                        "8.熊本新酒店-(THE NEW hotel kumamoto)\n" +
-                        "-地址:1 Chome-13-1 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
-                        "-电话:+81 96-326-1111\r" +
-                        "9.熊本大和魯內酒店-(Daiwa Roynet Hotel Kumamoto)\n" +
-                        "-地址:10-22 Hanabatacho, Chuo Ward, Kumamoto, 860-0806,Japan\n" +
-                        "-电话:+81 96-319-1050\r" +
-                        "10.方舟大熊本酒店-(Ark Hotel Kumamotojomae)\n" +
-                        "-地址:5-16 Jotomachi, Chuo Ward, Kumamoto, 860-0846,Japan\n" +
-                        "-电话:+81 96-351-2222\r"
-        );
+
     }
 
     private static void initCenterBranch(Branch rootBranch) {
         Branch branch = newBranch(rootBranch.getId(), "中部 (中部)");
 
-        createBranch(branch.getId(), " 富士山 (Mount Fuji)",
+        createBranch(branch.getId(), " 富士山 (Mount Fuji)", "FSZ",
                 "1.     Mount Fuji Fifth Station (富士山五合目)    \n" +
                         "2.     Fuji-Q Highland (富士急ハイランド)    \n" +
                         "3.     Oshino Hakkai (忍野八海)    \n" +
@@ -540,7 +545,7 @@ public class DataInitUtil {
                         "   - 地址: 2-3-16 Kamiyoshida, Fujiyoshida, Yamanashi 403-0005, Japan\n" +
                         "   - 电话: +81 555-22-1717\r"
         );
-        createBranch(branch.getId(), " 伊豆 (Izu)",
+        createBranch(branch.getId(), " 伊豆 (Izu)", "FSZ",
                 "1.     Izu Kogen (伊豆高原)    \n" +
                         "2.     Izu Granpal Park (伊豆ぐらんぱる公園)    \n" +
                         "3.     Shuzenji Onsen (修善寺温泉)    \n" +
@@ -591,7 +596,7 @@ public class DataInitUtil {
                         "   - 地址: 1993-250 Atami, Shizuoka 413-8555, Japan\n" +
                         "   - 电话: +81 557-82-5151\r"
         );
-        createBranch(branch.getId(), " 名古屋 (Nagoya)",
+        createBranch(branch.getId(), " 名古屋 (Nagoya)", "NGO",
                 "1.     Nagoya Castle (名古屋城)    \n" +
                         "2.     Atsuta Shrine (熱田神宮)    \n" +
                         "3.     Nagoya Port Aquarium (名古屋港水族館)    \n" +
@@ -672,7 +677,7 @@ public class DataInitUtil {
     private static void initBranchGuanxi(Branch rootBranch) {
         Branch guanxi = newBranch(rootBranch.getId(), "关西 (关西)");
 
-        createBranch(guanxi.getId(), "大阪 (Osaka)",
+        createBranch(guanxi.getId(), "大阪 (Osaka)", "KIX",
                 "1.     Osaka Castle Keep (大阪城天守閣)    \n" +
                         "2.     Tsutenkaku Tower (通天閣)    \n" +
                         "3.     Universal Studios Japan (日本环球影城)    \n" +
@@ -771,7 +776,7 @@ public class DataInitUtil {
                         "   - 电话: +81 6-6347-1112\r"
                 );
 
-        createBranch(guanxi.getId(), "京都 (Kyoto)",
+        createBranch(guanxi.getId(), "京都 (Kyoto)", "KIX",
                 "1.     Kinkakuji Temple (金閣寺)    \\n\" +\n" +
                         "                        \"2.     Kiyomizudera Temple (清水寺)    \\n\" +\n" +
                         "                        \"3.     Fushimi Inari Shrine (伏見稲荷大社)    \\n\" +\n" +
@@ -833,7 +838,7 @@ public class DataInitUtil {
                         "   - 地址: 602-8071 Kyoto, Kamigyo-ku Shinmachi-Dori Nakadachiuri, Japan\n" +
                         "   - 电话: +81 75-441-4411\r"
                 );
-        createBranch(guanxi.getId(), "神户 (Kobe)",
+        createBranch(guanxi.getId(), "神户 (Kobe)", "KIX",
                 "1.     Kobe Port Tower (神戸ポートタワー)    \n" +
                         "2.     Meriken Park (メリケンパーク)    \n" +
                         "3.     Mount Rokko (六甲山)    \n" +
@@ -898,7 +903,7 @@ public class DataInitUtil {
 
     private static void initBranchTokyo(Branch rootBranch) {
         createBranch(rootBranch.getId(),
-                "东京 (Tokyo)",
+                "东京 (Tokyo)", "NRT",
 
                 "1.   Tokyo Station (東京駅)  \n" +
                         "2.   Ginza (銀座)  \n" +
@@ -1087,8 +1092,17 @@ public class DataInitUtil {
                 String number = String.valueOf(CacheData.getTouristSpotMap().size());
                 String englishName = m.group(2).trim();
                 String japaneseName = m.group(3).trim();
+                if (StrUtil.isEmpty(number)) {
+                    System.err.println("number为空");
+                }
                 System.out.println("景点编号: " + number);
+                if (StrUtil.isEmpty(englishName)) {
+                    System.err.println("englishName为空");
+                }
                 System.out.println("景点英文名: " + englishName);
+                if (StrUtil.isEmpty(japaneseName)) {
+                    System.err.println("japaneseName为空");
+                }
                 System.out.println("景点日文名: " + japaneseName);
                 TouristSpot sport = new TouristSpot();
                 sport.setEnglishName(englishName);
@@ -1110,7 +1124,7 @@ public class DataInitUtil {
     public static Branch newBranch(String data) {
         Branch branch = new Branch();
         // 定义正则表达式模式
-        String pattern = "(.*) \\((.*)\\)";
+        String pattern = "(.*)\\((.*)\\)";
         // 创建 Pattern 对象
         Pattern r = Pattern.compile(pattern);
         // 创建 Matcher 对象
@@ -1118,7 +1132,13 @@ public class DataInitUtil {
         if (m.find()) {
             String chineseName = m.group(1).trim();
             String englishName = m.group(2).trim();
-            System.out.println("机构中文名: " + chineseName);
+            if (StrUtil.isEmpty(chineseName)) {
+                System.err.println("chineseName为空");
+
+            }          System.out.println("机构中文名: " + chineseName);
+            if (StrUtil.isEmpty(englishName)) {
+                System.err.println("englishName为空");
+            }
             System.out.println("机构英文名: " + englishName);
             branch.setZhName(chineseName);
             branch.setEnName(englishName);
@@ -1141,12 +1161,25 @@ public class DataInitUtil {
      * @param sportData
      * @param hotelData
      */
-    private static void createBranch(String parentId, String branchData, String sportData, String hotelData) {
+    private static Branch createBranch(String parentId, String branchData, String sportData, String hotelData) {
         Branch branch = newBranch(branchData);
         branch.setTouristSpots(newTouristSpotSet(sportData));
         branch.setHotels(newHotelSet(hotelData));
         branch.setParentId(parentId);
         CacheData.getBranchMap().get(parentId).getChildren().add(branch.getId());
+        return branch;
+    }
+
+    /**
+     *
+     * @param branchData
+     * @param sportData
+     * @param hotelData
+     */
+    private static Branch createBranch(String parentId, String branchData, String shortName, String sportData, String hotelData) {
+        Branch branch = createBranch(parentId, branchData, sportData, hotelData);
+        branch.setShortName(shortName);
+        return branch;
     }
 
     /**
@@ -1159,7 +1192,7 @@ public class DataInitUtil {
         List<Hotel> list = new ArrayList<>();
 
         // 定义正则表达式模式
-        String pattern = "(\\d+)\\.\\s+(.*) \\((.*)\\)\n.* - 地址: (.*)\n.* - 电话: (.*)";
+        String pattern = "(\\d+)\\.(.*) \\((.*)\\)\n.*地址:(.*)\n.*电话:(.*)";
         // 创建 Pattern 对象
         Pattern r = Pattern.compile(pattern);
 
@@ -1173,10 +1206,25 @@ public class DataInitUtil {
                 String englishName = m.group(3).trim();
                 String address = m.group(4).trim().replaceAll("\\n|\\(|\\)", "");
                 String phone = m.group(5).trim().replaceAll("\\n|\\(|\\)", "");
+                if (StrUtil.isEmpty(number)) {
+                    System.err.println("number为空");
+                }
                 System.out.println("酒店编号: " + number);
+                if (StrUtil.isEmpty(chineseName)) {
+                    System.err.println("chineseName为空");
+                }
                 System.out.println("酒店名: " + chineseName);
+                if (StrUtil.isEmpty(englishName)) {
+                    System.err.println("englishName为空");
+                }
                 System.out.println("酒店名: " + englishName);
+                if (StrUtil.isEmpty(address)) {
+                    System.err.println("address为空");
+                }
                 System.out.println("酒店地址: " + address);
+                if (StrUtil.isEmpty(phone)) {
+                    System.err.println("phone为空");
+                }
                 System.out.println("酒店电话: " + phone);
                 Hotel hotel = new Hotel();
                 hotel.setHotelId(number);
