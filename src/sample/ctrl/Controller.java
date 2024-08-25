@@ -10,6 +10,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.pinyin.PinyinUtil;
 import com.sun.javafx.scene.control.ReadOnlyUnbackedObservableList;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import sample.doc.ItineraryDoc;
@@ -190,6 +191,7 @@ public class Controller implements Initializable {
             branchTreeView.setRoot(new TreeItem<>());
         }
         buildBranchTreeView(branchTreeView.getRoot(), CacheData.getRootBranch());
+
         branchTreeView.setCellFactory(param -> new TreeCell<Branch>() {
             @Override
             protected void updateItem(Branch item, boolean empty) {
@@ -198,10 +200,10 @@ public class Controller implements Initializable {
                 if (empty || item == null) {
                     setText(StrUtil.EMPTY);
                 } else {
-                    setText(String.format("%s (%s) [%s]",
+                    setText(String.format("%s %s %s",
                             StrUtil.blankToDefault(item.getZhName(), StrUtil.EMPTY),
-                            StrUtil.blankToDefault(item.getEnName(), StrUtil.EMPTY),
-                            StrUtil.blankToDefault(item.getShortName(), StrUtil.EMPTY)
+                            StrUtil.isBlank(item.getEnName()) ? StrUtil.EMPTY : String.format("(%s)", item.getEnName()),
+                            StrUtil.isBlank(item.getShortName()) ? StrUtil.EMPTY : String.format("[%s]", item.getShortName())
                     ));
                 }
             }
@@ -211,7 +213,7 @@ public class Controller implements Initializable {
             System.out.println(newValue.getValue().getZhName());
             showHotelList.clear();
             showHotelList.addAll(CacheData.getHotelMap().getListByIdSet(newValue.getValue().getAllHotels()));
-            showHotelList.sort(Comparator.comparing(Hotel::getHotelId));
+            showHotelList.sort(Comparator.comparing(o -> Integer.valueOf(o.getHotelId())));
             hotelCombo.setItems(new ReadOnlyUnbackedObservableList<Hotel>() {
                 @Override
                 public Hotel get(int i) {
@@ -232,12 +234,18 @@ public class Controller implements Initializable {
     private void buildBranchTreeView(TreeItem<Branch> root, Branch rootBranch) {
         root.setValue(rootBranch);
 
+        ObservableList<TreeItem<Branch>> children = root.getChildren();
+        List<TreeItem<Branch>> list = new ArrayList<>(rootBranch.getChildren().size());
+
         for (String childId : rootBranch.getChildren()) {
             TreeItem<Branch> item = new TreeItem<>();
             buildBranchTreeView(item, CacheData.getBranchMap().get(childId));
-            root.getChildren().add(item);
+            list.add(item);
         }
-        root.getChildren().sort(Comparator.comparing(a -> a.getValue().getId()));
+
+        list.sort(Comparator.comparing(o -> Integer.valueOf(o.getValue().getId())));
+        children.addAll(list);
+        System.out.println("树构建中");
     }
 
     /**

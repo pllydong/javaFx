@@ -51,7 +51,8 @@ public class DataInitUtil {
         Branch branch = newBranch(rootBranch.getId(), "北海道 (北海道)");
         branch.setShortName("CTS");
 
-        createBranch(branch.getId(), "登别、洞爷湖 (Noboribetsu、Lake Toya)",
+        createBranch(branch.getId(), "洞爷湖 (Lake Toya)",
+
                 "1.     Noboribetsu Onsen (登別温泉)    \n" +
                         "2.     Noboribetsu Bear Park (登別クマ牧場)    \n" +
                         "3.     Noboribetsu Date Jidaimura (登別伊達時代村)    \n" +
@@ -70,37 +71,47 @@ public class DataInitUtil {
                         "7.     Toyako Onsen Street (洞爺湖温泉街)    \n" +
                         "8.     Sobetsu Fruit Village (壮瞥フルーツ村)    \n" +
                         "9.   Toyako Onsen Hotel (洞爺湖温泉ホテル)    ",
-                "1. 登别、洞爷湖 - 登别温泉乡村酒店 (Noboribetsu Grand Hotel)\n" +
+
+                "1.登别温泉乡村酒店 (Noboribetsu Grand Hotel)\n" +
                         "   - 地址: 154 Noboribetsu Onsen-cho, Noboribetsu, Hokkaido 059-0592, Japan\n" +
-                        "   - 电话: +81 143-84-2101\r" +
+                        "   - 电话: +81 143-84-2101\n" +
+                        "\n" +
                         "2. 登别温泉酒店 (Noboribetsu Sekisui-Tei)\n" +
                         "   - 地址: 203-1 Noboribetsu Onsencho, Noboribetsu, Hokkaido 059-0596, Japan\n" +
-                        "   - 电话: +81 143-84-2255\r" +
+                        "   - 电话: +81 143-84-2255\n" +
+                        "\n" +
                         "3. 登别皇家酒店 (Noboribetsu Manseikaku)\n" +
                         "   - 地址: 21 Noboribetsu Onsen-cho, Noboribetsu, Hokkaido 059-0551, Japan\n" +
-                        "   - 电话: +81 143-84-3501\r" +
+                        "   - 电话: +81 143-84-3501\n" +
+                        "\n" +
                         "4. 洞爷湖万豪酒店 (The Windsor Hotel Toya Resort & Spa)\n" +
                         "   - 地址: 336 Shimizu, Toyako-cho, Abuta-gun, Hokkaido 049-5722, Japan\n" +
-                        "   - 电话: +81 142-73-1111\r" +
+                        "   - 电话: +81 142-73-1111\n" +
+                        "\n" +
                         "5. 洞爷湖日航酒店 (The Lake View Toya Nonokaze Resort)\n" +
                         "   - 地址: 29-1 Toyako Onsen, Toyako-cho, Abuta-gun, Hokkaido 049-5721, Japan\n" +
-                        "   - 电话: +81 142-75-2600\r" +
+                        "   - 电话: +81 142-75-2600\n" +
+                        "\n" +
                         "6. 洞爷湖温泉酒店 (Toya Sun Palace Resort & Spa)\n" +
                         "   - 地址: 7-1 Toyako Onsen, Toyako-cho, Abuta-gun, Hokkaido 049-5721, Japan\n" +
-                        "   - 电话: +81 142-75-1111\r" +
-                        "7. 登别酒店 (Noboribetsu Onsen Hotel Mahoroba)\n" +
+                        "   - 电话: +81 142-75-1111\n" +
+                        "\n" +
+                        "7.登别麻火若巴酒店 (Noboribetsu Onsen Hotel Mahoroba)\n" +
                         "   - 地址: 65 Noboribetsu Onsen-cho, Noboribetsu, Hokkaido 059-0551, Japan\n" +
-                        "   - 电话: +81 143-84-2211\r" +
+                        "   - 电话: +81 143-84-2211\n" +
+                        "\n" +
                         "8. 洞爷湖喜来登酒店 (Sheraton Hokkaido Kiroro Resort)\n" +
                         "   - 地址: 128-1 Tokiwa, Akaigawa-mura, Yoichi-gun, Hokkaido 046-0593, Japan\n" +
-                        "   - 电话: +81 135-34-7111\r" +
-                        "9. 洞爷湖酒店 (Toya Kohantei)\n" +
+                        "   - 电话: +81 135-34-7111\n" +
+                        "\n" +
+                        "9. 洞爷湖畔亭酒店 (Toya Kohantei)\n" +
                         "   - 地址: 7-8 Toyako Onsen, Toyako-cho, Abuta-gun, Hokkaido 049-5721, Japan\n" +
-                        "   - 电话: +81 142-75-2121\r"
+                        "   - 电话: +81 142-75-2121\n"
         );
 
 
         createBranch(branch.getId(), " 富良野 (Furano)",
+
                 "1.     Farm Tomita (ファーム富田)    \n" +
                         "2.     Saika no Sato (彩香の里)    \n" +
                         "3.     Biei Patchwork Road (美瑛のパッチワークの路)    \n" +
@@ -111,39 +122,38 @@ public class DataInitUtil {
                         "8.     Furano Wine Vineyard (富良野ワイン葡萄園)    \n" +
                         "9.     Furano Prince Hotel (富良野プリンスホテル)    \n" +
                         "10.   Kumagera (くまげら)     ",
-                "1. 富良野温泉酒店 (New Furano Prince Hotel)\n" +
+
+                "1. 新富良野王子大饭店 (New Furano Prince Hotel)\n" +
                         "   - 地址: Nakagoryo, Furano, Hokkaido 076-8511, Japan\n" +
-                        "   - 电话: +81 167-22-1111\r" +
-                        "2. 富良野酒店 (Hotel Naturwald Furano)\n" +
+                        "   - 电话: +81 167-22-1111\n" +
+                        "\n" +
+                        "2. 富良野那图瓦得酒店 (Hotel Naturwald Furano)\n" +
                         "   - 地址: 14-46 Kitanomine-cho, Furano, Hokkaido 076-0034, Japan\n" +
-                        "   - 电话: +81 167-22-1211\r" +
-                        "3. 富良野乡村酒店 (Furano La Terre)\n" +
+                        "   - 电话: +81 167-22-1211\n" +
+                        "\n" +
+                        "3. 富良野拉渔村酒店 (Furano La Terre)\n" +
                         "   - 地址: 1488-1 Yamabe, Furano, Hokkaido 076-0048, Japan\n" +
-                        "   - 电话: +81 167-42-5111\r" +
-                        "4. 富良野度假酒店 (Furano Resort Orika)\n" +
+                        "   - 电话: +81 167-42-5111\n" +
+                        "\n" +
+                        "4. 富良奥利卡野度假村 (Furano Resort Orika)\n" +
                         "   - 地址: 2-3 Furano, Hokkaido 076-0035, Japan\n" +
-                        "   - 电话: +81 167-22-2311\r" +
-                        "5. 富良野日式酒店 (Furano Hops Hotel)\n" +
-                        "   - 地址: 25-10 Naka-Goryo, Furano, Hokkaido 076-0014, Japan\n" +
-                        "   - 电话: +81 167-22-1111\r" +
-                        "6. 富良野皇家酒店 (Hotel Naturwald Furano)\n" +
-                        "   - 地址: 14-46 Kitanomine-cho, Furano, Hokkaido 076-0034, Japan\n" +
-                        "   - 电话: +81 167-22-1211\r" +
-                        "7. 富良野君悦酒店 (Furano Prince Hotel)\n" +
-                        "   - 地址: Nakagoryo, Furano, Hokkaido 076-8511, Japan\n" +
-                        "   - 电话: +81 167-22-1111\r" +
-                        "8. 富良野花园酒店 (Furano Hotel)\n" +
-                        "   - 地址: 15-1 Kitanomine-cho, Furano, Hokkaido 076-0034, Japan\n" +
-                        "   - 电话: +81 167-22-1111\r" +
-                        "9. 富良野湖景酒店 (Hotel Edel Warme)\n" +
+                        "   - 电话: +81 167-22-2311\n" +
+                        "\n" +
+                        "5. 富良野啤酒花酒店 (Furano Hops Hotel)\n" +
+                        "   - 地址: 25 Go Nishi 2 Senkita, Kamifurano, Sorachi District, Hokkaido 071-0502, Japan\n" +
+                        "   - 电话: 81 167-45-6511\n" +
+                        "\n" +
+                        "6. 埃德尔温馨酒店 (Hotel Edel Warme)\n" +
                         "   - 地址: 9-20 Kitanomine-cho, Furano, Hokkaido 076-0034, Japan\n" +
-                        "   - 电话: +81 167-22-1161\r" +
-                        "10. 富良野精品酒店 (Furano Natulux Hotel)\n" +
+                        "   - 电话: +81 167-22-1161\n" +
+                        "\n" +
+                        "7.富良诺纳图鲁宾馆 (Furano Natulux Hotel)\n" +
                         "    - 地址: 1-35 Asahi-machi, Furano, Hokkaido 076-0026, Japan\n" +
                         "    - 电话: +81 167-22-1777"
         );
 
         createBranch(branch.getId(), "札幌、小樽 (Sapporo、Otaru)",
+
                 "1.     Sapporo TV Tower (札幌テレビ塔)    \n" +
                         "2.     Odori Park (大通公園)    \n" +
                         "3.     Sapporo Clock Tower (札幌市時計台)    \n" +
@@ -168,32 +178,37 @@ public class DataInitUtil {
 
                         "1. 札幌喜来登酒店 (Sheraton Sapporo Hotel)\n" +
                                 "   - 地址: 5-10-1 Minami 2-jo Nishi, Chuo-ku, Sapporo, Hokkaido 060-0062, Japan\n" +
-                                "   - 电话: +81 11-512-3355\r" +
+                                "   - 电话: +81 11-512-3355\n" +
+                                "\n" +
                                 "2. 札幌大仓酒店 (Hotel Okura Sapporo)\n" +
                                 "   - 地址: 9-1 Nishi 5-Chome, Minami 1-Jo, Chuo-Ku, Sapporo, Hokkaido 060-0061, Japan\n" +
-                                "   - 电话: +81 11-221-2333\r" +
+                                "   - 电话: +81 11-221-2333\n" +
+                                "\n" +
                                 "3. 札幌万豪酒店 (JR Tower Hotel Nikko Sapporo)\n" +
                                 "   - 地址: 5 Nishi 2-Chome, Kita 5-Jo, Chuo-Ku, Sapporo, Hokkaido 060-0005, Japan\n" +
-                                "   - 电话: +81 11-251-2222\r" +
+                                "   - 电话: +81 11-251-2222\n" +
+                                "\n" +
                                 "4. 札幌瑞吉酒店 (The St. Regis Sapporo)\n" +
                                 "   - 地址: 1-4 Nishi 1-Chome, Kita 1-Jo, Chuo-Ku, Sapporo, Hokkaido 060-0001, Japan\n" +
-                                "   - 电话: +81 11-231-2222\r" +
+                                "   - 电话: +81 11-231-2222\n" +
+                                "\n" +
                                 "5. 札幌希尔顿酒店 (Hilton Sapporo Park)\n" +
                                 "   - 地址: 7-1 Odori Nishi, Chuo-Ku, Sapporo, Hokkaido 060-0042, Japan\n" +
-                                "   - 电话: +81 11-251-2222\r" +
+                                "   - 电话: +81 11-511-3131\n" +
+                                "\n" +
                                 "6. 札幌皇家花园酒店 (The Royal Park Hotel Sapporo)\n" +
                                 "   - 地址: 1-1-1 Minami 2-Jo Nishi, Chuo-Ku, Sapporo, Hokkaido 060-0062, Japan\n" +
-                                "   - 电话: +81 11-251-2222\r" +
+                                "   - 电话: +81 11-208-1555\n" +
+                                "\n" +
                                 "7. 札幌皇宫酒店 (Sapporo Grand Hotel)\n" +
                                 "   - 地址: 4-6-1 Kita 1-Jo Nishi, Chuo-Ku, Sapporo, Hokkaido 060-0001, Japan\n" +
-                                "   - 电话: +81 11-251-2222\r" +
-                                "8. 札幌日航酒店 (Sapporo Prince Hotel)\n" +
+                                "   - 电话: +81 11-261-3311\n" +
+                                "\n" +
+                                "8. 札幌王子酒店 (Sapporo Prince Hotel)\n" +
                                 "   - 地址: 1-2-9 Kita 5-Jo Nishi, Chuo-Ku, Sapporo, Hokkaido 060-0005, Japan\n" +
-                                "   - 电话: +81 11-251-2222\r" +
-                                "9. 札幌豪华酒店 (Jozankei Grand Hotel Zuien)\n" +
-                                "   - 地址: 4-30 Jozankei Onsen Higashi, Minami-Ku, Sapporo, Hokkaido 061-2302, Japan\n" +
-                                "   - 电话: +81 11-598-2311\r" +
-                                "10. 小樽温泉酒店 (Hotel Sonia Otaru)\n" +
+                                "   - 电话: +81 11-241-1111\n" +
+                                "\n" +
+                                "9. 索尼娅小樽酒店 (Hotel Sonia Otaru)\n" +
                                 "    - 地址: 1-4-20 Ironai, Otaru, Hokkaido 047-0031, Japan\n" +
                                 "    - 电话: +81 134-21-3151"
                 );
@@ -233,33 +248,37 @@ public class DataInitUtil {
                         "8.     Motsunabe Yamaya (もつ鍋やまや)    \n" +
                         "9.     Hakata Ichibangai (博多一番街)    \n" +
                         "10.   Tempura Hirao (天ぷらひらお)  ",
-                "1. 福冈 - 福冈日航酒店 (Hotel Nikko Fukuoka)\n" +
+                "1.福冈日航酒店 (Hotel Nikko Fukuoka)\n" +
                         "   - 地址: 2-18-25 Hakataekimae, Hakata-ku, Fukuoka, 812-0011, Japan\n" +
-                        "   - 电话: +81 92-482-1111\r" +
+                        "   - 电话: +81 92-482-1111\n" +
+                        "\n" +
                         "2. 福冈大仓酒店 (Hotel Okura Fukuoka)\n" +
                         "   - 地址: 3-2 Shimokawabata-machi, Hakata-ku, Fukuoka 812-0027, Japan\n" +
-                        "   - 电话: +81 92-262-1111\r" +
-                        "3. 福冈希尔顿酒店 (Hilton Fukuoka Sea Hawk)\n" +
+                        "   - 电话: +81 92-262-1111\n" +
+                        "\n" +
+                        "3. 福冈海鹰希尔顿酒店 (Hilton Fukuoka Sea Hawk)\n" +
                         "   - 地址: 2-2-3 Jigyohama, Chuo-ku, Fukuoka 810-8650, Japan\n" +
-                        "   - 电话: +81 92-844-8111\r" +
-                        "4. 福冈万豪酒店 (The Ritz-Carlton, Fukuoka)\n" +
+                        "   - 电话: +81 92-844-8111\n" +
+                        "\n" +
+                        "4. 丽思卡尔顿酒店 (The Ritz-Carlton, Fukuoka)\n" +
                         "   - 地址: 2-6-60 Daimyo, Chuo-ku, Fukuoka 810-0041, Japan\n" +
-                        "   - 电话: +81 92-715-1111\r" +
-                        "5. 福冈哈卡塔皇家酒店 (Grand Hyatt Fukuoka)\n" +
+                        "   - 电话: +81 92-715-1111\n" +
+                        "\n" +
+                        "5. 福冈君悦酒店 (Grand Hyatt Fukuoka)\n" +
                         "   - 地址: 1-2-82 Sumiyoshi, Hakata-ku, Fukuoka 812-0018, Japan\n" +
-                        "   - 电话: +81 92-282-1234\r" +
-                        "6. 福冈皇宫酒店 (Hotel New Otani Hakata)\n" +
+                        "   - 电话: +81 92-282-1234\n" +
+                        "\n" +
+                        "6. 博多新大谷饭店 (Hotel New Otani Hakata)\n" +
                         "   - 地址: 1-1-2 Watanabe-dori, Chuo-ku, Fukuoka 810-0004, Japan\n" +
-                        "   - 电话: +81 92-714-1111\r" +
-                        "7. 福冈君悦酒店 (Grand Hyatt Fukuoka)\n" +
-                        "   - 地址: 1-2-82 Sumiyoshi, Hakata-ku, Fukuoka 812-0018, Japan\n" +
-                        "   - 电话: +81 92-282-1234\r" +
-                        "8. 福冈美丽殿酒店 (Hotel Monterey Fukuoka)\n" +
+                        "   - 电话: +81 92-714-1111\n" +
+                        "\n" +
+                        "7. 福冈蒙特利酒店 (Hotel Monterey Fukuoka)\n" +
                         "   - 地址: 3-4-24 Watanabe-dori, Chuo-ku, Fukuoka 810-0004, Japan\n" +
-                        "   - 电话: +81 92-737-7111\r" +
-                        "9. 福冈皇家花园酒店 (Royal Park Hotel The Fukuoka)\n" +
+                        "   - 电话: +81 92-737-7111\n" +
+                        "\n" +
+                        "8. 福冈皇家花园酒店 (Royal Park Hotel The Fukuoka)\n" +
                         "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
-                        "   - 电话: +81 92-414-1111");
+                        "   - 电话: +81 92-414-1111\n");
 
         createBranch(branch.getId(), " 熊本 (Kumamoto)", "KMJ",
                 "1.     Kumamoto Castle (熊本城)    \n" +
@@ -291,36 +310,46 @@ public class DataInitUtil {
                         "8.     Sakuranobaba Josaien (桜の馬場 城彩苑) \n" +
                         "9.     Basashi Izakaya Sakura (馬刺し 居酒屋桜)  \n" +
                         "10.   Kumamoto Ramen Keika (熊本ラーメン 桂花) ",
-                "1.熊本之花酒店 (THE BLOSSOM KUMAMOTO)\n" +
-                        "- 地址: 3 Chome-15-26 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
-                        "- 电话: +81 96-327-8763\r" +
-                        "2.三井花园饭店熊本 (Mitsui Garden Hotel Kumamoto)\n" +
-                        "- 地址: 1-20 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012 Japan\n" +
-                        "- 电话: +81 96-352-1131\r" +
-                        "3.船舶酒店集团熊本REF酒店 (REF Kumamoto by VESSEL HOTELS)\n" +
-                        "- 地址: 7-2 Shinshigai, Chuo Ward, Kumamoto, 860-0803,Japan\n" +
-                        "- 电话: +81 96-328-7777\r" +
-                        "4.熊本法夫酒店 (FAV HOTEL KUMAMOTO)\n" +
-                        "- 地址: 9-1 Kajiyamachi, Chuo Ward, Kumamoto, 860-0026 Japan \n" +
-                        "- 电话: +81 92-292-2431\r" +
-                        "5.阿斯科特广场饭店 (Place Hotel Ascot)\n" +
-                        "- 地址: 6-4 Anseimachi, Chuo Ward, Kumamoto, 860-0801 Japan\n" +
-                        "- 电话: +81 96-328-6000\r" +
-                        "6.熊本网格高级酒店 (Grids Premium Hotel Kumamoto)\n" +
-                        "- 地址: 1-7 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012,Japan\n" +
-                        "- 电话: +81 96-312-2700\r" +
-                        "7.多米熊本酒店 (Dormy Inn Kumamoto)\n" +
-                        "- 地址: 3-1 Karashimacho, Chuo Ward, Kumamoto, 860-0804,Japan\n" +
-                        "- 电话: +81 96-311-5489\r" +
-                        "8.熊本新酒店 (THE NEW hotel kumamoto)\n" +
-                        "- 地址: 1 Chome-13-1 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
-                        "- 电话: +81 96-326-1111\r" +
-                        "9.熊本大和魯內酒店 (Daiwa Roynet Hotel Kumamoto)\n" +
-                        "- 地址: 10-22 Hanabatacho, Chuo Ward, Kumamoto, 860-0806,Japan\n" +
-                        "- 电话: +81 96-319-1050\r" +
-                        "10.方舟大熊本酒店 (Ark Hotel Kumamotojomae)\n" +
-                        "- 地址: 5-16 Jotomachi, Chuo Ward, Kumamoto, 860-0846,Japan\n" +
-                        "- 电话: +81 96-351-2222\r"
+
+                "1.熊本之花酒店(THE BLOSSOM KUMAMOTO)\n" +
+                        "-地址:3 Chome-15-26 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
+                        "-电话:+81 96-327-8763\n" +
+                        "\n" +
+                        "2.三井花园饭店熊本(Mitsui Garden Hotel Kumamoto)\n" +
+                        "-地址:1-20 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012 Japan\n" +
+                        "-电话:+81 96-352-1131\n" +
+                        "\n" +
+                        "3.船舶酒店集团熊本REF酒店(REF Kumamoto by VESSEL HOTELS)\n" +
+                        "-地址:7-2 Shinshigai, Chuo Ward, Kumamoto, 860-0803,Japan\n" +
+                        "-电话:+81 96-328-7777\n" +
+                        "\n" +
+                        "4.熊本法夫酒店(FAV HOTEL KUMAMOTO)\n" +
+                        "-地址:9-1 Kajiyamachi, Chuo Ward, Kumamoto, 860-0026 Japan \n" +
+                        "-电话:+81 92-292-2431\n" +
+                        "\n" +
+                        "5.阿斯科特广场饭店(Place Hotel Ascot)\n" +
+                        "-地址:6-4 Anseimachi, Chuo Ward, Kumamoto, 860-0801 Japan\n" +
+                        "-电话:+81 96-328-6000\n" +
+                        "\n" +
+                        "6.熊本网格高级酒店(Grids Premium Hotel Kumamoto)\n" +
+                        "-地址:1-7 Koyaimamachi, Chuo Ward, Kumamoto, 860-0012,Japan\n" +
+                        "-电话:+81 96-312-2700\n" +
+                        "\n" +
+                        "7.多米熊本酒店(Dormy Inn Kumamoto)\n" +
+                        "-地址:3-1 Karashimacho, Chuo Ward, Kumamoto, 860-0804,Japan\n" +
+                        "-电话:+81 96-311-5489\n" +
+                        "\n" +
+                        "8.熊本新酒店(THE NEW hotel kumamoto)\n" +
+                        "-地址:1 Chome-13-1 Kasuga, Nishi Ward, Kumamoto, 860-0047,Japan\n" +
+                        "-电话:+81 96-326-1111\n" +
+                        "\n" +
+                        "9.熊本大和魯內酒店(Daiwa Roynet Hotel Kumamoto)\n" +
+                        "-地址:10-22 Hanabatacho, Chuo Ward, Kumamoto, 860-0806,Japan\n" +
+                        "-电话:+81 96-319-1050\n" +
+                        "\n" +
+                        "10.方舟大熊本酒店(Ark Hotel Kumamotojomae)\n" +
+                        "-地址:5-16 Jotomachi, Chuo Ward, Kumamoto, 860-0846,Japan\n" +
+                        "-电话:+81 96-351-2222\n"
         );
 
 
@@ -347,30 +376,30 @@ public class DataInitUtil {
                         "4.     Kaisenyasan Umi-Sachi (海鮮居酒屋 海幸)  \n" +
                         "5.     Chicken Nanban Ogura Honten (チキン南蛮のお店 おぐら本店)   \n" +
                         "6.   Saito Winery (西都ワイナリー) ",
-                "1. 宫崎温泉酒店 (ANA Holiday Inn Resort Miyazaki)\n" +
+                
+                "1. 宫崎ANA假日酒店 (ANA Holiday Inn Resort Miyazaki)\n" +
                         "   - 地址: 1-16-1 Aoshima, Miyazaki, 889-2162, Japan\n" +
-                        "   - 电话: +81 985-65-1555\r" +
+                        "   - 电话: +81 985-65-1555\n" +
+                        "\n" +
                         "2. 宫崎东方酒店 (Hotel Marix Lagoon)\n" +
                         "   - 地址: 3-2-23 Tachibanadorihigashi, Miyazaki, 880-0805, Japan\n" +
-                        "   - 电话: +81 985-28-1111\r" +
+                        "   - 电话: +81 985-28-1111\n" +
+                        "\n" +
                         "3. 宫崎太阳酒店 (Sun Messe Miyazaki)\n" +
                         "   - 地址: 2650-1 Miyakoda, Miyazaki, 880-2101, Japan\n" +
-                        "   - 电话: +81 985-65-2021\r" +
-                        "4.宫崎山荘酒店 (Garden Terrace Miyazaki Hotels & Resorts)\n" +
-                        "   - 地址: 4-8-1 Miyazakiekihigashi, Miyazaki, 880-0812, Japan\n" +
-                        "   - 电话: +81 985-73-8888\r" +
-                        "5. 宫崎万豪酒店 (Sheraton Grande Ocean Resort)\n" +
+                        "   - 电话: +81 985-65-2021\n" +
+                        "\n" +
+                        "4. 宫崎大洋喜来登度假酒店 (Sheraton Grande Ocean Resort)\n" +
                         "   - 地址: Hamayama, Yamasaki-cho, Miyazaki, 880-8545, Japan\n" +
-                        "   - 电话: +81 985-21-1113\r" +
-                        "6. 宫崎温泉乡村酒店 (Aoshima Grand Hotel)\n" +
+                        "   - 电话: +81 985-21-1113\n" +
+                        "\n" +
+                        "5. 青岛格兰德酒店 (Aoshima Grand Hotel)\n" +
                         "   - 地址: 1-16-64 Aoshima, Miyazaki, 889-2162, Japan\n" +
-                        "   - 电话: +81 985-65-2011\r" +
-                        "7. 宫崎海滨酒店 (Seagaia Ocean Resort)\n" +
+                        "   - 电话: +81 985-65-2011\n" +
+                        "\n" +
+                        "6. 喜凯亚 (Seagaia Ocean Resort)\n" +
                         "   - 地址: 3083-1 Hamayama, Yamasaki-cho, Miyazaki, 880-8545, Japan\n" +
-                        "   - 电话: +81 985-21-1311\r" +
-                        "8. 宫崎豪华酒店 (Garden Terrace Miyazaki Hotels & Resorts)\n" +
-                        "    - 地址: 4-8-1 Miyazakiekihigashi, Miyazaki, 880-0812, Japan\n" +
-                        "    - 电话: +81 985-73-8888"
+                        "   - 电话: +81 985-21-1311\n"
         );
         createBranch(branch.getId(), " 鹿児島 (Kagoshima)", "KOJ",
                 "1.     Sakurajima (桜島)    \n" +
@@ -381,7 +410,8 @@ public class DataInitUtil {
                         "6.     Tenmonkan (天文館)    \n" +
                         "7.     Hirakawa Zoological Park (平川動物園)    \n" +
                         "8.     Ibusuki Onsen (指宿温泉)    \n" +
-                        "9.     Chiran Peace Museum (知覧特攻平和会館)  10.    Kirishima Shrine (霧島神宮)    \n" +
+                        "9.     Chiran Peace Museum (知覧特攻平和会館)  \n" +
+                        "10.    Kirishima Shrine (霧島神宮)    \n" +
                         "11.    Kagoshima City Museum of Art (鹿児島市立美術館)    \n" +
                         "12.    Kagoshima Aquarium (鹿児島水族館)    \n" +
                         "13.    Museum of the Meiji Restoration (維新ふるさと館)    \n" +
@@ -401,28 +431,27 @@ public class DataInitUtil {
                         "10.   Senganen Garden Restaurant (名勝 仙巌園の料亭)  ",
                 "1. 鹿儿岛皇家酒店 (Hotel Shiroyama Kagoshima)\n" +
                         "   - 地址: 41-1 Shinsyouincho, Kagoshima, Kagoshima 890-8586, Japan\n" +
-                        "   - 电话: +81 99-224-2211\r" +
+                        "   - 电话: +81 99-224-2211\n" +
+                        "\n" +
                         "2. 鹿儿岛日航酒店 (Hotel Nikko Kagoshima)\n" +
                         "   - 地址: 15-1 Kamoike, Kagoshima, Kagoshima 890-0064, Japan\n" +
-                        "   - 电话: +81 99-257-2411\r" +
-                        "3. 鹿儿岛万豪酒店 (Sheraton Kagoshima)\n" +
+                        "   - 电话: +81 99-257-2411\n" +
+                        "\n" +
+                        "3. 鹿儿岛喜来登酒店 (Sheraton Kagoshima)\n" +
                         "   - 地址: 1-3-1 Furusato-cho, Kagoshima, Kagoshima 890-0045, Japan\n" +
-                        "   - 电话: +81 99-214-7766\r" +
-                        "4. 鹿儿岛喜来登酒店 (Sheraton Kagoshima)\n" +
-                        "   - 地址: 1-3-1 Furusato-cho, Kagoshima, Kagoshima 890-0045, Japan\n" +
-                        "   - 电话: +81 99-214-7766\r" +
-                        "5. 鹿儿岛皇冠假日酒店 (ANA Crowne Plaza Hotel Kagoshima)\n" +
+                        "   - 电话: +81 99-214-7766\n" +
+                        "\n" +
+                        "4. 鹿儿岛皇冠假日酒店 (ANA Crowne Plaza Hotel Kagoshima)\n" +
                         "   - 地址: 8-1-1 Nishihara, Kagoshima, Kagoshima 890-8581, Japan\n" +
-                        "   - 电话: +81 99-213-2211\r" +
-                        "6. 鹿儿岛皇家花园酒店 (The Royal Park Hotel Fukuoka)\n" +
+                        "   - 电话: +81 99-213-2211\n" +
+                        "\n" +
+                        "5. 鹿儿岛皇家花园酒店 (The Royal Park Hotel Fukuoka)\n" +
                         "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
-                        "   - 电话: +81 92-414-1111\r" +
-                        "7. 鹿儿岛豪华酒店 (Kagoshima Tokyu Hotel)\n" +
-                        "   - 地址: 22-1 Kamoike, Kagoshima, Kagoshima 890-0063, Japan\n" +
-                        "   - 电话: +81 99-257-2411\r" +
-                        "8. 鹿儿岛温泉酒店 (Kirishima Kokusai Hotel)\n" +
+                        "   - 电话: +81 92-414-1111\n" +
+                        "\n" +
+                        "6. 鹿儿岛国际酒店 (Kirishima Kokusai Hotel)\n" +
                         "   - 地址: 3930-12 Makizonocho Takachiho, Kirishima, Kagoshima 899-6603, Japan\n" +
-                        "   - 电话: +81 995-78-2525\r"
+                        "   - 电话: +81 995-78-2525"
         );
 
         createBranch(branch.getId(), " 冲绳 (Okinawa)", "OKA",
@@ -456,36 +485,30 @@ public class DataInitUtil {
                         "8.     Goya Shokudo (ゴーヤー食堂)    \n" +
                         "9.     Steak House 88 (ステーキハウス88)    \n" +
                         "10.   Kinchichi Soba (金月そば)    ",
-                "1. 冲绳日航酒店 (Hotel Nikko Alivila)\n" +
+                "1. 阿利维亚日光酒店 (Hotel Nikko Alivila)\n" +
                         "   - 地址: 600 Gima Yomitan-son, Nakagami-gun, Okinawa 904-0393, Japan\n" +
-                        "   - 电话: +81 98-958-5000\r" +
-                        "2. 冲绳希尔顿酒店 (Hilton Okinawa Chatan Resort)\n" +
+                        "   - 电话: +81 98-958-5000\n" +
+                        "2. 冲绳北谷希尔顿度假酒店 (Hilton Okinawa Chatan Resort)\n" +
                         "   - 地址: 40-1 Mihama, Chatan-cho, Nakagami-gun, Okinawa 904-0115, Japan\n" +
-                        "   - 电话: +81 98-901-1111\r" +
-                        "3. 冲绳万豪酒店 (The Ritz-Carlton, Okinawa)\n" +
+                        "   - 电话: +81 98-901-1111\n" +
+                        "3. 冲绳丽思卡尔顿酒店 (The Ritz-Carlton, Okinawa)\n" +
                         "   - 地址: 1343-1 Kise, Nago, Okinawa 905-0026, Japan\n" +
-                        "   - 电话: +81 980-43-5555\r" +
-                        "4. 冲绳丽思卡尔顿酒店 (The Ritz-Carlton, Okinawa)\n" +
-                        "   - 地址: 1343-1 Kise, Nago, Okinawa 905-0026, Japan\n" +
-                        "   - 电话: +81 980-43-5555\r" +
-                        "5. 冲绳君悦酒店 (Hyatt Regency Seragaki Island Okinawa)\n" +
+                        "   - 电话: +81 980-43-5555\n" +
+                        "4. 冲绳濑良垣岛凯悦酒店 (Hyatt Regency Seragaki Island Okinawa)\n" +
                         "   - 地址: 1108 Seragaki, Onna-son, Kunigami-gun, Okinawa 904-0404, Japan\n" +
-                        "   - 电话: +81 98-960-4321\r" +
-                        "6. 冲绳喜来登酒店 (Sheraton Okinawa Sunmarina Resort)\n" +
+                        "   - 电话: +81 98-960-4321\n" +
+                        "5. 冲绳太阳码头喜来登酒店 (Sheraton Okinawa Sunmarina Resort)\n" +
                         "   - 地址: 66-1 Fuchaku, Onna-son, Kunigami-gun, Okinawa 904-0494, Japan\n" +
-                        "   - 电话: +81 98-965-2222\r" +
-                        "7. 冲绳皇冠假日酒店 (ANA InterContinental Manza Beach Resort)\n" +
+                        "   - 电话: +81 98-965-2222\n" +
+                        "6. 洲际万座海滩度假酒店 (ANA InterContinental Manza Beach Resort)\n" +
                         "   - 地址: 2260 Seragaki, Onna-son, Kunigami-gun, Okinawa 904-0493, Japan\n" +
-                        "   - 电话: +81 98-966-1211\r" +
-                        "8. 冲绳酒店 (Hotel Monterey Okinawa Spa & Resort)\n" +
+                        "   - 电话: +81 98-966-1211\n" +
+                        "7. 冲绳蒙特利水疗度假酒店 (Hotel Monterey Okinawa Spa & Resort)\n" +
                         "   - 地址: 1550-1 Fuchaku, Onna-son, Kunigami-gun, Okinawa 904-0413, Japan\n" +
-                        "   - 电话: +81 98-993-7111\r" +
-                        "9. 冲绳皇家花园酒店 (The Royal Park Hotel Fukuoka)\n" +
-                        "   - 地址: 2-14-15 Hakataekimae, Hakata-ku, Fukuoka 812-0011, Japan\n" +
-                        "   - 电话: +81 92-414-1111\r" +
-                        "10. 冲绳豪华酒店 (Halekulani Okinawa)\n" +
+                        "   - 电话: +81 98-993-7111\n" +
+                        "8. 海丽客兰尼冲绳 (Halekulani Okinawa)\n" +
                         "   - 地址: 1967-1 Nakama, Onna-son, Kunigami-gun, Okinawa 904-0401, Japan\n" +
-                        "   - 电话: +81 98-953-8600\r"
+                        "   - 电话: +81 98-953-8600"
         );
 
     }
@@ -514,36 +537,45 @@ public class DataInitUtil {
                         "18.   Yamanakako Hananomiyako Park (山中湖花の都公園)    \n" +
                         "19.   Gotemba Premium Outlets (御殿場プレミアムアウトレット)    \n" +
                         "20.   Mt. Fuji World Heritage Center (富士山世界遺産センター)    ",
-                "1. 富士山 - 富士景酒店 (Hotel Mystays Fuji)\n" +
+                "1.富士山展望温泉酒店 (Hotel Mystays Fuji)\n" +
                         "   - 地址: 401-0301 Yamanashi, Fujiyoshida, Arakura 2654, Japan\n" +
-                        "   - 电话: +81 555-24-3221\r" +
-                        "2. 富士山太阳酒店 (Fuji View Hotel)\n" +
+                        "   - 电话: +81 555-24-3221\n" +
+                        "\n" +
+                        "2. 富士景观酒店 (Fuji View Hotel)\n" +
                         "   - 地址: 511 Katsuyama, Fujikawaguchiko, Minamitsuru-gun, Yamanashi 401-0310, Japan\n" +
-                        "   - 电话: +81 555-83-2211\r" +
-                        "3. 富士河口湖温泉酒店 (Hotel New Century)\n" +
+                        "   - 电话: +81 555-83-2211\n" +
+                        "\n" +
+                        "3. 新世纪大酒店 (Hotel New Century)\n" +
                         "   - 地址: 180-1 Azagawa, Fujikawaguchiko, Minamitsuru-gun, Yamanashi 401-0303, Japan\n" +
-                        "   - 电话: +81 555-72-1414\r" +
-                        "4. 富士山景酒店 (Highland Resort Hotel & Spa)\n" +
+                        "   - 电话: +81 555-72-1414\n" +
+                        "\n" +
+                        "4. 海兰德水疗度假酒店 (Highland Resort Hotel & Spa)\n" +
                         "   - 地址: 5-6-1 Shinnishihara, Fujiyoshida, Yamanashi 403-0017, Japan\n" +
-                        "   - 电话: +81 555-22-1000\r" +
-                        "5. 富士山广场酒店 (Fuji Lake Hotel)\n" +
+                        "   - 电话: +81 555-22-1000\n" +
+                        "\n" +
+                        "5. 富士湖酒店 (Fuji Lake Hotel)\n" +
                         "   - 地址: 1 Funatsu, Fujikawaguchiko, Minamitsuru-gun, Yamanashi 401-0301, Japan\n" +
-                        "   - 电话: +81 555-72-2209\r" +
-                        "6. 富士山景湖畔酒店 (Kawaguchiko Hotel)\n" +
+                        "   - 电话: +81 555-72-2209\n" +
+                        "\n" +
+                        "6. 河口湖酒店 (Kawaguchiko Hotel)\n" +
                         "   - 地址: 200 Azagawa, Fujikawaguchiko, Yamanashi 401-0303, Japan\n" +
-                        "   - 电话: +81 555-72-1332\r" +
-                        "7. 富士山湖景酒店 (Fujikawaguchiko Onsen Hotel)\n" +
+                        "   - 电话: +81 555-72-1332\n" +
+                        "\n" +
+                        "7. 富士河口湖温泉酒店 (Fujikawaguchiko Onsen Hotel)\n" +
                         "   - 地址: 1184-1 Matsuyama, Fujikawaguchiko, Yamanashi 401-0310, Japan\n" +
-                        "   - 电话: +81 555-83-1111\r" +
-                        "8. 富士山花园酒店 (Shiki no Yado Fujisan)\n" +
+                        "   - 电话: +81 555-83-1111\n" +
+                        "\n" +
+                        "8. 富士山四季之宿 (Shiki no Yado Fujisan)\n" +
                         "   - 地址: 6713-19 Funatsu, Fujikawaguchiko, Yamanashi 401-0301, Japan\n" +
-                        "   - 电话: +81 555-83-3771\r" +
-                        "9. 富士山蓝星酒店 (Hotel Konanso)\n" +
+                        "   - 电话: +81 555-83-3771\n" +
+                        "\n" +
+                        "9. 富士河口湖温泉湖南庄酒店 (Hotel Konanso)\n" +
                         "   - 地址: 4020-2 Funatsu, Fujikawaguchiko, Minamitsuru-gun, Yamanashi 401-0301, Japan\n" +
-                        "   - 电话: +81 555-72-2160\r" +
+                        "   - 电话: +81 555-72-2160\n" +
+                        "\n" +
                         "10. 富士山皇家酒店 (Fuji Royal Hotel)\n" +
                         "   - 地址: 2-3-16 Kamiyoshida, Fujiyoshida, Yamanashi 403-0005, Japan\n" +
-                        "   - 电话: +81 555-22-1717\r"
+                        "   - 电话: +81 555-22-1717"
         );
         createBranch(branch.getId(), " 伊豆 (Izu)", "FSZ",
                 "1.     Izu Kogen (伊豆高原)    \n" +
@@ -574,27 +606,33 @@ public class DataInitUtil {
                         "8.     Owakudani (大涌谷)    \n" +
                         "9.     Gotemba Kogen Toki no Sumika (御殿場高原時之栖)    \n" +
                         "10.   Gotemba City Brewery (御殿場市役所前のビール醸造所)    ",
-                "1. 伊豆温泉度假酒店 (Izu Marriott Hotel Shuzenji)\n" +
+                "1. 伊豆万豪酒店修善寺 (Izu Marriott Hotel Shuzenji)\n" +
                         "   - 地址: 1529 Odaira, Izu, Shizuoka 410-2415, Japan\n" +
-                        "   - 电话: +81 558-72-1311\r" +
-                        "2. 伊豆温泉乡村酒店 (Kawana Hotel)\n" +
+                        "   - 电话: +81 558-72-1311\n" +
+                        "\n" +
+                        "2. 川奈酒店 (Kawana Hotel)\n" +
                         "   - 地址: 1459 Kawana, Ito, Shizuoka 414-0044, Japan\n" +
-                        "   - 电话: +81 557-45-1111\r" +
-                        "3. 伊豆滨田酒店 (Atami Fufu)\n" +
+                        "   - 电话: +81 557-45-1111\n" +
+                        "\n" +
+                        "3. 馥府 热海 (Atami Fufu)\n" +
                         "   - 地址: 11-48 Minaguchicho, Atami, Shizuoka 413-0016, Japan\n" +
-                        "   - 电话: +81 557-86-7777\r" +
-                        "4. 伊豆美食温泉酒店 (Yagyu no Sho)\n" +
+                        "   - 电话: +81 557-86-7777\n" +
+                        "\n" +
+                        "4. 柳生庄日式旅馆 (Yagyu no Sho)\n" +
                         "   - 地址: 1116-6 Shuzenji, Izu, Shizuoka 410-2416, Japan\n" +
-                        "   - 电话: +81 558-72-0011\r" +
-                        "5. 伊豆日式酒店 (Arai Ryokan)\n" +
+                        "   - 电话: +81 558-72-0011\n" +
+                        "\n" +
+                        "5. 新井旅馆 (Arai Ryokan)\n" +
                         "   - 地址: 970 Shuzenji, Izu, Shizuoka 410-2416, Japan\n" +
-                        "   - 电话: +81 558-72-2007\r" +
+                        "   - 电话: +81 558-72-2007\n" +
+                        "\n" +
                         "6. 伊豆高原酒店 (Akazawa Geihinkan)\n" +
                         "   - 地址: 155 Akazawa, Ito, Shizuoka 413-0231, Japan\n" +
-                        "   - 电话: +81 557-53-4900\r" +
-                        "7. 伊豆酒店 (Hotel New Akao)\n" +
+                        "   - 电话: +81 557-53-4900\n" +
+                        "\n" +
+                        "7.新赤尾酒店 (Hotel New Akao)\n" +
                         "   - 地址: 1993-250 Atami, Shizuoka 413-8555, Japan\n" +
-                        "   - 电话: +81 557-82-5151\r"
+                        "   - 电话: +81 557-82-5151\n"
         );
         createBranch(branch.getId(), " 名古屋 (Nagoya)", "NGO",
                 "1.     Nagoya Castle (名古屋城)    \n" +
@@ -639,34 +677,43 @@ public class DataInitUtil {
                         "20.     Marriott Associa Hotel (マリオットアソシアホテル) ",
                 "1. 名古屋 - 名古屋万豪酒店 (Nagoya Marriott Associa Hotel)\n" +
                         "   - 地址: 1-1-4 Meieki, Nakamura-ku, Nagoya, Aichi 450-6002, Japan\n" +
-                        "   - 电话: +81 52-584-1111\r" +
+                        "   - 电话: +81 52-584-1111\n" +
+                        "\n" +
                         "2. 名古屋皇冠酒店 (ANA Crowne Plaza Hotel Grand Court Nagoya)\n" +
                         "   - 地址: 1-1-1 Kanayama-cho, Naka-ku, Nagoya 460-0023, Japan\n" +
-                        "   - 电话: +81 52-683-4111\r" +
-                        "3. 名古屋西华酒店 (Hilton Nagoya)\n" +
+                        "   - 电话: +81 52-683-4111\n" +
+                        "\n" +
+                        "3. 名古屋希尔顿饭店 (Hilton Nagoya)\n" +
                         "   - 地址: 1-3-3 Sakae, Naka-ku, Nagoya, Aichi 460-0008, Japan\n" +
-                        "   - 电话: +81 52-212-1111\r" +
+                        "   - 电话: +81 52-212-1111\n" +
+                        "\n" +
                         "4. 名古屋新大谷酒店 (Hotel New Otani Nagoya)\n" +
                         "   - 地址: 4-1 Sakae, Naka-ku, Nagoya, Aichi 460-0008, Japan\n" +
-                        "   - 电话: +81 52-211-1111\r" +
-                        "5. 名古屋荣大酒店 (Nagoya Tokyu Hotel)\n" +
+                        "   - 电话: +81 52-211-1111\n" +
+                        "\n" +
+                        "5. 名古屋东急酒店 (Nagoya Tokyu Hotel)\n" +
                         "   - 地址: 4-6-8 Sakae, Naka-ku, Nagoya 460-0008, Japan\n" +
-                        "   - 电话: +81 52-251-2411\r" +
-                        "6. 名古屋东急酒店 (Nagoya Kanko Hotel)\n" +
+                        "   - 电话: +81 52-251-2411\n" +
+                        "\n" +
+                        "6. 名古屋观光酒店 (Nagoya Kanko Hotel)\n" +
                         "   - 地址: 1-19-30 Nishiki, Naka-ku, Nagoya 460-8608, Japan\n" +
-                        "   - 电话: +81 52-231-7711\r" +
-                        "7. 名古屋塔楼酒店 (Nagoya JR Gate Tower Hotel)\n" +
+                        "   - 电话: +81 52-231-7711\n" +
+                        "\n" +
+                        "7. 名古屋JR门楼酒店 (Nagoya JR Gate Tower Hotel)\n" +
                         "   - 地址: 1-1-3 Meieki, Nakamura-ku, Nagoya, Aichi 450-6660, Japan\n" +
-                        "   - 电话: +81 52-566-2111\r" +
+                        "   - 电话: +81 52-566-2111\n" +
+                        "\n" +
                         "8. 名古屋蒙特利酒店 (Hotel Monterey Nagoya)\n" +
                         "   - 地址: 3-23-1 Nishiki, Naka-ku, Nagoya 460-0003, Japan\n" +
-                        "   - 电话: +81 52-957-7111\r" +
+                        "   - 电话: +81 52-957-7111\n" +
+                        "\n" +
                         "9. 名古屋中部国际机场酒店 (Centrair Hotel)\n" +
                         "   - 地址: 1-1 Sentorea, Tokoname, Aichi 479-0881, Japan\n" +
-                        "   - 电话: +81 569-38-1111\r" +
+                        "   - 电话: +81 569-38-1111\n" +
+                        "\n" +
                         "10. 名古屋皇家花园酒店 (Royal Park Hotel The Nagoya)\n" +
                         "   - 地址: 3-23-13 Nishiki, Naka-ku, Nagoya, Aichi 460-0003, Japan\n" +
-                        "   - 电话: +81 52-957-2222\r"
+                        "   - 电话: +81 52-957-2222\n"
         );
     }
 
@@ -744,36 +791,46 @@ public class DataInitUtil {
                         "14.     Ganso Kushikatsu Daruma (Shinsekai) (元祖串カツ だるま（新世界総店）)    \n" +
                         "15.     Nanba Kyuhorou (中華料理)    ",
 
-                "1. 大阪 - 帝国酒店大阪 (Imperial Hotel Osaka)\n" +
+                "\n" +
+                        "1. 大阪 - 帝国酒店大阪 (Imperial Hotel Osaka)\n" +
                         "   - 地址: 1-8-50 Temmabashi, Kita-ku, Osaka, 530-0042, Japan\n" +
-                        "   - 电话: +81 6-6881-1111\r" +
+                        "   - 电话: +81 6-6881-1111\n" +
+                        "\n" +
                         "2. 大阪瑞吉酒店 (The St. Regis Osaka)\n" +
                         "   - 地址: 3-6-12 Honmachi, Chuo-ku, Osaka, 541-0053, Japan\n" +
-                        "   - 电话: +81 6-6258-3333\r" +
+                        "   - 电话: +81 6-6258-3333\n" +
+                        "\n" +
                         "3. 大阪日航酒店 (Hotel Nikko Osaka)\n" +
                         "   - 地址: 1-3-3 Nishi-shinsaibashi, Chuo-ku, Osaka 542-0086, Japan\n" +
-                        "   - 电话: +81 6-6244-1111\r" +
-                        "4. 大阪海港区日航酒店 (Hotel Universal Port)\n" +
+                        "   - 电话: +81 6-6244-1111\n" +
+                        "\n" +
+                        "4. 环球影城港湾酒店 (Hotel Universal Port)\n" +
                         "   - 地址: 1-1-111 Sakurajima, Konohana-ku, Osaka 554-0031, Japan\n" +
-                        "   - 电话: +81 6-6463-5000\r" +
+                        "   - 电话: +81 6-6463-5000\n" +
+                        "\n" +
                         "5. 大阪丽思卡尔顿酒店 (The Ritz-Carlton, Osaka)\n" +
                         "   - 地址: 2-5-25 Umeda, Kita-ku, Osaka 530-0001, Japan\n" +
-                        "   - 电话: +81 6-6343-7000\r" +
+                        "   - 电话: +81 6-6343-7000\n" +
+                        "\n" +
                         "6. 大阪希尔顿酒店 (Hilton Osaka)\n" +
                         "   - 地址: 8-8, Umeda 1-chome, Kita-ku, Osaka 530-0001, Japan\n" +
-                        "   - 电话: +81 6-6347-7111\r" +
+                        "   - 电话: +81 6-6347-7111\n" +
+                        "\n" +
                         "7. 大阪阪急国际酒店 (Osaka Hankyu International Hotel)\n" +
                         "   - 地址: 19-19 Chayamachi, Kita-ku, Osaka 530-0013, Japan\n" +
-                        "   - 电话: +81 6-6377-2100\r" +
+                        "   - 电话: +81 6-6377-2100\n" +
+                        "\n" +
                         "8. 大阪万豪酒店 (Osaka Marriott Miyako Hotel)\n" +
                         "   - 地址: 1-1-43 Abenosuji, Abeno-ku, Osaka 545-0052, Japan\n" +
-                        "   - 电话: +81 6-6628-6111\r" +
-                        "9. 大阪新世界日航酒店 (Hotel Keihan Universal Tower)\n" +
+                        "   - 电话: +81 6-6628-6111\n" +
+                        "\n" +
+                        "9.  环球影城塔楼酒店 (Hotel Keihan Universal Tower)\n" +
                         "   - 地址: 6-2-45 Shimaya, Konohana-ku, Osaka 554-0024, Japan\n" +
-                        "   - 电话: +81 6-6465-1001\r" +
+                        "   - 电话: +81 6-6465-1001\n" +
+                        "\n" +
                         "10. 大阪中心皇冠假日酒店 (Crowne Plaza ANA Osaka)\n" +
                         "   - 地址: 1-3-1 Dojimahama, Kita-ku, Osaka 530-0004, Japan\n" +
-                        "   - 电话: +81 6-6347-1112\r"
+                        "   - 电话: +81 6-6347-1112"
                 );
 
         createBranch(guanxi.getId(), "京都 (Kyoto)", "KIX",
@@ -809,34 +866,43 @@ public class DataInitUtil {
                         "                        \"10.   Kyoto Station Building (京都駅ビル)    ",
                 "1. 京都丽思卡尔顿酒店 (The Ritz-Carlton, Kyoto)\n" +
                         "   - 地址: Kamogawa Nijo-Ohashi Hotori, Nakagyo-ku, Kyoto, 604-0902, Japan\n" +
-                        "   - 电话: +81 75-746-5555\r" +
+                        "   - 电话: +81 75-746-5555\n" +
+                        "\n" +
                         "2. 京都四季酒店 (Four Seasons Hotel Kyoto)\n" +
                         "   - 地址: 445-3 Myohoin Maekawa-cho, Higashiyama-ku, Kyoto 605-0932, Japan\n" +
-                        "   - 电话: +81 75-541-8288\r" +
+                        "   - 电话: +81 75-541-8288\n" +
+                        "\n" +
                         "3. 京都皇家酒店 (The Royal Park Hotel Kyoto)\n" +
                         "   - 地址: 745 Sanjocho, Sanjo-kudaru, Kawaramachi-dori, Nakagyo-ku, Kyoto 604-8004, Japan\n" +
-                        "   - 电话: +81 75-241-1111\r" +
-                        "4. 京都宾馆 (Kyoto Hotel Okura)\n" +
+                        "   - 电话: +81 75-241-1111\n" +
+                        "\n" +
+                        "4. 京都大仓酒店 (Kyoto Hotel Okura)\n" +
                         "   - 地址: 604-8558 Kyoto, Nakagyo-ku, Kawaramachi-Oike, Japan\n" +
-                        "   - 电话: +81 75-211-5111\r" +
+                        "   - 电话: +81 75-211-5111\n" +
+                        "\n" +
                         "5. 京都世纪酒店 (Kyoto Century Hotel)\n" +
                         "   - 地址: 680 Higashishiokoji-cho, Shimogyo-ku, Kyoto 600-8216, Japan\n" +
-                        "   - 电话: +81 75-351-0111\r" +
-                        "6. 京都格兰德酒店 (Hyatt Regency Kyoto)\n" +
+                        "   - 电话: +81 75-351-0111\n" +
+                        "\n" +
+                        "6. 京都凯悦酒店 (Hyatt Regency Kyoto)\n" +
                         "   - 地址: 644-2 Sanjusangendo-mawari, Higashiyama-ku, Kyoto 605-0941, Japan\n" +
-                        "   - 电话: +81 75-541-1234\r" +
-                        "7. 京都丽思酒店 (Rihga Royal Hotel Kyoto)\n" +
+                        "   - 电话: +81 75-541-1234\n" +
+                        "\n" +
+                        "7. 京都丽嘉皇家酒店 (Rihga Royal Hotel Kyoto)\n" +
                         "   - 地址: 1 Taimatsu-cho, Shiokoji-sagaru, Higashi Horikawa-dori, Shimogyo-ku, Kyoto 600-8237, Japan\n" +
-                        "   - 电话: +81 75-341-1121\r" +
-                        "8. 京都高台寺优美娜酒店 (Hotel Gracery Kyoto Sanjo)\n" +
-                        "   - 地址: 406 Sakuranocho, Shinkyogoku, Higashiiru, Shijo-dori, Nakagyo-ku, Kyoto 604-8035, Japan\n" +
-                        "   - 电话: +81 75-222-1111\r" +
+                        "   - 电话: +81 75-341-1121\n" +
+                        "\n" +
+                        "8. 格拉斯丽京都三条酒店 (Hotel Gracery Kyoto Sanjo)\n" +
+                        "   - 地址: 420 Sakuranocho, Shinkyogoku, Higashiiru, Shijo-dori, Nakagyo-ku, Kyoto 604-8035, Japan\n" +
+                        "   - 电话: +81 75-222-1111\n" +
+                        "\n" +
                         "9. 京都樱花酒店 (Hotel Sakura Terrace)\n" +
                         "   - 地址: 1-1 Higashikujo Karasumacho, Minami-ku, Kyoto 601-8016, Japan\n" +
-                        "   - 电话: +81 75-692-1112\r" +
+                        "   - 电话: +81 75-692-1112\n" +
+                        "\n" +
                         "10. 京都瑞光酒店 (Kyoto Brighton Hotel)\n" +
                         "   - 地址: 602-8071 Kyoto, Kamigyo-ku Shinmachi-Dori Nakadachiuri, Japan\n" +
-                        "   - 电话: +81 75-441-4411\r"
+                        "   - 电话: +81 75-441-4411"
                 );
         createBranch(guanxi.getId(), "神户 (Kobe)", "KIX",
                 "1.     Kobe Port Tower (神戸ポートタワー)    \n" +
@@ -868,36 +934,41 @@ public class DataInitUtil {
                         "8.     Kobe Harborland umie (神戸ハーバーランドumie)    \n" +
                         "9.     Kobe Motomachi Shopping Street (神戸元町商店街)    \n" +
                         "10.   Sannomiya Center Street (三宮センター街)    ",
-                "1. 神户海港酒店 (Kobe Portopia Hotel)\n" +
+                "1. 神户波多比亚饭店 (Kobe Portopia Hotel)\n" +
                         "   - 地址: 10-1 Minatojima Nakamachi, Chuo-ku, Kobe, Hyogo 650-0046, Japan\n" +
-                        "   - 电话: +81 78-302-1111\r" +
-                        "2. 神户东方酒店 (Hotel Okura Kobe)\n" +
+                        "   - 电话: +81 78-302-1111\n" +
+                        "\n" +
+                        "2. 神户大仓酒店 (Hotel Okura Kobe)\n" +
                         "   - 地址: 2-1 Hatobacho, Chuo-ku, Kobe, Hyogo 650-8560, Japan\n" +
-                        "   - 电话: +81 78-333-0111\r" +
+                        "   - 电话: +81 78-333-0111\n" +
+                        "\n" +
                         "3. 神户皇冠广场酒店 (Crowne Plaza ANA Kobe)\n" +
                         "   - 地址: 1-1 Kitano-cho, Chuo-ku, Kobe 650-0002, Japan\n" +
-                        "   - 电话: +81 78-291-1121\r" +
-                        "4. 神户梅尔帕洛斯酒店 (Hotel Monterey Kobe)\n" +
+                        "   - 电话: +81 78-291-1121\n" +
+                        "\n" +
+                        "4. 神户蒙特利酒店 (Hotel Monterey Kobe)\n" +
                         "   - 地址: 2-11-13 Shimoyamate-dori, Chuo-ku, Kobe, Hyogo 650-0021, Japan\n" +
-                        "   - 电话: +81 78-392-7111\r" +
+                        "   - 电话: +81 78-392-7111\n" +
+                        "\n" +
                         "5. 神户东方酒店 (Oriental Hotel Kobe)\n" +
                         "   - 地址: 25 Kyomachi, Chuo-ku, Kobe 650-0034, Japan\n" +
-                        "   - 电话: +81 78-326-1500\r" +
-                        "6. 神户格兰德酒店 (Kobe Meriken Park Oriental Hotel)\n" +
+                        "   - 电话: +81 78-326-1500\n" +
+                        "\n" +
+                        "6. 神户美利坚公园东方大酒店 (Kobe Meriken Park Oriental Hotel)\n" +
                         "   - 地址: 5-6 Hatoba-cho, Chuo-ku, Kobe, Hyogo 650-0042, Japan\n" +
-                        "   - 电话: +81 78-325-8111\r" +
-                        "7. 神户日航酒店 (Kobe Bay Sheraton Hotel & Towers)\n" +
+                        "   - 电话: +81 78-325-8111\n" +
+                        "\n" +
+                        "7. 神户湾喜来登酒店&塔楼 (Kobe Bay Sheraton Hotel & Towers)\n" +
                         "   - 地址: 2-13 Koyocho-naka, Higashinada-ku, Kobe 658-0032, Japan\n" +
-                        "   - 电话: +81 78-857-7000\r" +
-                        "8. 神户阪急酒店 (Hotel Sunroute Sopra Kobe)\n" +
+                        "   - 电话: +81 78-857-7000\n" +
+                        "\n" +
+                        "8. 神户雅致灿路都大饭店 (Hotel Sunroute Sopra Kobe)\n" +
                         "   - 地址: 1-1-22 Isobe-dori, Chuo-ku, Kobe 651-0084, Japan\n" +
-                        "   - 电话: +81 78-222-7500\r" +
-                        "9. 神户湾花园酒店 (Kobe Bay Sheraton Hotel & Towers)\n" +
-                        "   - 地址: 2-13 Koyocho-naka, Higashinada-ku, Kobe 658-0032, Japan\n" +
-                        "   - 电话: +81 78-857-7000\r" +
-                        "10. 神户北野酒店 (Kobe Kitano Hotel)\n" +
+                        "   - 电话: +81 78-222-7500\n" +
+                        "\n" +
+                        "9. 神户北野酒店 (Kobe Kitano Hotel)\n" +
                         "   - 地址: 3-3-20 Yamamoto-dori, Chuo-ku, Kobe 650-0003, Japan\n" +
-                        "   - 电话: +81 78-271-3711\r"
+                        "   - 电话: +81 78-271-3711"
         );
     }
 
@@ -1034,34 +1105,43 @@ public class DataInitUtil {
 
                 "1. 帝国酒店东京 (Imperial Hotel Tokyo)\n" +
                         "   - 地址: 1-1-1 Uchisaiwai-cho, Chiyoda-ku, Tokyo, 100-8558, Japan\n" +
-                        "   - 电话: +81 3-3504-1111\r" +
-                        "2. 旭日光之塔大酒店 (The Gate Hotel Asakusa Kaminarimon by Hulic)\n" +
+                        "   - 电话: +81 3-3504-1111\n" +
+                        "\n" +
+                        "2. 浅草雷门休雷克盖特酒店东京 (The Gate Hotel Asakusa Kaminarimon by Hulic)\n" +
                         "   - 地址: 2-16-11 Kaminarimon, Taito, Tokyo 111-0034, Japan\n" +
-                        "   - 电话: +81 3-5826-3877\r" +
+                        "   - 电话: +81 3-5826-3877\n" +
+                        "\n" +
                         "3. 东京大仓酒店 (The Okura Tokyo)\n" +
                         "   - 地址: 2-10-4 Toranomon, Minato City, Tokyo 105-0001, Japan\n" +
-                        "   - 电话: +81 3-3582-0111\r" +
-                        "4. 丸之内大酒店 (Palace Hotel Tokyo)\n" +
+                        "   - 电话: +81 3-3582-0111\n" +
+                        "\n" +
+                        "4. 东京皇宫酒店 (Palace Hotel Tokyo)\n" +
                         "   - 地址: 1-1-1 Marunouchi, Chiyoda-ku, Tokyo 100-0005, Japan\n" +
-                        "   - 电话: +81 3-3211-5211\r" +
+                        "   - 电话: +81 3-3211-5211\n" +
+                        "\n" +
                         "5. 东京皇家花园酒店 (The Royal Park Hotel Tokyo Shiodome)\n" +
                         "   - 地址: 1-6-3 Higashi-Shimbashi, Minato-ku, Tokyo 105-8333, Japan\n" +
-                        "   - 电话: +81 3-6253-1111\r" +
+                        "   - 电话: +81 3-6253-1111\n" +
+                        "\n" +
                         "6. 东京湾洲际酒店 (InterContinental Tokyo Bay)\n" +
                         "   - 地址: 1-16-2 Kaigan, Minato-ku, Tokyo 105-8576, Japan\n" +
-                        "   - 电话: +81 3-5404-2222\r" +
+                        "   - 电话: +81 3-5404-2222\n" +
+                        "\n" +
                         "7. 东京湾日航酒店 (Hilton Tokyo Odaiba)\n" +
                         "   - 地址: 1-9-1 Daiba, Minato-ku, Tokyo 135-8625, Japan\n" +
-                        "   - 电话: +81 3-5500-5500\r" +
+                        "   - 电话: +81 3-5500-5500\n" +
+                        "\n" +
                         "8. 东京车站酒店 (The Tokyo Station Hotel)\n" +
                         "   - 地址: 1-9-1 Marunouchi, Chiyoda-ku, Tokyo 100-0005, Japan\n" +
-                        "   - 电话: +81 3-5220-1111\r" +
-                        "9. 东京安达大酒店 (Hotel New Otani Tokyo Garden Tower)\n" +
+                        "   - 电话: +81 3-5220-1111\n" +
+                        "\n" +
+                        "9. 东京新大谷酒店 (Hotel New Otani Tokyo Garden Tower)\n" +
                         "   - 地址: 4-1 Kioi-cho, Chiyoda-ku, Tokyo 102-8578, Japan\n" +
-                        "   - 电话: +81 3-3265-1111\r" +
+                        "   - 电话: +81 3-3265-1111\n" +
+                        "\n" +
                         "10. 丸之内酒店 (Marunouchi Hotel)\n" +
                         "   - 地址: 1-6-3 Marunouchi, Chiyoda-ku, Tokyo 100-0005, Japan\n" +
-                        "   - 电话: +81 3-3217-1111\r"
+                        "   - 电话: +81 3-3217-1111"
         );
     }
 
@@ -1188,11 +1268,11 @@ public class DataInitUtil {
      * @return
      */
     private static Set<String> newHotelSet(String hotelData) {
-        List<String> splitList = Arrays.stream(hotelData.split("\r")).map(String::trim).filter(StrUtil::isNotEmpty).collect(Collectors.toList());
+        List<String> splitList = Arrays.stream(hotelData.split("\n\n")).map(String::trim).filter(StrUtil::isNotEmpty).collect(Collectors.toList());
         List<Hotel> list = new ArrayList<>();
 
         // 定义正则表达式模式
-        String pattern = "(\\d+)\\.(.*) \\((.*)\\)\n.*地址:(.*)\n.*电话:(.*)";
+        String pattern = "(\\d+)\\.(.*)\\((.*)\\)\n.*地址:(.*)\n.*电话:(.*)";
         // 创建 Pattern 对象
         Pattern r = Pattern.compile(pattern);
 
