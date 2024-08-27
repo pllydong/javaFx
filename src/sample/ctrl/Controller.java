@@ -18,10 +18,7 @@ import sample.doc.PdfFormHandler;
 import sample.doc.RequisitionDoc;
 import sample.doc.TicketDoc;
 import sample.enums.*;
-import sample.model.Branch;
-import sample.model.CacheData;
-import sample.model.Hotel;
-import sample.model.TouristSpot;
+import sample.model.*;
 import sample.pojo.*;
 import sample.utils.ActivationUtil;
 import sample.utils.MyUtil;
@@ -159,6 +156,14 @@ public class Controller implements Initializable {
     public TreeView<Branch> branchTreeView;
 
     private final List<Hotel> showHotelList = new ArrayList<>();
+    /**
+     * 出发航班信息输入 [开始地点, 出发时间, 目的地, 抵达时间, 航班号码
+     */
+    public TextField startFlightField;
+    /**
+     * 返航航班信息输入
+     */
+    public TextField endFlightField;
 
 
     /**
@@ -434,8 +439,8 @@ public class Controller implements Initializable {
         info.setDateOfArrivalInJapan(getDdMmYyyyTimeStr(startDt));
         // 入境日本口岸
         info.setPortOfEntryIntoJapan(portOfEntryIntoJapanField.getText());
-        // 入境航空公司名称
-        info.setNameOfShipOrAirline(cacheData.getFlight().getCode());
+        // 入境航空公司名称 (航班号码)
+        info.setNameOfShipOrAirline(cacheData.getFlight().getFlightCode());
 
         // 入住酒店名称
         Hotel hotel = cacheData.getHotel();
@@ -493,7 +498,8 @@ public class Controller implements Initializable {
             itinerary.setDate(String.format("%s.%s.%s", dt.substring(0, 4), dt.substring(4, 6), dt.substring(6, 8)));
             ArrayList<String> activityPlan = new ArrayList<>(4);
             if (dt.equals(cacheData.getStartDt())) {
-                activityPlan.add(AirportEnum.ICN.getFromToStr(AirportEnum.NRT));
+                // 第一条数据：固定 ICN -> 指定入境港口
+                activityPlan.add(AirportEnum.ICN.getFromToStr(portOfEntryIntoJapanField.getText()));
                 itinerary.setContactNumber(phoneField.getText());
             } else if (dt.equals(cacheData.getEndDt())) {
                 activityPlan.add(AirportEnum.NRT.getFromToStr(AirportEnum.ICN));
@@ -507,19 +513,21 @@ public class Controller implements Initializable {
      * 填充机票信息
      */
     private void fillFlightInfo() {
-        cacheData.setFlightInfo(FligihtInfo.createFlightInfo(cacheData.getFlight(), cacheData.getStartDt()));
-        cacheData.setBackFlightInfo(FligihtInfo.createFlightInfo(cacheData.getBackFlight(), cacheData.getEndDt()));
+        Flight flight = cacheData.getFlight();
+        cacheData.setFlightInfo(FligihtInfo.createFlightInfo(flight, cacheData.getStartDt()));
+        Flight backFlight = cacheData.getBackFlight();
+        cacheData.setBackFlightInfo(FligihtInfo.createFlightInfo(backFlight, cacheData.getEndDt()));
         Ticket ticketInfo = new Ticket();
         cacheData.setTicketInfo(ticketInfo);
         ticketInfo.setAirlinePnr(RandomUtil.randomStringUpper(6));
         ticketInfo.setBookingPnr(RandomUtil.randomStringUpper(6));
-        ticketInfo.seteTicketNumber(cacheData.getFlight().getCompany().getRandomTicketNum());
+        ticketInfo.seteTicketNumber(AirlineCompanyEnum.getRandomTicketNum(flight.getTicketPreFix()));
         ticketInfo.setPassengerName(cacheData.getUserInfo().getEnglishLastName() + StrUtil.SLASH + cacheData.getUserInfo().getEnglishFirstName(), SexEnum.values()[sexCombo.getSelectionModel().getSelectedIndex()]);
         ticketInfo.setIdNumber(passportField.getText());
         ticketInfo.setConjunctionTicketNumber("");
         ticketInfo.setDateOfIssue(LocalDateTimeUtil.now().format(DatePattern.NORM_DATE_FORMATTER));
         ticketInfo.setIataCode(RandomUtil.randomNumbers(8));
-        ticketInfo.setIssuingAirline(cacheData.getFlight().getCompany().getEnglishName());
+        ticketInfo.setIssuingAirline(flight.getCompanyName());
     }
 
     /**
@@ -537,8 +545,37 @@ public class Controller implements Initializable {
         cacheData.setHotel(hotelCombo.getItems().get(selectedIndex));
 
         // 选择的航班
-        cacheData.setFlight(FLIGHT_LIST.get(flightCombo.getSelectionModel().getSelectedIndex()));
-        cacheData.setBackFlight(BACK_FLIGHT_LIST.get(backFlightCombo.getSelectionModel().getSelectedIndex()));
+        Flight startFlight = new Flight();
+        String startFlightFieldText = startFlightField.getText();
+        if (StrUtil.isNotBlank(startFlightFieldText)) {
+            try {
+                getFlightInfoFromText(startFlight, startFlightFieldText);
+            } catch (Exception e) {
+                popMsg("警告", "输入的开始航班信息有误，请按照格式[开始地点,开始地点航站号,开始时间,终点,终点航站号,抵达时间,航班号码,航空公司,机票号码前缀]输入，或者清空输入框！" +
+                        "\n示例：NRT,T1,10:00,KIX,T1,12:00,KE1111,KOREAN AIR,180");
+                return false;
+            }
+        } else {
+            startFlight.setFlightEnum(FLIGHT_LIST.get(flightCombo.getSelectionModel().getSelectedIndex()));
+        }
+        cacheData.setFlight(startFlight);
+
+        Flight endFlight = new Flight();
+        String endFlightFieldText = startFlightField.getText();
+        if (StrUtil.isNotBlank(endFlightFieldText)) {
+            try {
+                getFlightInfoFromText(endFlight, endFlightFieldText);
+            } catch (Exception e) {
+                popMsg("警告", "输入的结束航班信息有误，请按照格式[开始地点,开始地点航站号,开始时间,终点,终点航站号,抵达时间,航班号码,航空公司,机票号码前缀]输入，或者清空输入框！" +
+                        "\n示例：NRT,T1,10:00,KIX,T1,12:00,KE1111,KOREAN AIR,180");
+                return false;
+            }
+        } else {
+            endFlight.setFlightEnum(BACK_FLIGHT_LIST.get(backFlightCombo.getSelectionModel().getSelectedIndex()));
+        }
+        cacheData.setBackFlight(endFlight);
+
+
         String startDt = LocalDateTimeUtil.format(startDatePicker.getValue(), PURE_DATE_PATTERN);
         cacheData.setStartDt(startDt);
         String endDt = LocalDateTimeUtil.format(endDatePicker.getValue(), PURE_DATE_PATTERN);
@@ -561,38 +598,52 @@ public class Controller implements Initializable {
         return true;
     }
 
+    private void getFlightInfoFromText(Flight flight, String startFlightFieldText) {
+        List<String> list = Arrays.stream(startFlightFieldText.split(",")).map(String::trim).collect(Collectors.toList());
+        flight.setStartCode(list.get(0));
+        flight.setStartTerminalNo(list.get(1));
+        flight.setStartTime(list.get(2));
+        flight.setEndCode(list.get(3));
+        flight.setEndTerminalNo(list.get(4));
+        flight.setEndTime(list.get(5));
+        flight.setFlightCode(list.get(6));
+        flight.setCompanyName(list.get(7));
+        flight.setTicketPreFix(list.get(8));
+    }
+
     /**
      * 填充用户信息
      */
     private void fillUserInfo() {
         cacheData.setUserInfo(new UserInformation());
-        cacheData.getUserInfo().setPassportNum(passportField.getText());
+        UserInformation userInfo = cacheData.getUserInfo();
+        userInfo.setPassportNum(passportField.getText());
         String lastName = lastNameField.getText();
-        cacheData.getUserInfo().setChineseLastName(lastName);
+        userInfo.setChineseLastName(lastName);
         String firstName = firstNameField.getText();
-        cacheData.getUserInfo().setChineseFirstName(firstName);
+        userInfo.setChineseFirstName(firstName);
 
         Assert.notBlank(lastName, "姓氏不能为空");
         Assert.notBlank(firstName, "名称不能为空");
 
-        cacheData.getUserInfo().setGender(MyUtil.setCheck(cacheData.getUserInfo().getGender(), sexCombo.getSelectionModel().getSelectedIndex()));
-        cacheData.getUserInfo().setDateOfBirth(DateUtil.format(LocalDateTimeUtil.of(birthdayPicker.getValue()), PURE_DATE_PATTERN));
-        cacheData.getUserInfo().setPlaceOfBirth(birthplaceField.getText());
-        cacheData.getUserInfo().setMaritalStatus(MyUtil.setCheck(cacheData.getUserInfo().getMaritalStatus(), marriageCombo.getSelectionModel().getSelectedIndex()));
-        cacheData.getUserInfo().setNationality(nationalityField.getText());
-        cacheData.getUserInfo().setForeignerRegistrationNumber(idnField.getText());
-        cacheData.getUserInfo().setContactNumber(phoneField.getText());
-        cacheData.getUserInfo().setEmail(emailField.getText());
-        cacheData.getUserInfo().setAddress(addressField.getText());
-        cacheData.getUserInfo().setCurrentOccupationAndPosition(MyUtil.setCheck(cacheData.getUserInfo().getCurrentOccupationAndPosition(), occupationCombo.getSelectionModel().getSelectedIndex()));
-        cacheData.getUserInfo().setCompanyOrSchoolName(companyName.getText());
-        cacheData.getUserInfo().setCompanyOrSchoolPhoneNumber(companyPhoneField.getText());
-        cacheData.getUserInfo().setCompanyOrSchoolAddress(companyAddressField.getText());
-        cacheData.getUserInfo().setEnglishLastName(PinyinUtil.getPinyin(lastName, StrUtil.EMPTY).toUpperCase(Locale.ROOT));
-        cacheData.getUserInfo().setEnglishFirstName(PinyinUtil.getPinyin(firstName, StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        userInfo.setGender(MyUtil.setCheck(userInfo.getGender(), sexCombo.getSelectionModel().getSelectedIndex()));
+        userInfo.setDateOfBirth(DateUtil.format(LocalDateTimeUtil.of(birthdayPicker.getValue()), PURE_DATE_PATTERN));
+        userInfo.setPlaceOfBirth(birthplaceField.getText());
+        userInfo.setMaritalStatus(MyUtil.setCheck(userInfo.getMaritalStatus(), marriageCombo.getSelectionModel().getSelectedIndex()));
+        userInfo.setNationality(nationalityField.getText());
+        userInfo.setForeignerRegistrationNumber(idnField.getText());
+        userInfo.setContactNumber(phoneField.getText());
+        userInfo.setEmail(emailField.getText());
+        userInfo.setAddress(addressField.getText());
+        userInfo.setCurrentOccupationAndPosition(MyUtil.setCheck(userInfo.getCurrentOccupationAndPosition(), occupationCombo.getSelectionModel().getSelectedIndex()));
+        userInfo.setCompanyOrSchoolName(companyName.getText());
+        userInfo.setCompanyOrSchoolPhoneNumber(companyPhoneField.getText());
+        userInfo.setCompanyOrSchoolAddress(companyAddressField.getText());
+        userInfo.setEnglishLastName(PinyinUtil.getPinyin(lastName, StrUtil.EMPTY).toUpperCase(Locale.ROOT));
+        userInfo.setEnglishFirstName(PinyinUtil.getPinyin(firstName, StrUtil.EMPTY).toUpperCase(Locale.ROOT));
         LocalDate startDt = startDatePicker.getValue();
         LocalDate endDt = endDatePicker.getValue();
-        cacheData.getUserInfo().setPlannedDurationOfStayInJapan(String.format(UserInformation.DURATION_FORMAT,
+        userInfo.setPlannedDurationOfStayInJapan(String.format(UserInformation.DURATION_FORMAT,
                 StrUtil.fillBefore(String.valueOf(startDt.getYear()), '0', 4),
                 StrUtil.fillBefore(String.valueOf(startDt.getMonthValue()), '0', 2),
                 StrUtil.fillBefore(String.valueOf(startDt.getDayOfMonth()), '0', 2),
@@ -604,7 +655,7 @@ public class Controller implements Initializable {
         LocalDate lastStayStartDtPickerValue = lastStayStartDtPicker.getValue();
         LocalDate lastStayEndDtPickerValue = lastStayEndDtPicker.getValue();
         if (null != lastStayEndDtPickerValue && null != lastStayStartDtPickerValue) {
-            cacheData.getUserInfo().setLastStayInJapanDuration(String.format(UserInformation.DURATION_FORMAT,
+            userInfo.setLastStayInJapanDuration(String.format(UserInformation.DURATION_FORMAT,
                     StrUtil.fillBefore(String.valueOf(lastStayStartDtPickerValue.getYear()), '0', 4),
                     StrUtil.fillBefore(String.valueOf(lastStayStartDtPickerValue.getMonthValue()), '0', 2),
                     StrUtil.fillBefore(String.valueOf(lastStayStartDtPickerValue.getDayOfMonth()), '0', 2),
@@ -616,20 +667,22 @@ public class Controller implements Initializable {
 
         String last1yStayDaysFieldText = last1yStayDaysField.getText();
         if (StrUtil.isNotBlank(last1yStayDaysFieldText)) {
-            cacheData.getUserInfo().setTotalStayDurationInJapanLastYear(
+            userInfo.setTotalStayDurationInJapanLastYear(
                     String.format(UserInformation.STAY_DURATION_JAPAN_LAST_YEAR_FORMAT, last1yStayDaysFieldText)
             );
         }
 
-        // 港口,航班号
-        cacheData.getUserInfo().setEntryPortOrFlightNumber(cacheData.getFlight().getEndTerminal().getAirport()
-                + StrPool.COMMA
-                + cacheData.getFlight().getCode());
+        // 航班号
+        Flight flight = cacheData.getFlight();
+        userInfo.setEntryPortOrFlightNumber(
+//                flight.getEndTerminal().getAirport()
+//                + StrPool.COMMA +
+                flight.getFlightCode());
 
         // 入境港口
         String portName = portOfEntryIntoJapanField.getText();
         if (StrUtil.isNotBlank(portName)) {
-            cacheData.getUserInfo().setPlannedCityOfEntryInJapan(portName);
+            userInfo.setPlannedCityOfEntryInJapan(portName);
         }
     }
 
@@ -684,6 +737,7 @@ public class Controller implements Initializable {
         });
         occupationCombo.getSelectionModel().select(OccupationEnum.STUDENT.ordinal());
 
+        // 出发航班下拉框
         flightCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
             @Override
             public String get(int i) {
@@ -739,13 +793,20 @@ public class Controller implements Initializable {
                 + StrPool.BRACKET_START + flightEnum.getStartTime() + StrPool.COMMA
                 + flightEnum.getEndTime() + StrPool.BRACKET_END
                 + StrPool.AT + flightEnum.getCompany().getChineseName();
+//        return flightEnum.getStartTerminal().getAirport().getCode() +
+//                "," +
+//                flightEnum.getStartTime() +
+//                "," +
+//                flightEnum.getEndTerminal().getAirport().getCode() +
+//                "," +
+//                flightEnum.getEndTime() +
+//                "," +
+//                flightEnum.getCode() +
+//                "," +
+//                flightEnum.getCompany().getEnglishName();
     }
 
-    List<FlightEnum> FLIGHT_LIST = Arrays.stream(FlightEnum.values()).filter(f ->
-            f.getStartTerminal().getAirport() == AirportEnum.ICN
-    ).collect(Collectors.toList());
+    List<FlightEnum> FLIGHT_LIST = Arrays.stream(FlightEnum.values()).collect(Collectors.toList());
 
-    List<FlightEnum> BACK_FLIGHT_LIST = Arrays.stream(FlightEnum.values()).filter(f ->
-            f.getStartTerminal().getAirport() == AirportEnum.NRT
-    ).collect(Collectors.toList());
+    List<FlightEnum> BACK_FLIGHT_LIST = Arrays.stream(FlightEnum.values()).collect(Collectors.toList());
 }

@@ -42,7 +42,7 @@ public enum TerminalEnum {
     /**
      * 富士山机场
      */
-    FSZ_T("T", FSZ),
+    FSZ_T("", FSZ),
     /**
      * 中部
      */
@@ -50,23 +50,23 @@ public enum TerminalEnum {
     /**
      * 福冈机场
      */
-    FUK_T("T", FUK),
+    FUK_T("", FUK),
     /**
      * 熊本机场
      */
-    KMJ_T("T", KMJ),
+    KMJ_T("", KMJ),
     /**
      * 鹿儿岛机场
      */
-    KOJ_T("T", KOJ),
+    KOJ_T("", KOJ),
     /**
      * 那霸机场
      */
-    OKA_T("T", OKA),
+    OKA_T("", OKA),
     /**
      * 新千岁机场
      */
-    CTS_T("T", CTS),
+    CTS_T("", CTS),
 
 
 //    JP_T1("金浦", "I", AirportEnum.GMP),

@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import sample.enums.FlightEnum;
+import sample.model.Flight;
 
 import static cn.hutool.core.date.DatePattern.PURE_DATE_PATTERN;
 
@@ -55,21 +56,21 @@ public class FligihtInfo {
     private String arrivalTerminal;
 
 
-    public static FligihtInfo createFlightInfo(FlightEnum flightEnum, String dt) {
+    public static FligihtInfo createFlightInfo(Flight flight, String dt) {
         FligihtInfo flightInfo = new FligihtInfo();
-        flightInfo.setFlight(flightEnum.getCode());
+        flightInfo.setFlight(flight.getFlightCode());
         flightInfo.setDate(DateUtil.parse(dt, PURE_DATE_PATTERN).toDateStr());
-        flightInfo.setDepartureTerminal(flightEnum.getStartTerminal().getTerminalNo());
+        flightInfo.setDepartureTerminal(flight.getStartTerminalNo());
 
-        String startTime = formatTime(flightEnum.getStartTime());
+        String startTime = formatTime(flight.getStartTime());
         flightInfo.setDepartureTime(startTime);
 
-        flightInfo.setArrivalTerminal(flightEnum.getEndTerminal().getTerminalNo());
+        flightInfo.setArrivalTerminal(flight.getEndTerminalNo());
 
-        String endTime = formatTime(flightEnum.getEndTime());
+        String endTime = formatTime(flight.getEndTime());
         flightInfo.setArrivalTime(endTime);
 
-        flightInfo.setOriginDes(flightEnum.getStartTerminal().getAirport().getCode() + StrUtil.SLASH + flightEnum.getEndTerminal().getAirport().getCode());
+        flightInfo.setOriginDes(flight.getStartCode() + StrUtil.SLASH + flight.getEndCode());
         return flightInfo;
     }
 

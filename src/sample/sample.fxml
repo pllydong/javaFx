@@ -169,7 +169,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="530.0">
                <children>
-                  <TextField fx:id="addressField" layoutX="5.0" layoutY="3.0" prefHeight="23.0" prefWidth="634.0" text="서울시 성북구 종암로3길30-6, 401호" />
+                  <TextField fx:id="addressField" layoutX="5.0" layoutY="3.0" prefHeight="30.0" prefWidth="623.0" text="서울시 성북구 종암로3길30-6, 401호" />
                </children>
             </AnchorPane>
          </items>
@@ -244,7 +244,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.22401847575057737" layoutX="300.0" layoutY="162.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.22401847575057737" layoutX="303.0" layoutY="126.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -258,7 +258,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.24942263279445728" layoutX="300.0" layoutY="192.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.24942263279445728" layoutX="300.0" layoutY="162.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -272,7 +272,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.21709006928406466" layoutX="300.0" layoutY="222.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.21709006928406466" layoutX="300.0" layoutY="201.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -286,7 +286,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button fx:id="exportFileButton" layoutX="304.0" layoutY="258.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="428.0" style="-fx-background-color: #54FF9F;" text="生成文件" />
+      <Button fx:id="exportFileButton" layoutX="326.0" layoutY="492.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="372.0" style="-fx-background-color: #54FF9F;" text="生成文件" />
       <SplitPane dividerPositions="0.18013856812933027" layoutX="300.0" layoutY="132.0" prefHeight="30.0" prefWidth="435.0" visible="false">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -371,7 +371,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.17551963048498845" layoutX="300.0" layoutY="293.0" prefHeight="30.0" prefWidth="435.0">
+      <SplitPane dividerPositions="0.17551963048498845" layoutX="303.0" layoutY="263.0" prefHeight="30.0" prefWidth="435.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="28.0" prefWidth="93.0">
                <children>
@@ -399,7 +399,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button fx:id="randomFlightButton" layoutX="391.0" layoutY="371.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="217.0" text="随机航班生成" />
+      <Button fx:id="randomFlightButton" layoutX="386.0" layoutY="407.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="217.0" text="随机航班生成" />
       <SplitPane dividerPositions="0.35348837209302325" layoutX="754.0" layoutY="14.0" prefHeight="30.0" prefWidth="217.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -528,5 +528,8 @@
       </SplitPane>
       <TreeView fx:id="branchTreeView" layoutX="754.0" layoutY="303.0" prefHeight="289.0" prefWidth="428.0" />
       <Label layoutX="754.0" layoutY="278.0" prefHeight="20.0" prefWidth="435.0" text="城市选择" />
+      <TextField fx:id="startFlightField" layoutX="301.0" layoutY="297.0" prefHeight="30.0" prefWidth="428.0" />
+      <TextField fx:id="endFlightField" layoutX="301.0" layoutY="371.0" prefHeight="30.0" prefWidth="428.0" />
+      <Label layoutX="300.0" layoutY="236.0" prefHeight="20.0" prefWidth="435.0" text="示例：NRT,T1,10:00,KIX,T1,12:00,KE1111,KOREAN AIR,180" />
    </children>
 </Pane>

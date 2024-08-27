@@ -9,7 +9,6 @@ import lombok.Getter;
  * @author guokun
  * @date 2024/6/19 22:15
  */
-@Getter
 public enum AirlineCompanyEnum {
     /**
      * 首尔航空
@@ -57,11 +56,31 @@ public enum AirlineCompanyEnum {
         this.ticketNumPrefix = ticketNumPrefix;
     }
 
+    public String getChineseName() {
+        return chineseName;
+    }
+
+    public String getEnglishName() {
+        return englishName;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+
+    public String getTicketNumPrefix() {
+        return ticketNumPrefix;
+    }
+
     /**
      * 获取随机机票号码
      * @return
      */
     public String getRandomTicketNum() {
-        return ticketNumPrefix + RandomUtil.randomNumbers(10);
+        return getRandomTicketNum(ticketNumPrefix);
+    }
+
+    public static String getRandomTicketNum(String prefix) {
+        return prefix + RandomUtil.randomNumbers(10);
     }
 }

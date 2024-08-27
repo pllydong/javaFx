@@ -64,10 +64,11 @@ public enum AirportEnum {
     }
 
     public String getFromToStr(AirportEnum to) {
-        return getFromToStr(this, to);
+        return getFromToStr(to.getCode());
     }
 
-    public static String getFromToStr(AirportEnum from, AirportEnum to) {
-        return from.getCode() + " -> " + to.getCode();
+    public String getFromToStr(String o2) {
+        return this.getCode() + " -> " + o2;
     }
+
 }

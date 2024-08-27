@@ -61,11 +61,11 @@ public class CacheData {
     /**
      * 出发航班
      */
-    private FlightEnum flight;
+    private Flight flight;
     /**
      * 返航航班
      */
-    private FlightEnum backFlight;
+    private Flight backFlight;
 
     /**
      * 用户信息
