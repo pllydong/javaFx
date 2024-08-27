@@ -51,7 +51,7 @@ public class DataInitUtil {
         Branch branch = newBranch(rootBranch.getId(), "北海道 (北海道)");
         branch.setShortName("CTS");
 
-        createBranch(branch.getId(), "洞爷湖 (Lake Toya)",
+        createBranch(branch.getId(), "登别、洞爷湖 (Noboribetsu、Lake Toya)",
 
                 "1.     Noboribetsu Onsen (登別温泉)    \n" +
                         "2.     Noboribetsu Bear Park (登別クマ牧場)    \n" +
@@ -487,25 +487,25 @@ public class DataInitUtil {
                         "10.   Kinchichi Soba (金月そば)    ",
                 "1. 阿利维亚日光酒店 (Hotel Nikko Alivila)\n" +
                         "   - 地址: 600 Gima Yomitan-son, Nakagami-gun, Okinawa 904-0393, Japan\n" +
-                        "   - 电话: +81 98-958-5000\n" +
+                        "   - 电话: +81 98-958-5000\n\n" +
                         "2. 冲绳北谷希尔顿度假酒店 (Hilton Okinawa Chatan Resort)\n" +
                         "   - 地址: 40-1 Mihama, Chatan-cho, Nakagami-gun, Okinawa 904-0115, Japan\n" +
-                        "   - 电话: +81 98-901-1111\n" +
+                        "   - 电话: +81 98-901-1111\n\n" +
                         "3. 冲绳丽思卡尔顿酒店 (The Ritz-Carlton, Okinawa)\n" +
                         "   - 地址: 1343-1 Kise, Nago, Okinawa 905-0026, Japan\n" +
-                        "   - 电话: +81 980-43-5555\n" +
+                        "   - 电话: +81 980-43-5555\n\n" +
                         "4. 冲绳濑良垣岛凯悦酒店 (Hyatt Regency Seragaki Island Okinawa)\n" +
                         "   - 地址: 1108 Seragaki, Onna-son, Kunigami-gun, Okinawa 904-0404, Japan\n" +
-                        "   - 电话: +81 98-960-4321\n" +
+                        "   - 电话: +81 98-960-4321\n\n" +
                         "5. 冲绳太阳码头喜来登酒店 (Sheraton Okinawa Sunmarina Resort)\n" +
                         "   - 地址: 66-1 Fuchaku, Onna-son, Kunigami-gun, Okinawa 904-0494, Japan\n" +
-                        "   - 电话: +81 98-965-2222\n" +
+                        "   - 电话: +81 98-965-2222\n\n" +
                         "6. 洲际万座海滩度假酒店 (ANA InterContinental Manza Beach Resort)\n" +
                         "   - 地址: 2260 Seragaki, Onna-son, Kunigami-gun, Okinawa 904-0493, Japan\n" +
-                        "   - 电话: +81 98-966-1211\n" +
+                        "   - 电话: +81 98-966-1211\n\n" +
                         "7. 冲绳蒙特利水疗度假酒店 (Hotel Monterey Okinawa Spa & Resort)\n" +
                         "   - 地址: 1550-1 Fuchaku, Onna-son, Kunigami-gun, Okinawa 904-0413, Japan\n" +
-                        "   - 电话: +81 98-993-7111\n" +
+                        "   - 电话: +81 98-993-7111\n\n" +
                         "8. 海丽客兰尼冲绳 (Halekulani Okinawa)\n" +
                         "   - 地址: 1967-1 Nakama, Onna-son, Kunigami-gun, Okinawa 904-0401, Japan\n" +
                         "   - 电话: +81 98-953-8600"

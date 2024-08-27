@@ -18,6 +18,7 @@ public class CacheData {
     private static final MyMap<Branch> branchMap = new MyMap<>();
     private static final MyMap<TouristSpot> touristSpotMap = new MyMap<>();
     private static final MyMap<Hotel> hotelMap = new MyMap<>();
+//    private static final MyMap<>
 
     public static Branch getRootBranch() {
         return rootBranch;

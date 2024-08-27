@@ -58,6 +58,12 @@ public class Branch {
      */
     private Set<String> hotels = new HashSet<>();
 
+    /**
+     * 航班列表
+     *
+     */
+    private Set<String> flights = new HashSet<>();
+
 
     public Set<String> getAllHotels() {
         Set<String> set = new HashSet<>(hotels);
