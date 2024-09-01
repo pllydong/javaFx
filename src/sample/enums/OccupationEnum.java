@@ -24,4 +24,10 @@ public enum OccupationEnum {
         this.code = code;
         this.desc = desc;
     }
+
+
+    @Override
+    public String toString() {
+        return this.desc;
+    }
 }

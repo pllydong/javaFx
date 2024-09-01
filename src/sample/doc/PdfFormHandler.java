@@ -1,5 +1,6 @@
 package sample.doc;
 
+import cn.hutool.core.util.StrUtil;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.AcroFields;
 import com.itextpdf.text.pdf.BaseFont;
@@ -9,6 +10,8 @@ import sample.pojo.JapanVisaApplication;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PdfFormHandler {
     public static void handle(JapanVisaApplication japanVisaApplication, String filePath, String cusName) {
@@ -39,10 +42,8 @@ public class PdfFormHandler {
 
 
             // 按顺序获取字段位置信息
-            String[] fieldNames = new String[42];
-            for (int i = 1; i <= 42; i++) {
-                fieldNames[i - 1] = "form-" + i;
-            }
+            List<String> fieldNames = form.getFields().keySet().stream()
+                    .filter(f -> !f.contains("rb-") && !f.contains(".RB")).collect(Collectors.toList());
 
 
             // 遍历所有表单域，按顺序填写
@@ -171,8 +172,11 @@ public class PdfFormHandler {
                 return application.getEmployerAddress();
             case "form-42":
                 return application.getPartnersProfessionOrOccupation();
+            case "topmostSubform[0].Page2[0].T150[0]":
+                return application.getDateOfApplication();
             default:
-                return "";
+//                return fieldName.substring(Math.min(fieldName.length() - 1, 20));
+                return StrUtil.EMPTY;
         }
     }
 

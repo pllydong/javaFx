@@ -15,7 +15,7 @@ public class JapanVisaApplication {
     private String givenAndMiddleNames="";
 
     // Other names (including any other names you are or have been known by) 其他名字（包括您现在或曾经使用的任何其他名字）
-    private String otherNames="";
+    private String otherNames="NONE";
 
     // Date of birth  出生日期
     private String dateOfBirth="";
@@ -131,5 +131,9 @@ public class JapanVisaApplication {
     //(Note)Partner's profession/occupation (or that of parents, if applicant is a minor):
     //伴侣的职业/职业（或父母的职业，如果申请人是未成年人）：
     private String partnersProfessionOrOccupation="";
+
+    //Date of application
+    //申请单日期
+    private String dateOfApplication="";
 
 }

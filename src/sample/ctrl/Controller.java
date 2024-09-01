@@ -132,9 +132,9 @@ public class Controller implements Initializable {
     public TextField last1yStayDaysField;
     public DatePicker lastStayEndDtPicker;
     public DatePicker lastStayStartDtPicker;
-    public ComboBox<String> backFlightCombo;
-    public Button randomFlightButton;
-    public ComboBox<String> flightCombo;
+//    public ComboBox<String> backFlightCombo;
+//    public Button randomFlightButton;
+//    public ComboBox<String> flightCombo;
     /**
      * 护照号码
      */
@@ -164,6 +164,18 @@ public class Controller implements Initializable {
      * 返航航班信息输入
      */
     public TextField endFlightField;
+    /**
+     * 客户其他名称
+     */
+    public TextField otherNameField;
+    /**
+     * 申请单2日期选择器:默认当日
+     */
+    public DatePicker application2DatePicker;
+    /**
+     * 伴侣工作，仅已婚生效
+     */
+    public ComboBox<OccupationEnum> partnerOccupationCombo;
 
 
     /**
@@ -250,7 +262,6 @@ public class Controller implements Initializable {
 
         list.sort(Comparator.comparing(o -> Integer.valueOf(o.getValue().getId())));
         children.addAll(list);
-        System.out.println("树构建中");
     }
 
     /**
@@ -301,6 +312,9 @@ public class Controller implements Initializable {
         endDatePicker.setValue(LocalDate.now().plusDays(4));
 
         birthdayPicker.setValue(LocalDate.now().minusYears(20));
+
+        // 行程单2日期，默认当日
+        application2DatePicker.setValue(LocalDate.now());
     }
 
     private void popMsg(String title, String msg) {
@@ -340,10 +354,10 @@ public class Controller implements Initializable {
             }
         });
 
-        randomFlightButton.setOnAction(event -> {
-            flightCombo.getSelectionModel().select(RandomUtil.randomInt(flightCombo.getItems().size()));
-            backFlightCombo.getSelectionModel().select(RandomUtil.randomInt(backFlightCombo.getItems().size()));
-        });
+//        randomFlightButton.setOnAction(event -> {
+//            flightCombo.getSelectionModel().select(RandomUtil.randomInt(flightCombo.getItems().size()));
+//            backFlightCombo.getSelectionModel().select(RandomUtil.randomInt(backFlightCombo.getItems().size()));
+//        });
     }
 
     /**
@@ -371,9 +385,9 @@ public class Controller implements Initializable {
                 pinyin, fileName,
                 cacheData.getHotel().getEnName(), cacheData.getHotel().getAddress(), cacheData.getHotel().getPhone());
 
-        // 导出机票
-        TicketDoc.handle(cacheData.getTicketInfo(), cacheData.getFlightInfo(), cacheData.getBackFlightInfo(), fileName, ticketPath,
-                1079, 1542);
+//        // 导出机票
+//        TicketDoc.handle(cacheData.getTicketInfo(), cacheData.getFlightInfo(), cacheData.getBackFlightInfo(), fileName, ticketPath,
+//                1079, 1542);
 
         // 导出申请表2
         PdfFormHandler.handle(cacheData.getJapanVisaApplication(), pdfApplicationPath, fileName);
@@ -389,7 +403,7 @@ public class Controller implements Initializable {
 
         fillUserInfo();
 
-        fillFlightInfo();
+//        fillFlightInfo();
 
         fillItineraryInfo();
 
@@ -398,6 +412,9 @@ public class Controller implements Initializable {
         return true;
     }
 
+    /**
+     * 行程单2
+     */
     private void fillJapanVisaApplicationInfo() {
         JapanVisaApplication info = new JapanVisaApplication();
         cacheData.setJapanVisaApplication(info);
@@ -407,8 +424,9 @@ public class Controller implements Initializable {
         info.setDateOfBirth(birthdayPicker.getValue() == null ?
                 StrUtil.EMPTY :
                 birthdayPicker.getValue().format(ddMMyyyy));
-        info.setSurname(PinyinUtil.getPinyin(lastNameField.getText()).toUpperCase(Locale.ROOT));
-        info.setGivenAndMiddleNames(PinyinUtil.getPinyin(firstNameField.getText()).toUpperCase(Locale.ROOT));
+        info.setSurname(PinyinUtil.getPinyin(lastNameField.getText()).toUpperCase(Locale.ROOT) + "  " + lastNameField.getText());
+        info.setGivenAndMiddleNames(PinyinUtil.getPinyin(firstNameField.getText()).toUpperCase(Locale.ROOT) + "  " + firstNameField.getText());
+        info.setOtherNames(StrUtil.blankToDefault(otherNameField.getText(), "NONE"));
         info.setPlaceOfBirthCountry(birthplaceField.getText());
         info.setSex(sexCombo.getSelectionModel().getSelectedIndex() + 1);
         info.setMaritalStatus(marriageCombo.getSelectionModel().getSelectedIndex() + 1);
@@ -451,7 +469,11 @@ public class Controller implements Initializable {
         info.setAddressOfIntendedStays(hotel.getAddress());
 
         // 之前在日本居住的时间
-        info.setPreviousStaysInJapan(getDdMmYyyyTimeStr(lastStayStartDtPicker.getValue()) + "~" + getDdMmYyyyTimeStr(lastStayEndDtPicker.getValue()));
+        String previousStaysInJapan = getDdMmYyyyTimeStr(lastStayStartDtPicker.getValue()) + "~" + getDdMmYyyyTimeStr(lastStayEndDtPicker.getValue());
+        if ("~".equals(previousStaysInJapan)) {
+            previousStaysInJapan = StrUtil.EMPTY;
+        }
+        info.setPreviousStaysInJapan(StrUtil.blankToDefault(previousStaysInJapan, "NONE"));
 
         // 当前居住地址
         info.setCurrentResidentialAddress(addressField.getText());
@@ -468,9 +490,14 @@ public class Controller implements Initializable {
         info.setEmployerTelephone(companyPhoneField.getText());
         info.setEmployerName(companyName.getText());
 
-        // 伴侣或父母的职业
-        info.setPartnersProfessionOrOccupation(StrUtil.EMPTY);
+        // 伴侣或父母的职业(仅已婚生效)
+        info.setPartnersProfessionOrOccupation(
+                MarriageEnum.MARRIED.getDesc().equals(marriageCombo.getValue()) && null != partnerOccupationCombo.getValue() ?
+                        partnerOccupationCombo.getValue().getDesc() : StrUtil.EMPTY
+        );
 
+        // 行程单2日期
+        info.setDateOfApplication(getDdMmYyyyTimeStr(application2DatePicker.getValue()));
 
     }
 
@@ -484,6 +511,9 @@ public class Controller implements Initializable {
      * 填充化行程单信息
      */
     private void fillItineraryInfo() {
+        // 入境港口不能为空
+        Assert.notBlank(portOfEntryIntoJapanField.getText(), "入境港口不能为空");
+
         cacheData.setItineraryInfoList(new ArrayList<>());
 
         // 随机分配的景点
@@ -502,9 +532,9 @@ public class Controller implements Initializable {
                 activityPlan.add(AirportEnum.ICN.getFromToStr(portOfEntryIntoJapanField.getText()));
                 itinerary.setContactNumber(phoneField.getText());
             } else if (dt.equals(cacheData.getEndDt())) {
-                activityPlan.add(AirportEnum.NRT.getFromToStr(AirportEnum.ICN));
+                activityPlan.add(portOfEntryIntoJapanField.getText() + " -> " + AirportEnum.ICN.getCode());
             }
-            activityPlan.addAll(touristSpots.stream().map(TouristSpot::getEnglishName).collect(Collectors.toList()));
+            activityPlan.addAll(touristSpots.stream().map(t -> String.format("%s (%s)", t.getEnglishName(), t.getJapaneseName())).collect(Collectors.toList()));
             itinerary.setActivityPlan(activityPlan);
         }
     }
@@ -556,7 +586,7 @@ public class Controller implements Initializable {
                 return false;
             }
         } else {
-            startFlight.setFlightEnum(FLIGHT_LIST.get(flightCombo.getSelectionModel().getSelectedIndex()));
+//            startFlight.setFlightEnum(FLIGHT_LIST.get(flightCombo.getSelectionModel().getSelectedIndex()));
         }
         cacheData.setFlight(startFlight);
 
@@ -571,7 +601,7 @@ public class Controller implements Initializable {
                 return false;
             }
         } else {
-            endFlight.setFlightEnum(BACK_FLIGHT_LIST.get(backFlightCombo.getSelectionModel().getSelectedIndex()));
+//            endFlight.setFlightEnum(BACK_FLIGHT_LIST.get(backFlightCombo.getSelectionModel().getSelectedIndex()));
         }
         cacheData.setBackFlight(endFlight);
 
@@ -599,16 +629,17 @@ public class Controller implements Initializable {
     }
 
     private void getFlightInfoFromText(Flight flight, String startFlightFieldText) {
-        List<String> list = Arrays.stream(startFlightFieldText.split(",")).map(String::trim).collect(Collectors.toList());
-        flight.setStartCode(list.get(0));
-        flight.setStartTerminalNo(list.get(1));
-        flight.setStartTime(list.get(2));
-        flight.setEndCode(list.get(3));
-        flight.setEndTerminalNo(list.get(4));
-        flight.setEndTime(list.get(5));
-        flight.setFlightCode(list.get(6));
-        flight.setCompanyName(list.get(7));
-        flight.setTicketPreFix(list.get(8));
+//        List<String> list = Arrays.stream(startFlightFieldText.split(",")).map(String::trim).collect(Collectors.toList());
+//        flight.setStartCode(list.get(0));
+//        flight.setStartTerminalNo(list.get(1));
+//        flight.setStartTime(list.get(2));
+//        flight.setEndCode(list.get(3));
+//        flight.setEndTerminalNo(list.get(4));
+//        flight.setEndTime(list.get(5));
+//        flight.setFlightCode(list.get(6));
+//        flight.setCompanyName(list.get(7));
+//        flight.setTicketPreFix(list.get(8));
+        flight.setFlightCode(startFlightFieldText);
     }
 
     /**
@@ -737,37 +768,51 @@ public class Controller implements Initializable {
         });
         occupationCombo.getSelectionModel().select(OccupationEnum.STUDENT.ordinal());
 
-        // 出发航班下拉框
-        flightCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
+        partnerOccupationCombo.setItems(new ReadOnlyUnbackedObservableList<OccupationEnum>() {
             @Override
-            public String get(int i) {
-                FlightEnum flightEnum = FLIGHT_LIST.get(i);
-                return getFlightComboStr(flightEnum);
+            public OccupationEnum get(int i) {
+                return OccupationEnum.values()[i];
             }
 
             @Override
             public int size() {
-                return FLIGHT_LIST.size();
+                return OccupationEnum.values().length;
             }
         });
-        flightCombo.getSelectionModel().select(RandomUtil.randomInt(FLIGHT_LIST.size()));
+        partnerOccupationCombo.getSelectionModel().selectFirst();
 
 
-        backFlightCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
+//        // 出发航班下拉框
+//        flightCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
+//            @Override
+//            public String get(int i) {
+//                FlightEnum flightEnum = FLIGHT_LIST.get(i);
+//                return getFlightComboStr(flightEnum);
+//            }
+//
+//            @Override
+//            public int size() {
+//                return FLIGHT_LIST.size();
+//            }
+//        });
+//        flightCombo.getSelectionModel().select(RandomUtil.randomInt(FLIGHT_LIST.size()));
 
 
-            @Override
-            public String get(int i) {
-                FlightEnum flightEnum = BACK_FLIGHT_LIST.get(i);
-                return getFlightComboStr(flightEnum);
-            }
-
-            @Override
-            public int size() {
-                return BACK_FLIGHT_LIST.size();
-            }
-        });
-        backFlightCombo.getSelectionModel().select(RandomUtil.randomInt(BACK_FLIGHT_LIST.size()));
+//        backFlightCombo.setItems(new ReadOnlyUnbackedObservableList<String>() {
+//
+//
+//            @Override
+//            public String get(int i) {
+//                FlightEnum flightEnum = BACK_FLIGHT_LIST.get(i);
+//                return getFlightComboStr(flightEnum);
+//            }
+//
+//            @Override
+//            public int size() {
+//                return BACK_FLIGHT_LIST.size();
+//            }
+//        });
+//        backFlightCombo.getSelectionModel().select(RandomUtil.randomInt(BACK_FLIGHT_LIST.size()));
 
         passportTypeComb.setItems(new ReadOnlyUnbackedObservableList<String>() {
 
