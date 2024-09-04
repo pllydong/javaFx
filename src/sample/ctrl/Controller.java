@@ -493,7 +493,7 @@ public class Controller implements Initializable {
         // 伴侣或父母的职业(仅已婚生效)
         info.setPartnersProfessionOrOccupation(
                 MarriageEnum.MARRIED.getDesc().equals(marriageCombo.getValue()) && null != partnerOccupationCombo.getValue() ?
-                        partnerOccupationCombo.getValue().getDesc() : StrUtil.EMPTY
+                        partnerOccupationCombo.getValue().getCode() : StrUtil.EMPTY
         );
 
         // 行程单2日期

@@ -10,11 +10,13 @@ import sample.pojo.JapanVisaApplication;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PdfFormHandler {
     public static void handle(JapanVisaApplication japanVisaApplication, String filePath, String cusName) {
+
         String pdfFilePath = "files/doc/申请表.pdf";
         try {
 
@@ -26,6 +28,7 @@ public class PdfFormHandler {
                 throw new RuntimeException(e);
             }
 
+//            BaseFont bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
             BaseFont bf = BaseFont.createFont("C:\\Windows\\Fonts\\msyh.ttc,0", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
             // 创建输出流和 PDFStamper
             FileOutputStream outputStream = new FileOutputStream(filePath + cusName + "申请表2.pdf");
@@ -40,10 +43,11 @@ public class PdfFormHandler {
             setRadioButtonField(stamper, form, "rb-3", japanVisaApplication.getPassportType());
 
 
-
-            // 按顺序获取字段位置信息
-            List<String> fieldNames = form.getFields().keySet().stream()
-                    .filter(f -> !f.contains("rb-") && !f.contains(".RB")).collect(Collectors.toList());
+            List<String> fieldNames = new ArrayList<>();
+            for (int i = 1; i <= 42; i++) {
+                fieldNames.add("form-" + i);
+            }
+            fieldNames.add("topmostSubform[0].Page2[0].T150[0]");
 
 
             // 遍历所有表单域，按顺序填写
