@@ -442,8 +442,8 @@ public class Controller implements Initializable {
         info.setIssuingAuthority(issuingAuthorityField.getText());
         info.setDateOfExpiry(getDdMmYyyyTimeStr(passportEndDtPicker.getValue()));
 
-        info.setCertificateOfEligibilityNumber(certificateField.getText());
-        info.setPurposeOfVisitOrResidenceStatus(purposeField.getText());
+        info.setCertificateOfEligibilityNumber(StrUtil.blankToDefault(certificateField.getText(), "NO"));
+        info.setPurposeOfVisitOrResidenceStatus(StrUtil.blankToDefault(purposeField.getText(), "TRAVEL"));
 
         // 计划在日本停留时间
         LocalDate startDt = startDatePicker.getValue();
